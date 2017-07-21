@@ -1,0 +1,104 @@
+*{
+  padding: 0;
+  margin: 0;
+}
+/*第一种样式*/
+body{
+  background: #34495E;
+
+}
+.admin_wrap{
+  width:275px;
+  margin: 100px auto;
+  position: relative;
+}
+.admin{
+  width: 275px;
+  height: 195px;
+  background: #7A8896;
+  opacity: 0.5;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.admin_in{
+  width: 261px;
+  background: #fff;
+  position: absolute;
+  left: 7px;
+  top: 7px;
+  text-align: center;
+}
+.admin_title{
+  display: inline-block;
+
+  height: 28px;
+  line-height: 28px;
+  background: #31475C;
+  color: #fff;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.admin_width{
+  width: 70%;
+}
+.admin_back{
+  background: #fff;
+  margin: 0 auto;
+  padding: 18px 0 8px 0;
+}
+.password{
+  margin-top: 12px;
+}
+.weui-search-bar__form:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 200%;
+    height: 200%;
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5);
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    border-radius: 10px;
+     border: none;
+    box-sizing: border-box;
+    background: #FFFFFF;
+}
+.weui-search-bar__box{
+  border: 1px solid #e6e6ea;
+  border-radius: 3px;
+}
+.admin_button{
+  width: 70%;
+  margin: 0 auto;
+  background: #FF3838;
+  color: #fff;
+  height: 28px;
+  line-height: 28px;
+  border: none;
+  outline-style: none;
+  margin-bottom: 7px;
+}
+.weui-footer{
+  overflow: hidden;
+}
+.admin_left{
+  float: left;
+  border-radius: 3px;
+}
+.admin_right{
+  float: right;
+  border-radius: 3px;
+}
+.admin_icon1{
+  position: absolute;
+  top: 2px;
+  left: 4px;
+}
+.admin_icon2{
+  position: absolute;
+  top: 2px;
+  left: 4px;
+}

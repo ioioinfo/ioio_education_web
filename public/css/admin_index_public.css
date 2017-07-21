@@ -1,0 +1,115 @@
+*,p{
+  margin: 0;
+  padding: 0;
+}
+a{
+  color: #fff;
+}
+body,html{
+  height: 100%;
+}
+thead{
+  background: #E6F8BA;
+}
+.table>thead>tr>th{
+  border: none;
+  text-align: center;
+}
+.page_wrap{
+  padding: 0 15px;
+}
+.ouveflow_hidden{
+  overflow: hidden;
+}
+.sort_img{
+  width: 23px;
+  height: 23px;
+}
+.admin_index{
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.admin_right{
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0;
+  background: #F2F0F1;
+}
+.admin_index_top{
+  width: 100%;
+  height: 51px;
+  line-height: 51px;
+  background: #ccc;
+  padding: 0 15px;
+}
+.admin_index_header{
+  color: #6e6e6e;
+  cursor: pointer;
+}
+.admin_index_exit{
+  color: #6e6e6e;
+  float: right;
+  top: 22.5px;
+  cursor: pointer;
+}
+.admin_index_exit:hover,.admin_index_header:hover{
+  text-decoration: none;
+}
+.admin_creat{
+  text-align: right;
+  padding: 17px 15px;
+}
+.admin_creat_input{
+  width: 100%;
+  height: 25px;
+  line-height: 25px;
+  outline-style: none;
+  border: none;
+  text-indent: 7px;
+}
+.admin_creat_search{
+  width: 30%;
+  display: inline-block;
+  border: 1px solid #E7E7E7;
+}
+.admin_creat_button{
+  padding: 0 16px;
+  height: 25px;
+  line-height: 25px;
+  background: #009695;
+  color: #fff;
+  border: none;
+}
+.admin_creat_button1{
+  padding: 0 16px;
+  height: 25px;
+  line-height: 25px;
+  background: #009695;
+  color: #fff;
+  border: none;
+  margin-left: 5px;
+}
+.admin_index_botton{
+}
+@media screen and (min-width:1023px){
+  .admin_index_botton{
+    width: 70%;
+    margin: 0 auto;
+  }
+}
+.borrow_view{
+  margin: 10px 10px 0 10px;
+  padding: 7px;
+  background: #fff;
+}
+.borrow_view_img{
+  box-sizing: border-box;
+
+}
+.borrow_bookimg{
+  width: 100%;
+  height: 120px;
+}
