@@ -30,20 +30,20 @@ exports.register = function(server, options, next) {
     var host = "http://worker.ioioinfo.com/";
     var cookie_options = {ttl:10*365*24*60*60*1000};
     var cookie_key = "ioio_education_cookie";
-    
+
     var wx_api = server.plugins.services.wx_api;
     var person = server.plugins.services.person;
     var fsm = server.plugins.services.fsm;
-    
+
     //签名验证
     var check_signature = function(signature,token,timestamp,nonce) {
         var shasum = crypto.createHash('sha1');
         arr = [token,timestamp,nonce].sort();
         shasum.update(arr.join(''));
-        
+
         return shasum.digest('hex') === signature;
     };
-    
+
     server.route([
         //微信验证
         {
@@ -53,7 +53,7 @@ exports.register = function(server, options, next) {
                 return reply("vBrz1szhoCGE5rvI");
             }
         },
-        
+
         //微信验证，龙腾广告
         {
             method: 'GET',
@@ -62,7 +62,7 @@ exports.register = function(server, options, next) {
                 return reply("50tGTGs5qhZGX2b2");
             }
         },
-        
+
         {
             method: 'GET',
             path: '/wechat',
@@ -72,9 +72,9 @@ exports.register = function(server, options, next) {
                 var timestamp = request.query.timestamp;
                 var nonce = request.query.nonce;
                 var token = "uuinfo_weixin";
-                
+
                 var check = check_signature(signature,token,timestamp,nonce);
-                
+
                 if (check) {
                     return reply(echostr);
                 } else {
@@ -82,22 +82,22 @@ exports.register = function(server, options, next) {
                 }
             },
         },
-        
+
         {
             method: 'POST',
             path: '/wechat',
             handler: function(request, reply) {
                 var body = request.payload;
                 var platform_id = "worker";
-                
+
                 //状态机
                 var act_time = moment().format("YYYY-MM-DD HH:mm:ss");
                 var point = "wx_worker";
-                
+
                 wx_reply.process_xml(body, function(xml,msg_type,openid,resp) {
                     if (msg_type == "text") {
                         var content = xml.Content[0];
-                        
+
                         //获取用户信息
                         person.get_person_wx(platform_id,openid,function(err,rows) {
                             if (rows && rows.length > 0) {
@@ -107,7 +107,7 @@ exports.register = function(server, options, next) {
                                     return reply(resp.text({content:"你的身份不能识别。请联系:13917684019"}));
                                 }
                                 var act_options = {"act_type":"wx_text","act_content":content};
-                                
+
                                 fsm.worker_act(act_time, point,person_id,JSON.stringify(act_options),function(err,body) {
                                     if (body.info) {
                                         var info = JSON.parse(body.info);
@@ -127,14 +127,14 @@ exports.register = function(server, options, next) {
                     } else if (msg_type == "image") {
                         //图片地址
                         var pic_url = xml.PicUrl[0];
-                        
+
                         //获取用户信息
                         person.get_person_wx(platform_id,openid,function(err,rows) {
                             if (rows && rows.length > 0) {
                                 var row = rows[0];
                                 var person_id = row.person_id;
                                 var act_options = {"act_type":"wx_image","act_content":pic_url};
-                                
+
                                 fsm.worker_act(act_time, point,person_id,JSON.stringify(act_options),function(err,body) {
                                     if (body.info) {
                                         var info = JSON.parse(body.info);
@@ -157,16 +157,16 @@ exports.register = function(server, options, next) {
                         if (xml.Recognition) {
                            recognition = xml.Recognition[0];
                         }
-                        
+
                         var act_content = {"media_id":media_id,"recognition":recognition};
-                        
+
                         //获取用户信息
                         person.get_person_wx(platform_id,openid,function(err,rows) {
                             if (rows && rows.length > 0) {
                                 var row = rows[0];
                                 var person_id = row.person_id;
                                 var act_options = {"act_type":"wx_voice","act_content":act_content};
-                                
+
                                 fsm.worker_act(act_time, point,person_id,JSON.stringify(act_options),function(err,body) {
                                     if (body.info) {
                                         var info = JSON.parse(body.info);
@@ -194,7 +194,7 @@ exports.register = function(server, options, next) {
                             } else {
                                 scene = null;
                             }
-                            
+
                             wx_api.get_user_info(platform_id,openid, function(err,info) {
                                 if (err) {
                                     return reply(resp.text({content:"获取用户信息错误"}));
@@ -204,7 +204,7 @@ exports.register = function(server, options, next) {
                                 var headimgurl = info["headimgurl"];
                                 var unionid = info["unionid"];
                                 var platform_id = "worker";
-                                
+
                                 person.save_wx(platform_id,openid,nickname,sex,headimgurl,unionid,scene, function(err,result) {
                                     console.log(result);
                                     return reply(resp.text({content:"终于等到你"}));
@@ -219,7 +219,7 @@ exports.register = function(server, options, next) {
                 });
             },
         },
-        
+
         //授权页面跳转
         {
             method: 'GET',
