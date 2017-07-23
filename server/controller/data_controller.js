@@ -22,7 +22,6 @@ var moduel_prefix = 'ioio_education_data';
 
 exports.register = function(server, options, next) {
     var service_info = "ioio education";
-    
     var person = server.plugins.services.person;
     var task = server.plugins.services.task;
     var hr = server.plugins.services.hr;
@@ -30,7 +29,7 @@ exports.register = function(server, options, next) {
 
     var cookie_options = {ttl:10*365*24*60*60*1000};
     var cookie_key = "ioio_borrow_cookie";
-    
+
     server.route([
         //查询数据
         {
@@ -40,7 +39,7 @@ exports.register = function(server, options, next) {
                 return reply({"success":true,"rows":[],"num":0});
             }
         },
-        
+
     ]);
 
     next();
