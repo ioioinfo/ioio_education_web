@@ -32,7 +32,7 @@ exports.register = function(server, options, next) {
     var cookie_key = "ioio_borrow_cookie";
 
     server.route([
-        //查询数据
+        //查询班级
         {
             method: "GET",
             path: '/get_classes',
@@ -46,12 +46,26 @@ exports.register = function(server, options, next) {
                 });
             }
         },
-        //查询数据
+        //查询学员
         {
             method: "GET",
             path: '/get_students',
             handler: function(request, reply) {
                 education_api.get_students(function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        {
+            method: "GET",
+            path: '/search_students_byId',
+            handler: function(request, reply) {
+                var class_id = request.query.class_id;
+                education_api.search_students_byId(class_id,function(err,rows){
                     if (!err) {
                         return reply(rows);
                     }else {
