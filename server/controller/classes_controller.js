@@ -226,7 +226,110 @@ exports.register = function(server, options, next) {
                 });
             }
         },
+        //查询课程信息
+        {
+            method: "GET",
+            path: '/search_lesson_byId',
+            handler: function(request, reply) {
+                var id = request.query.id;
+                education_api.search_lesson_byId(id,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //课程删除
+        {
+            method: "POST",
+            path: '/delete_lesson',
+            handler: function(request, reply) {
+                var id = request.payload.id;
+                if (!id) {
+                    return reply({"success":false,"message":"id wrong","service_info":service_info});
+                }
+                var data = {
+                    "id" : id
+                };
+                education_api.delete_lesson(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //保存课程
+        {
+            method: "POST",
+            path: '/save_lesson',
+            handler: function(request, reply) {
+                var plan_id = request.payload.plan_id;
+				var teacher_id = request.payload.teacher_id;
+				var name = request.payload.name;
+				var code = request.payload.code;
+				var hours = request.payload.hours;
+				var level_id = request.payload.level_id;
 
+				if (!plan_id || !teacher_id || !name || !code || !hours || !level_id) {
+					return reply({"success":false,"message":"params wrong","service_info":service_info});
+				}
+
+                var data = {
+                    "plan_id": plan_id,
+                    "teacher_id": teacher_id,
+                    "name": name,
+                    "code": code,
+                    "hours": hours,
+                    "level_id": level_id
+                };
+                education_api.save_lesson(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //更新课程
+        {
+            method: "POST",
+            path: '/update_lesson',
+            handler: function(request, reply) {
+                var id = request.payload.id;
+                var plan_id = request.payload.plan_id;
+                var teacher_id = request.payload.teacher_id;
+                var name = request.payload.name;
+                var code = request.payload.code;
+                var hours = request.payload.hours;
+                var level_id = request.payload.level_id;
+
+                if (!id ||!plan_id || !teacher_id || !name || !code || !hours || !level_id) {
+                    return reply({"success":false,"message":"params wrong","service_info":service_info});
+                }
+
+                var data = {
+                    "id":id,
+                    "plan_id": plan_id,
+                    "teacher_id": teacher_id,
+                    "name": name,
+                    "code": code,
+                    "hours": hours,
+                    "level_id": level_id
+                };
+                education_api.update_lesson(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
 
     ]);
 

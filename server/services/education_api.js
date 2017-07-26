@@ -22,6 +22,46 @@ var host = "http://211.149.248.241:18027/";
 
 var nav = function(server) {
     return {
+        update_lesson: function(data,cb) {
+            var url = host + "update_lesson";
+            uu_request.request(url, data, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,body);
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
+        save_lesson: function(data,cb) {
+            var url = host + "save_lesson";
+            uu_request.request(url, data, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,body);
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
+        delete_lesson: function(data,cb) {
+            var url = host + "delete_lesson";
+            uu_request.request(url, data, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,body);
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
+        search_lesson_byId: function(id,cb) {
+            var url = host + "search_lesson_byId?id=" + id;
+            uu_request.get(url, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,JSON.parse(body));
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
         get_lessons: function(cb) {
             var url = host + "get_lessons";
             uu_request.get(url, function(err, response, body) {
