@@ -18,7 +18,7 @@ var r = require('request');
 var moment = require('moment');
 var eventproxy = require('eventproxy');
 
-var moduel_prefix = 'ioio_education_data';
+var moduel_prefix = 'ioio_education_class_data';
 
 exports.register = function(server, options, next) {
     var service_info = "ioio education";
@@ -26,6 +26,7 @@ exports.register = function(server, options, next) {
     var task = server.plugins.services.task;
     var hr = server.plugins.services.hr;
     var notify = server.plugins.services.notify;
+    var education_api = server.plugins.services.education_api;
 
     var cookie_options = {ttl:10*365*24*60*60*1000};
     var cookie_key = "ioio_borrow_cookie";
@@ -36,7 +37,13 @@ exports.register = function(server, options, next) {
             method: "GET",
             path: '/get_classes',
             handler: function(request, reply) {
-                
+                education_api.get_classes(function(err,rows){
+                    if (!err) {
+                        return reply({"success":true,"rows":rows});
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
             }
         },
 

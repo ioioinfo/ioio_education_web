@@ -22,7 +22,17 @@ var host = "http://211.149.248.241:18027/";
 
 var nav = function(server) {
     return {
-
+        get_classes: function(cb) {
+            var url = host + "get_classes";
+            console.log("url:"+url);
+            uu_request.get(url, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,JSON.parse(body).rows);
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
 
 
         // car4s_act: function(act_time, point,person_id,act_options,cb) {
@@ -38,23 +48,6 @@ var nav = function(server) {
         //     });
         // },
 
-        // geocode: function(address,cb) {
-        //     var url = host + "geocode/geo";
-        //     var data = {key:"0c053bde775595e8b1b3de340265f053",output:"JSON","address":address};
-        //
-        //     uu_request.request(url, data, function(err, response, body) {
-        //         if (!err && response.statusCode === 200) {
-        //             var geocodes = [];
-        //
-        //             if (body["status"] == "1") {
-        //                 geocodes = body["geocodes"];
-        //             }
-        //             cb(err,geocodes);
-        //         } else {
-        //             cb(true,{message:"网络错误"});
-        //         }
-        //     });
-        // },
 
 
     };
