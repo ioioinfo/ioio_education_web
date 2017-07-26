@@ -212,7 +212,20 @@ exports.register = function(server, options, next) {
                 });
             }
         },
-
+        //查询课程
+        {
+            method: "GET",
+            path: '/get_lessons',
+            handler: function(request, reply) {
+                education_api.get_lessons(function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
 
 
     ]);
