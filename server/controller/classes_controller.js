@@ -13,28 +13,38 @@
  └──────────────────────────────────────────────────────────────┘
 */
 
-exports.register = function(server, options, next){
+var _ = require('lodash');
+var r = require('request');
+var moment = require('moment');
+var eventproxy = require('eventproxy');
 
-    var load_module = function(key, path) {
-        var module = require(path)(server);
-        if (typeof module.init === 'function') { module.init(); }
-        if (typeof module.refresh === 'function') { module.refresh(); }
-        server.expose(key, module);
-    };
+var moduel_prefix = 'ioio_education_data';
 
-    load_module('person', './person.js');
-    load_module('things', './things.js');
-    load_module('amap', './amap.js');
-    load_module('wx_api', './wx_api.js');
-    load_module('fsm', './fsm.js');
-    load_module('task', './task.js');
-    load_module('hr', './hr.js');
-    load_module('notify', './notify.js');
-    load_module('education_api', './education_api.js');
+exports.register = function(server, options, next) {
+    var service_info = "ioio education";
+    var person = server.plugins.services.person;
+    var task = server.plugins.services.task;
+    var hr = server.plugins.services.hr;
+    var notify = server.plugins.services.notify;
+
+    var cookie_options = {ttl:10*365*24*60*60*1000};
+    var cookie_key = "ioio_borrow_cookie";
+
+    server.route([
+        //查询数据
+        {
+            method: "GET",
+            path: '/get_classes',
+            handler: function(request, reply) {
+                
+            }
+        },
+
+    ]);
 
     next();
 }
 
 exports.register.attributes = {
-    name: 'services'
+    name: moduel_prefix
 };
