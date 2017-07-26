@@ -37,33 +37,6 @@ exports.register = function(server, options, next) {
             },
         },
 
-        //借书记录
-        {
-            method: 'GET',
-            path: '/borrow_books',
-            handler: function(request, reply) {
-                return reply.view("borrow_books");
-            },
-        },
-
-        //还书记录
-        {
-            method: 'GET',
-            path: '/return_list',
-            handler: function(request, reply) {
-                return reply.view("return_list");
-            },
-        },
-
-        //借书详情
-        {
-            method: 'GET',
-            path: '/borrow_view',
-            handler: function(request, reply) {
-                return reply.view("borrow_view");
-            },
-        },
-
 
     ]);
 

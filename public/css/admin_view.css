@@ -1,0 +1,35 @@
+.button_style_delect{
+  background: #FF7E00;
+  color: #fff;
+  cursor: pointer;
+}
+.button_style_new{
+  background: #7EBE2C;
+  color: #fff;
+  cursor: pointer;
+}
+.button_style_search{
+  background: #009695;
+  color: #fff;
+  cursor: pointer;
+}
+
+/*新建图书弹出层title*/
+.borrow_creat_title_style{
+  background: #009695;
+  color: #fff;
+}
+.borrow_creat_style{
+  background: #fff;
+  cursor: pointer;
+}
+
+/*新建借书证*/
+.new_creat_play_style{
+  color:red;
+  cursor: pointer;
+}
+
+#table{
+  background: #fff;
+}
