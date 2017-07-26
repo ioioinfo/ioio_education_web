@@ -113,6 +113,12 @@ var checkTd = function(defaultTd) {
               <input type="checkbox" />
             </td>
           );
+        }else if (this.props.thitem.type=="level") {
+          return (
+            <td>
+              {this.props.item[this.props.thitem.name].name}
+            </td>
+          );
         }else {
         return defaultTd;
     }

@@ -28,12 +28,57 @@ exports.register = function(server, options, next) {
     var cookie_key = "ioio_education_cookie";
 
     server.route([
-        //首页
+        //班级列表
         {
             method: 'GET',
             path: '/index',
             handler: function(request, reply) {
                 return reply.view("index");
+            },
+        },
+
+        //班级详情
+        {
+            method: 'GET',
+            path: '/class_view',
+            handler: function(request, reply) {
+                return reply.view("class_view");
+            },
+        },
+
+        //班级学员列表
+        {
+            method: 'GET',
+            path: '/class_student_list',
+            handler: function(request, reply) {
+                return reply.view("class_student_list");
+            },
+        },
+
+        //学员列表
+        {
+            method: 'GET',
+            path: '/student_list',
+            handler: function(request, reply) {
+                return reply.view("student_list");
+            },
+        },
+
+        //老师列表
+        {
+            method: 'GET',
+            path: '/teacher_list',
+            handler: function(request, reply) {
+                return reply.view("teacher_list");
+            },
+        },
+
+        //计划列表
+        {
+            method: 'GET',
+            path: '/play_list',
+            handler: function(request, reply) {
+                return reply.view("play_list");
             },
         },
 

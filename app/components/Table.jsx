@@ -4,19 +4,19 @@ var React = require('react');
 class Table extends React.Component {
     render() {
         return (
-            <div className="table">
+            <div id="table">
             <div className="">
-            <table className="table table-striped table-hover">
+            <table className="table table-striped table-hover table-bordered">
             <thead>
             <tr>
-            {this.props.tabthitems.map(item => (
-                <Th key={item.name} item={item} sort={this.props.sort} onSort={this.props.onSort} />))
+            {this.props.tabthitems.map((item,index) => (
+                <Th key={index} item={item} sort={this.props.sort} onSort={this.props.onSort} />))
             }
             </tr>
             </thead>
             <tbody>
-            {this.props.tabtritems.map(item => (
-                <Tr key={item.id} item={item} tabthitems={this.props.tabthitems} refresh={this.props.refresh} checkTd={this.props.checkTd} />))
+            {this.props.tabtritems.map((item,index)  => (
+                <Tr key={index} item={item} tabthitems={this.props.tabthitems} refresh={this.props.refresh} checkTd={this.props.checkTd} />))
             }
             </tbody>
             </table>
@@ -36,8 +36,8 @@ class Tr extends React.Component {
     render() {
         return (
             <tr>
-            {this.props.tabthitems.map(item => (
-                <Td key={item.name} item={this.props.item} thitem={item} refresh={this.props.refresh} checkTd={this.props.checkTd} />))
+            {this.props.tabthitems.map((item,index) => (
+                <Td key={index} item={this.props.item} thitem={item} refresh={this.props.refresh} checkTd={this.props.checkTd} />))
             }
             </tr>
         );
@@ -84,9 +84,17 @@ class Th extends React.Component {
         var thStyle = {
             width:this.props.item.width
         };
-        return (
-            <th style={thStyle}>{this.props.item.title} {img}</th>
-        );
+
+        if (this.props.item.type=="check"){
+          return (
+              <th style={thStyle}><input type="checkbox" />{this.props.item.title} {img}</th>
+          );
+        }else{
+          return (
+              <th style={thStyle}>{this.props.item.title} {img}</th>
+          );
+        }
+
     }
 };
 

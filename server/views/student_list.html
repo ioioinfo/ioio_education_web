@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
-    <title>首页</title>
+    <title>学员列表</title>
     <link rel="stylesheet" href="css/weui.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -20,18 +20,17 @@
     //表头
     var tt = [{name:'check',width:"5%", title:'',type:"check",sort:false}
         ,{name:'id',title:'编号',sort:true}
+        ,{name:'level',title:'年级',type:"level"}
         ,{name:'name',title:'名称',sort:false}
-        ,{name:'state',title:'状态',sort:false}
-        ,{name:'starting_date',title:'开班时间',sort:false}
-        ,{name:'end_date',title:'结束时间',sort:false}
-        ,{name:'class_master',title:'班主任',sort:false}
-        ,{name:'remarks',title:'备注'}
-        ,{name:'operation',title:'查看',type:"operation"}];
+        ,{name:'age',title:'年龄',sort:false}
+        ,{name:'sex',title:'性别',sort:false}
+        ,{name:'phone',title:'手机',sort:false}
+        ,{name:'state',title:'状态',sort:false}];
 
     function getTableData(params,cb) {
         params.everyNum = 50;
         var allNum = 0;
-        $.get("/get_classes",{params:JSON.stringify(params)},function(data){
+        $.get("/get_students",{params:JSON.stringify(params)},function(data){
             if (data.success) {
               if (data.rows) {
                 allNum = data.num;
@@ -48,7 +47,7 @@
     </script>
     <script src="js/jquery-3.1.1.min.js" type="text/javascript"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/app/index.js"></script>
+    <script src="js/app/student_list.js"></script>
 
 </body>
 </html>

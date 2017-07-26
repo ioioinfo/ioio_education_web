@@ -16,6 +16,11 @@
 module.exports = {
     entry: {
         index: './app/index.jsx',
+        class_view: './app/class_view.jsx',
+        student_list: './app/student_list.jsx',
+        class_student_list: './app/class_student_list.jsx',
+        teacher_list: './app/teacher_list.jsx',
+        play_list: './app/play_list.jsx',
     },
     output: {
         path: __dirname,

@@ -19,7 +19,9 @@ var view_globals = function(server,request) {
         image_host: 'http://211.149.248.241:18000',
         static_host: 'http://static.buy42.com',
         login_html:'<ul class="heardlogin"><li><a href="/user/">Login</a></li></ul>',
-        title:'| CHINA SPICE'
+        title:'| CHINA SPICE',
+        platform_name: "教务系统后台",
+        company_name: "佑佑信息科技"
     };
 };
 
