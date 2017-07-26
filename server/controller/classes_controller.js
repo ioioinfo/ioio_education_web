@@ -60,6 +60,7 @@ exports.register = function(server, options, next) {
                 });
             }
         },
+        //查询班级中的学员
         {
             method: "GET",
             path: '/search_students_byId',
