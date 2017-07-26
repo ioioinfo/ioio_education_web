@@ -191,6 +191,27 @@ exports.register = function(server, options, next) {
                 });
             }
         },
+        //保存学员
+        {
+            method: "POST",
+            path: '/save_student',
+            handler: function(request, reply) {
+                var students = request.payload.students;
+                students = JSON.parse(students);
+                if (students.length==0) {
+                    return reply({"success":false,"message":"students wrong","service_info":service_info});
+                }
+
+                var data = {"students":JSON.stringify(students)};
+                education_api.save_student(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
 
 
 
