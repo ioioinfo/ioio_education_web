@@ -38,6 +38,9 @@ tr{
 tbody{
   overflow: auto;
 }
+.operate_announce{
+  margin: 2px 0
+}
 .text_align_center{
   text-align: center;
 }

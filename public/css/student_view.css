@@ -1,0 +1,18 @@
+.student_view_wrap{
+
+}
+@media screen and (min-width:768px){
+  .student_view_infor{
+    width: 50%;
+    margin: 10px auto;
+    background: #fff;
+  }
+}
+.student_view_input_style{
+  border: 1px solid #e5e5e5;
+  font-size: 14px;
+  padding: 3px;
+}
+.student_view_button_xiugai{
+  padding: 0 15px 15px 15px;
+}

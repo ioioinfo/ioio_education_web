@@ -82,6 +82,15 @@ exports.register = function(server, options, next) {
             },
         },
 
+        //学员详情
+        {
+            method: 'GET',
+            path: '/student_view',
+            handler: function(request, reply) {
+                return reply.view("student_view");
+            },
+        },
+
 
     ]);
 
