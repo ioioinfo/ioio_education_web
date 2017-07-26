@@ -75,6 +75,23 @@ exports.register = function(server, options, next) {
                 });
             }
         },
+        //根据id查找班级
+        {
+            method: "GET",
+            path: '/search_class_byId',
+            handler: function(request, reply) {
+                var id = request.query.id;
+                education_api.search_class_byId(id,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+
+
 
     ]);
 
