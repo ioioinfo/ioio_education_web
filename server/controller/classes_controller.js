@@ -90,7 +90,86 @@ exports.register = function(server, options, next) {
                 });
             }
         },
-
+        //班级信息新增
+        {
+            method: "POST",
+            path: '/save_class',
+            handler: function(request, reply) {
+                var clas = request.payload.clas;
+                clas = JSON.parse(clas);
+                if (!clas.plan_id || !clas.name || !clas.code ||!clas.state || !clas.starting_date || !clas.end_date || !clas.class_master
+                || !clas.master_id || !clas.remarks || !clas.level_id) {
+                    return reply({"success":false,"message":"params wrong","service_info":service_info});
+                }
+                var data = {
+                    "clas" : JSON.stringify(clas)
+                };
+                education_api.save_class(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //班级删除
+        {
+            method: "POST",
+            path: '/delete_class',
+            handler: function(request, reply) {
+                var id = request.payload.id;
+                if (!id) {
+                    return reply({"success":false,"message":"id wrong","service_info":service_info});
+                }
+                var data = {
+                    "id" : id
+                };
+                education_api.delete_class(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //查询学员信息
+        {
+            method: "GET",
+            path: '/search_student_byId',
+            handler: function(request, reply) {
+                var id = request.query.id;
+                education_api.search_student_byId(id,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //班级删除
+        {
+            method: "POST",
+            path: '/update_student',
+            handler: function(request, reply) {
+                var student = request.payload.student;
+                student = JSON.parse(student);
+                if (!student.id || !student.name || !student.code || !student.age ||        !student.sex || !student.phone || !student.state ||!student.address || !student.province || !student.city || !student.district || !student.photo ||
+                !student.level_id) {
+                    return reply({"success":false,"message":"params wrong","service_info":service_info});
+                }
+                var data = {"student":JSON.stringify(student)};
+                education_api.update_student(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
 
 
     ]);

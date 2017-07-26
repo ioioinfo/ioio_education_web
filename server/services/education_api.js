@@ -22,6 +22,46 @@ var host = "http://211.149.248.241:18027/";
 
 var nav = function(server) {
     return {
+        update_student: function(data,cb) {
+            var url = host + "update_student";
+            uu_request.request(url, data, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,body);
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
+        search_student_byId: function(id,cb) {
+            var url = host + "search_student_byId?id=" + id;
+            uu_request.get(url, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,JSON.parse(body));
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
+        delete_class: function(data,cb) {
+            var url = host + "delete_class";
+            uu_request.request(url, data, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,body);
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
+        save_class: function(data,cb) {
+            var url = host + "save_class";
+            uu_request.request(url, data, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,body);
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
         search_class_byId: function(id,cb) {
             var url = host + "search_class_byId?id=" + id;
             uu_request.get(url, function(err, response, body) {
@@ -63,18 +103,7 @@ var nav = function(server) {
             });
         },
 
-        // car4s_act: function(act_time, point,person_id,act_options,cb) {
-        //     var url = host + "fsm/car4s_act";
-        //     var data = {act_time:act_time,point:point,"person_id":person_id,"act_options":act_options};
-        //
-        //     uu_request.request(url, data, function(err, response, body) {
-        //         if (!err && response.statusCode === 200) {
-        //             cb(err,body);
-        //         } else {
-        //             cb(true,{message:"网络错误"});
-        //         }
-        //     });
-        // },
+
 
 
 
