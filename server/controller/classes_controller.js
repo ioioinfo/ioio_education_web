@@ -39,13 +39,15 @@ exports.register = function(server, options, next) {
             handler: function(request, reply) {
                 education_api.get_classes(function(err,rows){
                     if (!err) {
-                        return reply({"success":true,"rows":rows});
+                        return reply(rows);
                     }else {
                         return reply({"success":false,"message":rows.message});
                     }
                 });
             }
         },
+
+
 
     ]);
 

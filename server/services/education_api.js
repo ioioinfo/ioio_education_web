@@ -27,7 +27,7 @@ var nav = function(server) {
             console.log("url:"+url);
             uu_request.get(url, function(err, response, body) {
                 if (!err && response.statusCode === 200) {
-                    cb(err,JSON.parse(body).rows);
+                    cb(err,JSON.parse(body));
                 } else {
                     cb(true,{message:"网络错误"});
                 }
