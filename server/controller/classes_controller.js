@@ -46,8 +46,20 @@ exports.register = function(server, options, next) {
                 });
             }
         },
-
-
+        //查询数据
+        {
+            method: "GET",
+            path: '/get_students',
+            handler: function(request, reply) {
+                education_api.get_students(function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
 
     ]);
 

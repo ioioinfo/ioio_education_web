@@ -24,7 +24,6 @@ var nav = function(server) {
     return {
         get_classes: function(cb) {
             var url = host + "get_classes";
-            console.log("url:"+url);
             uu_request.get(url, function(err, response, body) {
                 if (!err && response.statusCode === 200) {
                     cb(err,JSON.parse(body));
@@ -33,7 +32,16 @@ var nav = function(server) {
                 }
             });
         },
-
+        get_students: function(cb) {
+            var url = host + "get_students";
+            uu_request.get(url, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,JSON.parse(body));
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
 
         // car4s_act: function(act_time, point,person_id,act_options,cb) {
         //     var url = host + "fsm/car4s_act";
