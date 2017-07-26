@@ -149,7 +149,7 @@ exports.register = function(server, options, next) {
                 });
             }
         },
-        //班级删除
+        //学员修改
         {
             method: "POST",
             path: '/update_student',
@@ -170,6 +170,28 @@ exports.register = function(server, options, next) {
                 });
             }
         },
+        //学员删除
+        {
+            method: "POST",
+            path: '/delete_student',
+            handler: function(request, reply) {
+                var id = request.payload.id;
+                if (!id) {
+                    return reply({"success":false,"message":"id wrong","service_info":service_info});
+                }
+                var data = {
+                    "id" : id
+                };
+                education_api.delete_student(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+
 
 
     ]);
