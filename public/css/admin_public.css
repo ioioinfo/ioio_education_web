@@ -39,7 +39,8 @@ tbody{
   overflow: auto;
 }
 .operate_announce{
-  margin: 2px 0
+  margin: 2px 0;
+  color: #fff;
 }
 .text_align_center{
   text-align: center;
