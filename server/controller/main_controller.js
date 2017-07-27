@@ -82,6 +82,15 @@ exports.register = function(server, options, next) {
             },
         },
 
+        //添加学员
+        {
+            method: 'GET',
+            path: '/add_student',
+            handler: function(request, reply) {
+                return reply.view("add_student");
+            },
+        },
+
         //学员详情
         {
             method: 'GET',
