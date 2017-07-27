@@ -545,7 +545,123 @@ exports.register = function(server, options, next) {
                 });
             }
         },
+        //查询年级列表
+        {
+            method: "GET",
+            path: '/get_grades',
+            handler: function(request, reply) {
+                education_api.get_grades(function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //id查询年级
+        {
+            method: "GET",
+            path: '/search_grade_byId',
+            handler: function(request, reply) {
+                var id = request.query.id;
+                education_api.search_grade_byId(id,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //年级删除
+        {
+            method: "POST",
+            path: '/delete_grade',
+            handler: function(request, reply) {
+                var id = request.payload.id;
+                if (!id) {
+                    return reply({"success":false,"message":"id wrong","service_info":service_info});
+                }
+                var data = {
+                    "id" : id
+                };
+                education_api.delete_grade(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //保存年级
+        {
+            method: "POST",
+            path: '/save_grade',
+            handler: function(request, reply) {
+                var name = request.payload.name;
+				var code = request.payload.code;
+				var grade_leader = request.payload.grade_leader;
+				var leader_id = request.payload.leader_id;
+				var state = request.payload.state;
+				var remark = request.payload.remark;
 
+				if (!name || !code || !grade_leader || !leader_id || !state || !remark) {
+					return reply({"success":false,"message":"params wrong","service_info":service_info});
+				}
+                var data = {
+                    "name": name,
+                    "code": code,
+                    "grade_leader":grade_leader,
+                    "leader_id":leader_id,
+                    "state":state,
+                    "remark":remark
+                };
+                education_api.save_grade(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //更新年级
+        {
+            method: "POST",
+            path: '/update_grade',
+            handler: function(request, reply) {
+                var id = request.payload.id;
+                var name = request.payload.name;
+				var code = request.payload.code;
+				var grade_leader = request.payload.grade_leader;
+				var leader_id = request.payload.leader_id;
+				var state = request.payload.state;
+				var remark = request.payload.remark;
+
+				if (!name || !code || !grade_leader || !leader_id || !state || !remark || !id) {
+					return reply({"success":false,"message":"params wrong","service_info":service_info});
+				}
+
+                var data = {
+                    "id":id,
+                    "name": name,
+                    "code": code,
+                    "grade_leader":grade_leader,
+                    "leader_id":leader_id,
+                    "state":state,
+                    "remark":remark
+                };
+                education_api.update_grade(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
 
     ]);
 
