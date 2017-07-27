@@ -662,6 +662,98 @@ exports.register = function(server, options, next) {
                 });
             }
         },
+        //查询老师列表
+        {
+            method: "GET",
+            path: '/get_teachers',
+            handler: function(request, reply) {
+                education_api.get_teachers(function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //id查询老师
+        {
+            method: "GET",
+            path: '/search_teacher_byId',
+            handler: function(request, reply) {
+                var id = request.query.id;
+                education_api.search_teacher_byId(id,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //删除老师
+        {
+            method: "POST",
+            path: '/delete_teacher',
+            handler: function(request, reply) {
+                var id = request.payload.id;
+                if (!id) {
+                    return reply({"success":false,"message":"id wrong","service_info":service_info});
+                }
+                var data = {
+                    "id" : id
+                };
+                education_api.delete_teacher(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //保存老师
+        {
+            method: "POST",
+            path: '/save_teacher',
+            handler: function(request, reply) {
+                var teachers = request.payload.teachers;
+                teachers = JSON.parse(teachers);
+                if (teachers.length==0) {
+                    return reply({"success":false,"message":"teachers wrong","service_info":service_info});
+                }
+
+                var data = {"teachers":JSON.stringify(teachers)};
+                education_api.save_teacher(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //更新年级
+        {
+            method: "POST",
+            path: '/update_teacher',
+            handler: function(request, reply) {
+                var teacher = request.payload.teacher;
+                teacher = JSON.parse(teacher);
+                if (!teacher.id||!teacher.name|| !teacher.code|| !teacher.age|| !teacher.sex|| !teacher.phone|| !teacher.state||!teacher.address|| !teacher.province|| !teacher.city|| !teacher.district|| !teacher.photo|| !teacher.type_id|| !teacher.is_master|| !teacher.is_leader || !teacher.level) {
+                    return reply({"success":false,"message":"params wrong","service_info":service_info});
+                }
+
+                var data = {"teacher":JSON.stringify(teacher)};
+                education_api.update_teacher(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
 
     ]);
 
