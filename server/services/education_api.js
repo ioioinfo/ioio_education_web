@@ -22,6 +22,56 @@ var host = "http://211.149.248.241:18027/";
 
 var nav = function(server) {
     return {
+        update_plan: function(data,cb) {
+            var url = host + "update_plan";
+            uu_request.request(url, data, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,body);
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
+        save_plan: function(data,cb) {
+            var url = host + "save_plan";
+            uu_request.request(url, data, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,body);
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
+        delete_plan: function(data,cb) {
+            var url = host + "delete_plan";
+            uu_request.request(url, data, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,body);
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
+        search_plan_byId: function(id,cb) {
+            var url = host + "search_plan_byId?id=" + id;
+            uu_request.get(url, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,JSON.parse(body));
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
+        get_lesson_plans: function(cb) {
+            var url = host + "get_lesson_plans";
+            uu_request.get(url, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,JSON.parse(body));
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
         update_learning_task: function(data,cb) {
             var url = host + "update_learning_task";
             uu_request.request(url, data, function(err, response, body) {

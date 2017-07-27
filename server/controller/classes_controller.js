@@ -359,7 +359,7 @@ exports.register = function(server, options, next) {
                 });
             }
         },
-        //学习习任务删除
+        //学习任务删除
         {
             method: "POST",
             path: '/delete_task',
@@ -440,6 +440,112 @@ exports.register = function(server, options, next) {
                 });
             }
         },
+        //查询教学计划列表
+        {
+            method: "GET",
+            path: '/get_lesson_plans',
+            handler: function(request, reply) {
+                education_api.get_lesson_plans(function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //id查询教学计划
+        {
+            method: "GET",
+            path: '/search_plan_byId',
+            handler: function(request, reply) {
+                var id = request.query.id;
+                education_api.search_plan_byId(id,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //教学计划删除
+        {
+            method: "POST",
+            path: '/delete_plan',
+            handler: function(request, reply) {
+                var id = request.payload.id;
+                if (!id) {
+                    return reply({"success":false,"message":"id wrong","service_info":service_info});
+                }
+                var data = {
+                    "id" : id
+                };
+                education_api.delete_plan(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //保存教学计划
+        {
+            method: "POST",
+            path: '/save_plan',
+            handler: function(request, reply) {
+                var name = request.payload.name;
+                var code = request.payload.code;
+                var level_id = request.payload.level_id;
+
+                if (!name || !code || !level_id ) {
+                    return reply({"success":false,"message":"params wrong","service_info":service_info});
+                }
+
+                var data = {
+                    "name": name,
+                    "code": code,
+                    "level_id": level_id
+                };
+                education_api.save_plan(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //更新教学计划
+        {
+            method: "POST",
+            path: '/update_plan',
+            handler: function(request, reply) {
+                var id = request.payload.id;
+                var name = request.payload.name;
+                var code = request.payload.code;
+                var level_id = request.payload.level_id;
+                if (!id||!name||!code||!level_id) {
+                    return reply({"success":false,"message":"params wrong","service_info":service_info});
+                }
+
+                var data = {
+                    "id":id,
+                    "name": name,
+                    "level_id": level_id,
+                    "code": code
+                };
+                education_api.update_plan(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+
 
     ]);
 
