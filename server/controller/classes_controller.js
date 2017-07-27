@@ -330,9 +330,116 @@ exports.register = function(server, options, next) {
                 });
             }
         },
-        
+        //查询学习任务列表
+        {
+            method: "GET",
+            path: '/get_learning_tasks',
+            handler: function(request, reply) {
+                education_api.get_learning_tasks(function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //id查询学习任务
+        {
+            method: "GET",
+            path: '/search_task_byId',
+            handler: function(request, reply) {
+                var id = request.query.id;
+                education_api.search_task_byId(id,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //学习习任务删除
+        {
+            method: "POST",
+            path: '/delete_task',
+            handler: function(request, reply) {
+                var id = request.payload.id;
+                if (!id) {
+                    return reply({"success":false,"message":"id wrong","service_info":service_info});
+                }
+                var data = {
+                    "id" : id
+                };
+                education_api.delete_task(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //保存学习任务
+        {
+            method: "POST",
+            path: '/save_learning_task',
+            handler: function(request, reply) {
+                var student_id = request.payload.student_id;
+				var class_id = request.payload.class_id;
+				var plan_id = request.payload.plan_id;
+				var lesson_id = request.payload.lesson_id;
+				var level_id = request.payload.level_id;
+				var total_hours = request.payload.total_hours;
 
+				if (!student_id || !class_id || !plan_id || !level_id || !lesson_id || !total_hours) {
+					return reply({"success":false,"message":"params wrong","service_info":service_info});
+				}
 
+                var data = {
+                    "student_id": student_id,
+                    "class_id": class_id,
+                    "plan_id": plan_id,
+                    "lesson_id": lesson_id,
+                    "total_hours": total_hours,
+                    "level_id": level_id
+                };
+                education_api.save_learning_task(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //更新学习任务
+        {
+            method: "POST",
+            path: '/update_learning_task',
+            handler: function(request, reply) {
+                var id = request.payload.id;
+				var current_hours = request.payload.current_hours;
+				var lesson_id = request.payload.lesson_id;
+
+                if (!id ||!current_hours || !lesson_id) {
+                    return reply({"success":false,"message":"params wrong","service_info":service_info});
+                }
+
+                var data = {
+                    "id":id,
+                    "current_hours": current_hours,
+                    "lesson_id": lesson_id
+                };
+                education_api.update_learning_task(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
 
     ]);
 
