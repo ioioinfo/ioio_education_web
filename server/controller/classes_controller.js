@@ -878,6 +878,28 @@ exports.register = function(server, options, next) {
                 });
             }
         },
+        //删除班级
+        {
+            method: "POST",
+            path: '/delete_class_student',
+            handler: function(request, reply) {
+                var id = request.payload.id;
+                if (!id) {
+                    return reply({"success":false,"message":"id wrong","service_info":service_info});
+                }
+                var data = {
+                    "id" : id
+                };
+                education_api.delete_class_student(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+
 
     ]);
 
