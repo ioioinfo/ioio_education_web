@@ -110,7 +110,7 @@ var checkTd = function(defaultTd) {
         }else if (this.props.thitem.type=="check") {
           return (
             <td>
-              <input type="checkbox" />
+              <input type="checkbox" name="checkbox" />
             </td>
           );
         }else {

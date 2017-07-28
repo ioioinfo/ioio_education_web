@@ -26,8 +26,10 @@ class AdminRight extends React.Component {
       this.setPage=this.setPage.bind(this);
       this.handleSort=this.handleSort.bind(this);
       this.loadData=this.loadData.bind(this);
+      this.delect=this.delect.bind(this);
+      this.addClick=this.addClick.bind(this);
       // 初始化一个空对象
-      this.state = {tabthitems:[],tabtritems:[],allNum:0,everyNum:20,thisPage:1,sort:{name:"",dir:""}};
+      this.state = {tabthitems:[],tabtritems:[],tabthitems1:[],tabtritems1:[],allNum:0,everyNum:20,thisPage:1,sort:{name:"",dir:""}};
   }
   loadData(params1) {
       var params = {thisPage:this.state.thisPage,sort:this.state.sort};
@@ -40,8 +42,11 @@ class AdminRight extends React.Component {
   }
   componentDidMount() {
       var tableHeight = $(window).height()-181;
-      $("#table").css("height",tableHeight+"px");
-      this.loadData({});
+      $(".tableHeight").css("height",tableHeight+"px");
+      $(".arrow_right_style").css("height",tableHeight+"px");
+      $(".arrow_right_style").css("line-height",tableHeight+"px");
+      this.loadData({"table":"1"});
+      this.loadData({"table":"2"});
   }
   setPage(thisPage) {
       this.loadData({thisPage:thisPage});
@@ -50,6 +55,64 @@ class AdminRight extends React.Component {
       this.loadData({sort:sort});
   }
 
+  delect(e){
+    var students = [];
+    $(".tabthitems1_wrap td [name=checkbox]").each(function(){
+      if($(this).is(":checked")){
+        var id = $(this).data("id");
+        students.push(id);
+      }
+
+    })
+    $.ajax({
+
+        url: "/delete_class_student",
+        dataType: 'json',
+        type: 'POST',
+        data: {"class_id":"1","student_ids":JSON.stringify(students)},
+        success: function(data) {
+            if (data.success) {
+              this.loadData({"table":"1"});
+              this.loadData({"table":"2"});
+                alert("删除成功！");
+            }else {
+                alert("删除失败！");
+            }
+        }.bind(this),
+        error: function(xhr, status, err) {
+        }.bind(this)
+    });
+
+  }
+
+  addClick(e){
+    var student_ids = [];
+    $(".tabthitems_wrap td [name=checkbox]").each(function(){
+      if($(this).is(":checked")){
+        var id = $(this).data("id");
+        student_ids.push(id);
+      }
+
+    })
+
+    $.ajax({
+
+        url: "/add_students",
+        dataType: 'json',
+        type: 'POST',
+        data: {"class_id":"1","student_ids":JSON.stringify(student_ids)},
+        success: function(data) {
+            if (data.success) {
+              this.loadData({"table":"1"});
+              this.loadData({"table":"2"});
+            }else {
+                alert("添加失败！");
+            }
+        }.bind(this),
+        error: function(xhr, status, err) {
+        }.bind(this)
+    });
+  }
   render() {
     return (
       <div className="admin_right col-xs-12 col-sm-8 col-md-10">
@@ -59,7 +122,7 @@ class AdminRight extends React.Component {
               <div className="col-xs-12 col-sm-8 col-md-8">
                 <div className="row">
                   <div className="admin_creat_butto_wrap col-xs-12 col-sm-3 col-md-2 cursor_pointer">
-                    <p  className="button_style_delect text_align_center"><i className="fa fa-trash fa-fw admin_creat_button "></i>&nbsp; 删 除</p>
+                    <p  className="button_style_delect text_align_center" onClick={this.delect} ><i className="fa fa-trash fa-fw admin_creat_button "></i>&nbsp; 删 除</p>
                   </div>
                   <div className="admin_creat_butto_wrap col-xs-12 col-sm-3 col-md-2 cursor_pointer">
                     <p  className="button_style_new text_align_center"><i className="fa fa-plus fa-fw admin_creat_button "></i>&nbsp; 新 建</p>
@@ -78,8 +141,17 @@ class AdminRight extends React.Component {
 
             </div>
         </div>
-        <Table tabthitems={this.state.tabthitems} tabtritems={this.state.tabtritems} sort={this.state.sort} onSort={this.handleSort}  checkTd={checkTd} />
-        <PageTab setPage={this.setPage} allNum={this.state.allNum} everyNum={this.state.everyNum} thisPage={this.state.thisPage} />
+        <div className="col-xs-12 col-md-5 tabthitems_wrap">
+          <Table tabthitems={this.state.tabthitems} tabtritems={this.state.tabtritems} sort={this.state.sort} onSort={this.handleSort}  checkTd={checkTd} />
+          <PageTab setPage={this.setPage} allNum={this.state.allNum} everyNum={this.state.everyNum} thisPage={this.state.thisPage} />
+        </div>
+        <div  className="col-xs-12 col-md-2 arrow_right_style">
+          <i className="fa fa-arrow-right fa-fw cursor_pointer" onClick={this.addClick}></i>
+        </div>
+        <div className="col-xs-12 col-md-5 tabthitems1_wrap">
+          <Table tabthitems={this.state.tabthitems1} tabtritems={this.state.tabtritems1} sort={this.state.sort} onSort={this.handleSort}  checkTd={checkTd} />
+          <PageTab setPage={this.setPage} allNum={this.state.allNum} everyNum={this.state.everyNum} thisPage={this.state.thisPage} />
+        </div>
       </div>
     );
   }
@@ -99,18 +171,20 @@ class AdminRightTop extends React.Component {
 
 //判断特殊列
 var checkTd = function(defaultTd) {
-    var id = this.props.item.id;
+
+    var props = this.props;
+    var id = props.item[props.thitem.name];
 
         if(this.props.thitem.type=="operation"){
           return (
               <td>
-              <p className=""><a href="borrow_books_view"  className="btn btn-info btn-xs operate_announce">查 看</a></p>
+              <span className=""><a href="borrow_books_view"  className="btn btn-info btn-xs operate_announce">查 看</a></span>
               </td>
           );
-        }else if (this.props.thitem.type=="check") {
+        }else if (this.props.thitem.type=="checked" || this.props.thitem.type=="check") {
           return (
             <td>
-              <input type="checkbox" />
+              <input type="checkbox" name="checkbox" data-id={id} />
             </td>
           );
         }else if (this.props.thitem.type=="level") {

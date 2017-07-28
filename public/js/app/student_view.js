@@ -22726,60 +22726,6 @@ var AdminRight = function (_React$Component2) {
                 React.createElement(AdminRightTop, null),
                 React.createElement(
                     'div',
-                    { className: 'admin_creat overflow_hidden' },
-                    React.createElement(
-                        'div',
-                        { className: '' },
-                        React.createElement(
-                            'div',
-                            { className: 'col-xs-12 col-sm-8 col-md-8' },
-                            React.createElement(
-                                'div',
-                                { className: 'row' },
-                                React.createElement(
-                                    'div',
-                                    { className: 'admin_creat_butto_wrap col-xs-12 col-sm-3 col-md-2 cursor_pointer' },
-                                    React.createElement(
-                                        'p',
-                                        { className: 'button_style_delect text_align_center' },
-                                        React.createElement('i', { className: 'fa fa-trash fa-fw admin_creat_button ' }),
-                                        '\xA0 \u5220 \u9664'
-                                    )
-                                ),
-                                React.createElement(
-                                    'div',
-                                    { className: 'admin_creat_butto_wrap col-xs-12 col-sm-3 col-md-2 cursor_pointer' },
-                                    React.createElement(
-                                        'p',
-                                        { className: 'button_style_new text_align_center' },
-                                        React.createElement('i', { className: 'fa fa-plus fa-fw admin_creat_button ' }),
-                                        '\xA0 \u65B0 \u5EFA'
-                                    )
-                                )
-                            )
-                        ),
-                        React.createElement(
-                            'div',
-                            { className: 'col-xs-12 col-sm-4 col-md-4' },
-                            React.createElement(
-                                'div',
-                                { className: 'row' },
-                                React.createElement(
-                                    'span',
-                                    { className: 'admin_creat_search  col-xs-8 col-sm-8 col-md-8' },
-                                    React.createElement('input', { className: 'admin_creat_input', type: 'search', placeholder: '\u8BF7\u8F93\u5165\u5173\u952E\u5B57' })
-                                ),
-                                React.createElement(
-                                    'button',
-                                    { className: 'admin_creat_button_search col-xs-4 col-sm-4 col-md-4 button_style_search cursor_pointer' },
-                                    '\u641C \u7D22'
-                                )
-                            )
-                        )
-                    )
-                ),
-                React.createElement(
-                    'div',
                     { className: 'student_view_wrap' },
                     React.createElement(
                         'div',

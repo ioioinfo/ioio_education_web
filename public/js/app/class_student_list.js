@@ -10225,7 +10225,7 @@ var Table = function (_React$Component) {
 
             return React.createElement(
                 "div",
-                { id: "table" },
+                { id: "table", className: "tableHeight" },
                 React.createElement(
                     "div",
                     { className: "" },
@@ -10303,6 +10303,7 @@ var Th = function (_React$Component3) {
         var _this5 = _possibleConstructorReturn(this, (Th.__proto__ || Object.getPrototypeOf(Th)).call(this, props));
 
         _this5.handleClick = _this5.handleClick.bind(_this5);
+        _this5.handleClick1 = _this5.handleClick1.bind(_this5);
         return _this5;
     }
 
@@ -10326,6 +10327,11 @@ var Th = function (_React$Component3) {
             }
 
             this.props.onSort(sort);
+        }
+    }, {
+        key: "handleClick1",
+        value: function handleClick1(e) {
+            $("[name='checkbox']").attr("checked", 'true');
         }
     }, {
         key: "render",
@@ -10362,8 +10368,8 @@ var Th = function (_React$Component3) {
             if (this.props.item.type == "check") {
                 return React.createElement(
                     "th",
-                    { style: thStyle },
-                    React.createElement("input", { type: "checkbox" }),
+                    { id: "checkall", style: thStyle, onClick: this.handleClick1 },
+                    React.createElement("input", { name: "checkbox", type: "checkbox" }),
                     this.props.item.title,
                     " ",
                     img
@@ -23098,8 +23104,10 @@ var AdminRight = function (_React$Component2) {
     _this2.setPage = _this2.setPage.bind(_this2);
     _this2.handleSort = _this2.handleSort.bind(_this2);
     _this2.loadData = _this2.loadData.bind(_this2);
+    _this2.delect = _this2.delect.bind(_this2);
+    _this2.addClick = _this2.addClick.bind(_this2);
     // 初始化一个空对象
-    _this2.state = { tabthitems: [], tabtritems: [], allNum: 0, everyNum: 20, thisPage: 1, sort: { name: "", dir: "" } };
+    _this2.state = { tabthitems: [], tabtritems: [], tabthitems1: [], tabtritems1: [], allNum: 0, everyNum: 20, thisPage: 1, sort: { name: "", dir: "" } };
     return _this2;
   }
 
@@ -23118,8 +23126,11 @@ var AdminRight = function (_React$Component2) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       var tableHeight = $(window).height() - 181;
-      $("#table").css("height", tableHeight + "px");
-      this.loadData({});
+      $(".tableHeight").css("height", tableHeight + "px");
+      $(".arrow_right_style").css("height", tableHeight + "px");
+      $(".arrow_right_style").css("line-height", tableHeight + "px");
+      this.loadData({ "table": "1" });
+      this.loadData({ "table": "2" });
     }
   }, {
     key: 'setPage',
@@ -23130,6 +23141,62 @@ var AdminRight = function (_React$Component2) {
     key: 'handleSort',
     value: function handleSort(sort) {
       this.loadData({ sort: sort });
+    }
+  }, {
+    key: 'delect',
+    value: function delect(e) {
+      var students = [];
+      $(".tabthitems1_wrap td [name=checkbox]").each(function () {
+        if ($(this).is(":checked")) {
+          var id = $(this).data("id");
+          students.push(id);
+        }
+      });
+      $.ajax({
+
+        url: "/delete_class_student",
+        dataType: 'json',
+        type: 'POST',
+        data: { "class_id": "1", "student_ids": JSON.stringify(students) },
+        success: function (data) {
+          if (data.success) {
+            this.loadData({ "table": "1" });
+            this.loadData({ "table": "2" });
+            alert("删除成功！");
+          } else {
+            alert("删除失败！");
+          }
+        }.bind(this),
+        error: function (xhr, status, err) {}.bind(this)
+      });
+    }
+  }, {
+    key: 'addClick',
+    value: function addClick(e) {
+      var student_ids = [];
+      $(".tabthitems_wrap td [name=checkbox]").each(function () {
+        if ($(this).is(":checked")) {
+          var id = $(this).data("id");
+          student_ids.push(id);
+        }
+      });
+
+      $.ajax({
+
+        url: "/add_students",
+        dataType: 'json',
+        type: 'POST',
+        data: { "class_id": "1", "student_ids": JSON.stringify(student_ids) },
+        success: function (data) {
+          if (data.success) {
+            this.loadData({ "table": "1" });
+            this.loadData({ "table": "2" });
+          } else {
+            alert("添加失败！");
+          }
+        }.bind(this),
+        error: function (xhr, status, err) {}.bind(this)
+      });
     }
   }, {
     key: 'render',
@@ -23155,7 +23222,7 @@ var AdminRight = function (_React$Component2) {
                   { className: 'admin_creat_butto_wrap col-xs-12 col-sm-3 col-md-2 cursor_pointer' },
                   React.createElement(
                     'p',
-                    { className: 'button_style_delect text_align_center' },
+                    { className: 'button_style_delect text_align_center', onClick: this.delect },
                     React.createElement('i', { className: 'fa fa-trash fa-fw admin_creat_button ' }),
                     '\xA0 \u5220 \u9664'
                   )
@@ -23192,8 +23259,23 @@ var AdminRight = function (_React$Component2) {
             )
           )
         ),
-        React.createElement(Table, { tabthitems: this.state.tabthitems, tabtritems: this.state.tabtritems, sort: this.state.sort, onSort: this.handleSort, checkTd: checkTd }),
-        React.createElement(PageTab, { setPage: this.setPage, allNum: this.state.allNum, everyNum: this.state.everyNum, thisPage: this.state.thisPage })
+        React.createElement(
+          'div',
+          { className: 'col-xs-12 col-md-5 tabthitems_wrap' },
+          React.createElement(Table, { tabthitems: this.state.tabthitems, tabtritems: this.state.tabtritems, sort: this.state.sort, onSort: this.handleSort, checkTd: checkTd }),
+          React.createElement(PageTab, { setPage: this.setPage, allNum: this.state.allNum, everyNum: this.state.everyNum, thisPage: this.state.thisPage })
+        ),
+        React.createElement(
+          'div',
+          { className: 'col-xs-12 col-md-2 arrow_right_style' },
+          React.createElement('i', { className: 'fa fa-arrow-right fa-fw cursor_pointer', onClick: this.addClick })
+        ),
+        React.createElement(
+          'div',
+          { className: 'col-xs-12 col-md-5 tabthitems1_wrap' },
+          React.createElement(Table, { tabthitems: this.state.tabthitems1, tabtritems: this.state.tabtritems1, sort: this.state.sort, onSort: this.handleSort, checkTd: checkTd }),
+          React.createElement(PageTab, { setPage: this.setPage, allNum: this.state.allNum, everyNum: this.state.everyNum, thisPage: this.state.thisPage })
+        )
       );
     }
   }]);
@@ -23243,14 +23325,16 @@ var AdminRightTop = function (_React$Component3) {
 
 //判断特殊列
 var checkTd = function checkTd(defaultTd) {
-  var id = this.props.item.id;
+
+  var props = this.props;
+  var id = props.item[props.thitem.name];
 
   if (this.props.thitem.type == "operation") {
     return React.createElement(
       'td',
       null,
       React.createElement(
-        'p',
+        'span',
         { className: '' },
         React.createElement(
           'a',
@@ -23259,11 +23343,11 @@ var checkTd = function checkTd(defaultTd) {
         )
       )
     );
-  } else if (this.props.thitem.type == "check") {
+  } else if (this.props.thitem.type == "checked" || this.props.thitem.type == "check") {
     return React.createElement(
       'td',
       null,
-      React.createElement('input', { type: 'checkbox' })
+      React.createElement('input', { type: 'checkbox', name: 'checkbox', 'data-id': id })
     );
   } else if (this.props.thitem.type == "level") {
     return React.createElement(

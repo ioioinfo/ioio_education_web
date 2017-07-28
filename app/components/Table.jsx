@@ -4,7 +4,7 @@ var React = require('react');
 class Table extends React.Component {
     render() {
         return (
-            <div id="table">
+            <div id="table" className="tableHeight">
             <div className="">
             <table className="table table-striped table-hover table-bordered">
             <thead>
@@ -47,6 +47,7 @@ class Th extends React.Component {
     constructor(props) {
         super(props);
         this.handleClick=this.handleClick.bind(this);
+        this.handleClick1=this.handleClick1.bind(this);
     }
     handleClick(e){
         var sort = this.props.sort;
@@ -66,6 +67,9 @@ class Th extends React.Component {
         }
 
         this.props.onSort(sort);
+    }
+    handleClick1(e){
+      $("[name='checkbox']").attr("checked",'true');
     }
     render() {
         var img= <span></span>;
@@ -87,7 +91,7 @@ class Th extends React.Component {
 
         if (this.props.item.type=="check"){
           return (
-              <th style={thStyle}><input type="checkbox" />{this.props.item.title} {img}</th>
+              <th id="checkall" style={thStyle} onClick={this.handleClick1}><input  name="checkbox" type="checkbox" />{this.props.item.title} {img}</th>
           );
         }else{
           return (

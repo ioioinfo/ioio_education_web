@@ -10225,7 +10225,7 @@ var Table = function (_React$Component) {
 
             return React.createElement(
                 "div",
-                { id: "table" },
+                { id: "table", className: "tableHeight" },
                 React.createElement(
                     "div",
                     { className: "" },
@@ -10303,6 +10303,7 @@ var Th = function (_React$Component3) {
         var _this5 = _possibleConstructorReturn(this, (Th.__proto__ || Object.getPrototypeOf(Th)).call(this, props));
 
         _this5.handleClick = _this5.handleClick.bind(_this5);
+        _this5.handleClick1 = _this5.handleClick1.bind(_this5);
         return _this5;
     }
 
@@ -10326,6 +10327,11 @@ var Th = function (_React$Component3) {
             }
 
             this.props.onSort(sort);
+        }
+    }, {
+        key: "handleClick1",
+        value: function handleClick1(e) {
+            $("[name='checkbox']").attr("checked", 'true');
         }
     }, {
         key: "render",
@@ -10362,8 +10368,8 @@ var Th = function (_React$Component3) {
             if (this.props.item.type == "check") {
                 return React.createElement(
                     "th",
-                    { style: thStyle },
-                    React.createElement("input", { type: "checkbox" }),
+                    { id: "checkall", style: thStyle, onClick: this.handleClick1 },
+                    React.createElement("input", { name: "checkbox", type: "checkbox" }),
                     this.props.item.title,
                     " ",
                     img
@@ -23301,7 +23307,7 @@ var checkTd = function checkTd(defaultTd) {
     return React.createElement(
       'td',
       null,
-      React.createElement('input', { type: 'checkbox' })
+      React.createElement('input', { type: 'checkbox', name: 'checkbox' })
     );
   } else if (this.props.thitem.type == "level") {
     return React.createElement(
