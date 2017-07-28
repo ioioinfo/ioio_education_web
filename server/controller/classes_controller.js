@@ -878,6 +878,29 @@ exports.register = function(server, options, next) {
                 });
             }
         },
+        //查询可以添加到班级的学员
+        {
+            method: "POST",
+            path: '/add_students',
+            handler: function(request, reply) {
+                var class_id = request.payload.class_id;
+                var student_ids = request.payload.student_ids;
+                if (!class_id || !student_ids) {
+                    return reply({"success":false,"message":"params wrong","service_info":service_info});
+                }
+                var data = {
+                    "class_id" : class_id,
+                    "student_ids" :student_ids
+                };
+                education_api.add_students(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
         //删除班级
         {
             method: "POST",
