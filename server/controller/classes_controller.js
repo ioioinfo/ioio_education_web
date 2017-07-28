@@ -883,12 +883,14 @@ exports.register = function(server, options, next) {
             method: "POST",
             path: '/delete_class_student',
             handler: function(request, reply) {
-                var id = request.payload.id;
-                if (!id) {
+                var class_id = request.payload.class_id;
+                var student_ids = request.payload.student_ids;
+                if (!class_id || !student_ids) {
                     return reply({"success":false,"message":"id wrong","service_info":service_info});
                 }
                 var data = {
-                    "id" : id
+                    "class_id" : class_id,
+                    "student_ids" :student_ids
                 };
                 education_api.delete_class_student(data,function(err,rows){
                     if (!err) {
