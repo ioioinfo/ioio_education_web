@@ -22,6 +22,26 @@ var host = "http://211.149.248.241:18027/";
 
 var nav = function(server) {
     return {
+        delete_class_student: function(data,cb) {
+            var url = host + "delete_class_student";
+            uu_request.request(url, data, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,body);
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
+        add_by_classId: function(class_id,cb) {
+            var url = host + "add_by_classId?class_id=" + class_id;
+            uu_request.get(url, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,JSON.parse(body));
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
         update_teachers_type: function(data,cb) {
             var url = host + "update_teachers_type";
             uu_request.request(url, data, function(err, response, body) {
