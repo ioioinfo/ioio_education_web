@@ -733,7 +733,7 @@ exports.register = function(server, options, next) {
                 });
             }
         },
-        //更新年级
+        //更新年老师
         {
             method: "POST",
             path: '/update_teacher',
@@ -754,6 +754,113 @@ exports.register = function(server, options, next) {
                 });
             }
         },
+        //查询老师分类
+        {
+            method: "GET",
+            path: '/get_teachers_types',
+            handler: function(request, reply) {
+                education_api.get_teachers_types(function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //id查询老师分类
+        {
+            method: "GET",
+            path: '/search_type_byId',
+            handler: function(request, reply) {
+                var id = request.query.id;
+                education_api.search_type_byId(id,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //删除老师分类
+        {
+            method: "POST",
+            path: '/delete_teachers_type',
+            handler: function(request, reply) {
+                var id = request.payload.id;
+                if (!id) {
+                    return reply({"success":false,"message":"id wrong","service_info":service_info});
+                }
+                var data = {
+                    "id" : id
+                };
+                education_api.delete_teachers_type(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //保存老师分类
+        {
+            method: "POST",
+            path: '/save_teachers_type',
+            handler: function(request, reply) {
+                var name = request.payload.name;
+				var code = request.payload.code;
+				var remark = request.payload.remark;
+
+				if (!name || !code || !remark) {
+					return reply({"success":false,"message":"params wrong","service_info":service_info});
+				}
+
+                var data = {
+                    "name":name,
+                    "code":code,
+                    "remark":remark
+                };
+                education_api.save_teachers_type(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //更新老师分类
+        {
+            method: "POST",
+            path: '/update_teachers_type',
+            handler: function(request, reply) {
+                var id = request.payload.id;
+                var name = request.payload.name;
+				var code = request.payload.code;
+				var remark = request.payload.remark;
+
+				if (!name || !code || !remark || !id) {
+					return reply({"success":false,"message":"params wrong","service_info":service_info});
+				}
+
+                var data = {
+                    "id":id,
+                    "name":name,
+                    "code":code,
+                    "remark":remark
+                };
+                education_api.update_teachers_type(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+
 
     ]);
 
