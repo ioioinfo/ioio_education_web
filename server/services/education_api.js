@@ -22,6 +22,186 @@ var host = "http://211.149.248.241:18027/";
 
 var nav = function(server) {
     return {
+        add_students: function(data,cb) {
+            var url = host + "add_students";
+            uu_request.request(url, data, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,body);
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
+        delete_class_student: function(data,cb) {
+            var url = host + "delete_class_student";
+            uu_request.request(url, data, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,body);
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
+        add_by_classId: function(class_id,cb) {
+            var url = host + "add_by_classId?class_id=" + class_id;
+            uu_request.get(url, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,JSON.parse(body));
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
+        update_teachers_type: function(data,cb) {
+            var url = host + "update_teachers_type";
+            uu_request.request(url, data, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,body);
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
+        save_teachers_type: function(data,cb) {
+            var url = host + "save_teachers_type";
+            uu_request.request(url, data, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,body);
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
+        delete_teachers_type: function(data,cb) {
+            var url = host + "delete_teachers_type";
+            uu_request.request(url, data, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,body);
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
+        search_type_byId: function(id,cb) {
+            var url = host + "search_type_byId?id=" + id;
+            uu_request.get(url, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,JSON.parse(body));
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
+        get_teachers_types: function(cb) {
+            var url = host + "get_teachers_types";
+            uu_request.get(url, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,JSON.parse(body));
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
+        update_teacher: function(data,cb) {
+            var url = host + "update_teacher";
+            uu_request.request(url, data, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,body);
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
+        save_teacher: function(data,cb) {
+            var url = host + "save_teacher";
+            uu_request.request(url, data, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,body);
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
+        delete_teacher: function(data,cb) {
+            var url = host + "delete_teacher";
+            uu_request.request(url, data, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,body);
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
+        search_teacher_byId: function(id,cb) {
+            var url = host + "search_teacher_byId?id=" + id;
+            uu_request.get(url, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,JSON.parse(body));
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
+        get_teachers: function(cb) {
+            var url = host + "get_teachers";
+            uu_request.get(url, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,JSON.parse(body));
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
+        update_grade: function(data,cb) {
+            var url = host + "update_grade";
+            uu_request.request(url, data, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,body);
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
+        save_grade: function(data,cb) {
+            var url = host + "save_grade";
+            uu_request.request(url, data, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,body);
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
+        delete_grade: function(data,cb) {
+            var url = host + "delete_grade";
+            uu_request.request(url, data, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,body);
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
+        search_grade_byId: function(id,cb) {
+            var url = host + "search_grade_byId?id=" + id;
+            uu_request.get(url, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,JSON.parse(body));
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
+        get_grades: function(cb) {
+            var url = host + "get_grades";
+            uu_request.get(url, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,JSON.parse(body));
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
         update_plan: function(data,cb) {
             var url = host + "update_plan";
             uu_request.request(url, data, function(err, response, body) {

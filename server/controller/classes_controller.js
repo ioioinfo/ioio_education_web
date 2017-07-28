@@ -545,6 +545,385 @@ exports.register = function(server, options, next) {
                 });
             }
         },
+        //查询年级列表
+        {
+            method: "GET",
+            path: '/get_grades',
+            handler: function(request, reply) {
+                education_api.get_grades(function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //id查询年级
+        {
+            method: "GET",
+            path: '/search_grade_byId',
+            handler: function(request, reply) {
+                var id = request.query.id;
+                education_api.search_grade_byId(id,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //年级删除
+        {
+            method: "POST",
+            path: '/delete_grade',
+            handler: function(request, reply) {
+                var id = request.payload.id;
+                if (!id) {
+                    return reply({"success":false,"message":"id wrong","service_info":service_info});
+                }
+                var data = {
+                    "id" : id
+                };
+                education_api.delete_grade(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //保存年级
+        {
+            method: "POST",
+            path: '/save_grade',
+            handler: function(request, reply) {
+                var name = request.payload.name;
+				var code = request.payload.code;
+				var grade_leader = request.payload.grade_leader;
+				var leader_id = request.payload.leader_id;
+				var state = request.payload.state;
+				var remark = request.payload.remark;
+
+				if (!name || !code || !grade_leader || !leader_id || !state || !remark) {
+					return reply({"success":false,"message":"params wrong","service_info":service_info});
+				}
+                var data = {
+                    "name": name,
+                    "code": code,
+                    "grade_leader":grade_leader,
+                    "leader_id":leader_id,
+                    "state":state,
+                    "remark":remark
+                };
+                education_api.save_grade(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //更新年级
+        {
+            method: "POST",
+            path: '/update_grade',
+            handler: function(request, reply) {
+                var id = request.payload.id;
+                var name = request.payload.name;
+				var code = request.payload.code;
+				var grade_leader = request.payload.grade_leader;
+				var leader_id = request.payload.leader_id;
+				var state = request.payload.state;
+				var remark = request.payload.remark;
+
+				if (!name || !code || !grade_leader || !leader_id || !state || !remark || !id) {
+					return reply({"success":false,"message":"params wrong","service_info":service_info});
+				}
+
+                var data = {
+                    "id":id,
+                    "name": name,
+                    "code": code,
+                    "grade_leader":grade_leader,
+                    "leader_id":leader_id,
+                    "state":state,
+                    "remark":remark
+                };
+                education_api.update_grade(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //查询老师列表
+        {
+            method: "GET",
+            path: '/get_teachers',
+            handler: function(request, reply) {
+                education_api.get_teachers(function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //id查询老师
+        {
+            method: "GET",
+            path: '/search_teacher_byId',
+            handler: function(request, reply) {
+                var id = request.query.id;
+                education_api.search_teacher_byId(id,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //删除老师
+        {
+            method: "POST",
+            path: '/delete_teacher',
+            handler: function(request, reply) {
+                var id = request.payload.id;
+                if (!id) {
+                    return reply({"success":false,"message":"id wrong","service_info":service_info});
+                }
+                var data = {
+                    "id" : id
+                };
+                education_api.delete_teacher(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //保存老师
+        {
+            method: "POST",
+            path: '/save_teacher',
+            handler: function(request, reply) {
+                var teachers = request.payload.teachers;
+                teachers = JSON.parse(teachers);
+                if (teachers.length==0) {
+                    return reply({"success":false,"message":"teachers wrong","service_info":service_info});
+                }
+
+                var data = {"teachers":JSON.stringify(teachers)};
+                education_api.save_teacher(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //更新年老师
+        {
+            method: "POST",
+            path: '/update_teacher',
+            handler: function(request, reply) {
+                var teacher = request.payload.teacher;
+                teacher = JSON.parse(teacher);
+                if (!teacher.id||!teacher.name|| !teacher.code|| !teacher.age|| !teacher.sex|| !teacher.phone|| !teacher.state||!teacher.address|| !teacher.province|| !teacher.city|| !teacher.district|| !teacher.photo|| !teacher.type_id|| !teacher.is_master|| !teacher.is_leader || !teacher.level) {
+                    return reply({"success":false,"message":"params wrong","service_info":service_info});
+                }
+
+                var data = {"teacher":JSON.stringify(teacher)};
+                education_api.update_teacher(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //查询老师分类
+        {
+            method: "GET",
+            path: '/get_teachers_types',
+            handler: function(request, reply) {
+                education_api.get_teachers_types(function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //id查询老师分类
+        {
+            method: "GET",
+            path: '/search_type_byId',
+            handler: function(request, reply) {
+                var id = request.query.id;
+                education_api.search_type_byId(id,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //删除老师分类
+        {
+            method: "POST",
+            path: '/delete_teachers_type',
+            handler: function(request, reply) {
+                var id = request.payload.id;
+                if (!id) {
+                    return reply({"success":false,"message":"id wrong","service_info":service_info});
+                }
+                var data = {
+                    "id" : id
+                };
+                education_api.delete_teachers_type(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //保存老师分类
+        {
+            method: "POST",
+            path: '/save_teachers_type',
+            handler: function(request, reply) {
+                var name = request.payload.name;
+				var code = request.payload.code;
+				var remark = request.payload.remark;
+
+				if (!name || !code || !remark) {
+					return reply({"success":false,"message":"params wrong","service_info":service_info});
+				}
+
+                var data = {
+                    "name":name,
+                    "code":code,
+                    "remark":remark
+                };
+                education_api.save_teachers_type(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //更新老师分类
+        {
+            method: "POST",
+            path: '/update_teachers_type',
+            handler: function(request, reply) {
+                var id = request.payload.id;
+                var name = request.payload.name;
+				var code = request.payload.code;
+				var remark = request.payload.remark;
+
+				if (!name || !code || !remark || !id) {
+					return reply({"success":false,"message":"params wrong","service_info":service_info});
+				}
+
+                var data = {
+                    "id":id,
+                    "name":name,
+                    "code":code,
+                    "remark":remark
+                };
+                education_api.update_teachers_type(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //查询可以添加到班级的学员
+        {
+            method: "GET",
+            path: '/add_by_classId',
+            handler: function(request, reply) {
+                var class_id = request.query.class_id;
+                if (!class_id) {
+                    return reply({"success":false,"message":"class_id null"});
+                }
+                education_api.add_by_classId(class_id,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //查询可以添加到班级的学员
+        {
+            method: "POST",
+            path: '/add_students',
+            handler: function(request, reply) {
+                var class_id = request.payload.class_id;
+                var student_ids = request.payload.student_ids;
+                if (!class_id || !student_ids) {
+                    return reply({"success":false,"message":"params wrong","service_info":service_info});
+                }
+                var data = {
+                    "class_id" : class_id,
+                    "student_ids" :student_ids
+                };
+                education_api.add_students(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //删除班级
+        {
+            method: "POST",
+            path: '/delete_class_student',
+            handler: function(request, reply) {
+                var class_id = request.payload.class_id;
+                var student_ids = request.payload.student_ids;
+                if (!class_id || !student_ids) {
+                    return reply({"success":false,"message":"params wrong","service_info":service_info});
+                }
+                var data = {
+                    "class_id" : class_id,
+                    "student_ids" :student_ids
+                };
+                education_api.delete_class_student(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
 
 
     ]);
