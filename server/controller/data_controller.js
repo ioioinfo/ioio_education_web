@@ -47,14 +47,14 @@ exports.register = function(server, options, next) {
             handler: function(request, reply){
                 var rows = [
                     {icon:"fa fa-home fa-fw",navname:"首页",a:"index", snav:[]},
-                    {icon:"fa fa-minus-square-o fa-fw",navname:"学员列表",a:"student_list",snav:[]},
-                    {icon:"fa fa-tags fa-fw",navname:"学员详情",a:"student_view",snav:[]},
-                    {icon:"fa fa-user fa-fw",navname:"添加学员",a:"add_student",snav:[]},
-                    {icon:"fa fa-vcard fa-fw",navname:"教师列表",a:"teacher_list",snav:[]},
-                    {icon:"fa fa-money fa-fw",navname:"计划列表",a:"play_list",snav:[]},
-                    {icon:"fa fa-cube fa-fw",navname:"班级列表",a:"index",snav:[]},
-                    {icon:"fa fa-retweet fa-fw",navname:"班级学员列表",a:"class_student_list",snav:[]},
-                    {icon:"fa fa-retweet fa-fw",navname:"班级详情",a:"class_view",snav:[]},
+                    {icon:"fa fa-list fa-fw",navname:"学员列表",a:"student_list",snav:[]},
+                    {icon:"fa fa-child fa-fw",navname:"学员详情",a:"student_view",snav:[]},
+                    {icon:"fa fa-plus-circle fa-fw",navname:"添加学员",a:"add_student",snav:[]},
+                    {icon:"fa fa-user fa-fw",navname:"教师列表",a:"teacher_list",snav:[]},
+                    {icon:"fa fa-book fa-fw",navname:"计划列表",a:"play_list",snav:[]},
+                    {icon:"fa fa-building-o fa-fw",navname:"班级列表",a:"index",snav:[]},
+                    {icon:"fa fa-user-plus fa-fw",navname:"班级学员列表",a:"class_student_list",snav:[]},
+                    {icon:"fa fa-bookmark fa-fw",navname:"班级详情",a:"class_view",snav:[]},
                 ];
                 
                 return reply({"success":true,"rows":rows,"message":"ok"});
