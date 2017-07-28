@@ -886,7 +886,7 @@ exports.register = function(server, options, next) {
                 var class_id = request.payload.class_id;
                 var student_ids = request.payload.student_ids;
                 if (!class_id || !student_ids) {
-                    return reply({"success":false,"message":"id wrong","service_info":service_info});
+                    return reply({"success":false,"message":"params wrong","service_info":service_info});
                 }
                 var data = {
                     "class_id" : class_id,
