@@ -860,7 +860,24 @@ exports.register = function(server, options, next) {
                 });
             }
         },
-
+        //查询可以添加到班级的学员
+        {
+            method: "GET",
+            path: '/add_by_classId',
+            handler: function(request, reply) {
+                var class_id = request.query.class_id;
+                if (!class_id) {
+                    return reply({"success":false,"message":"class_id null"});
+                }
+                education_api.add_by_classId(class_id,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
 
     ]);
 
