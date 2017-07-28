@@ -22,6 +22,56 @@ var host = "http://211.149.248.241:18027/";
 
 var nav = function(server) {
     return {
+        update_teachers_type: function(data,cb) {
+            var url = host + "update_teachers_type";
+            uu_request.request(url, data, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,body);
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
+        save_teachers_type: function(data,cb) {
+            var url = host + "save_teachers_type";
+            uu_request.request(url, data, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,body);
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
+        delete_teachers_type: function(data,cb) {
+            var url = host + "delete_teachers_type";
+            uu_request.request(url, data, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,body);
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
+        search_type_byId: function(id,cb) {
+            var url = host + "search_type_byId?id=" + id;
+            uu_request.get(url, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,JSON.parse(body));
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
+        get_teachers_types: function(cb) {
+            var url = host + "get_teachers_types";
+            uu_request.get(url, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,JSON.parse(body));
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
         update_teacher: function(data,cb) {
             var url = host + "update_teacher";
             uu_request.request(url, data, function(err, response, body) {
