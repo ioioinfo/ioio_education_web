@@ -22676,7 +22676,7 @@ var AdminRight = function (_React$Component2) {
             var starting_date = $("#starting_date").val();
             var end_date = $("#end_date").val();
             var class_master = $("#class_master").val();
-            var master_id = $("#master_id").val();
+            var master_id = $("#class_master").val();
             var remarks = $("#remarks").val();
             var level_id = $("#level_id").val();
             clas.name = name;
@@ -22791,24 +22791,6 @@ var AdminRight = function (_React$Component2) {
                                 React.createElement(
                                     'label',
                                     { className: 'weui-label' },
-                                    '\u73ED\u4E3B\u4EFBid'
-                                )
-                            ),
-                            React.createElement(
-                                'div',
-                                { className: 'weui-cell__bd student_view_input_style' },
-                                React.createElement('input', { className: 'weui-input ', type: 'text', placeholder: '', id: 'master_id' })
-                            )
-                        ),
-                        React.createElement(
-                            'div',
-                            { className: 'weui-cell' },
-                            React.createElement(
-                                'div',
-                                { className: 'weui-cell__hd' },
-                                React.createElement(
-                                    'label',
-                                    { className: 'weui-label' },
                                     '\u73ED\u4E3B\u4EFB'
                                 )
                             ),
@@ -22821,7 +22803,7 @@ var AdminRight = function (_React$Component2) {
                                     this.state.masterItem.map(function (item, index) {
                                         return React.createElement(
                                             'option',
-                                            { key: index, id: item.id },
+                                            { key: index, value: item.id },
                                             item.name
                                         );
                                     })

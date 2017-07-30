@@ -86,7 +86,7 @@ class AdminRight extends React.Component {
     var starting_date = $("#starting_date").val();
     var end_date = $("#end_date").val();
     var class_master = $("#class_master").val();
-    var master_id = $("#master_id").val();
+    var master_id = $("#class_master").val();
     var remarks = $("#remarks").val();
     var level_id = $("#level_id").val();
     clas.name=name;
@@ -150,19 +150,13 @@ class AdminRight extends React.Component {
                 </div>
             </div>
 
-            <div className="weui-cell">
-                <div className="weui-cell__hd"><label className="weui-label">班主任id</label></div>
-                <div className="weui-cell__bd student_view_input_style">
-                    <input className="weui-input " type="text" placeholder="" id="master_id"/>
-                </div>
-            </div>
 
             <div className="weui-cell">
                 <div className="weui-cell__hd"><label className="weui-label">班主任</label></div>
                 <div className="weui-cell__bd student_view_input_style">
                   <select className="weui-input " type="text" placeholder="" id="class_master">
                   {this.state.masterItem.map((item,index)  => (
-                      <option key={index} id={item.id}>{item.name}</option>))
+                      <option key={index} value={item.id}>{item.name}</option>))
                   }
                   </select>
                 </div>
