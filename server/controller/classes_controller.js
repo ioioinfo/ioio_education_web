@@ -891,9 +891,6 @@ exports.register = function(server, options, next) {
             handler: function(request, reply) {
                 var class_id = request.query.class_id;
                 if (!class_id) {
-					return reply({"success":false,"message":"class_id null","service_info":service_info});
-				}
-                if (!class_id) {
                     return reply({"success":false,"message":"class_id null"});
                 }
                 education_api.add_by_classId(class_id,function(err,rows){
