@@ -81,6 +81,9 @@ exports.register = function(server, options, next) {
             path: '/search_class_byId',
             handler: function(request, reply) {
                 var id = request.query.id;
+                if (!id) {
+                    return reply({"success":false,"message":"id null","service_info":service_info});
+                }
                 education_api.search_class_byId(id,function(err,rows){
                     if (!err) {
                         return reply(rows);
@@ -134,12 +137,15 @@ exports.register = function(server, options, next) {
                 });
             }
         },
-        //查询学员信息
+        //id查询学员信息
         {
             method: "GET",
             path: '/search_student_byId',
             handler: function(request, reply) {
                 var id = request.query.id;
+                if (!id) {
+                    return reply({"success":false,"message":"id null","service_info":service_info});
+                }
                 education_api.search_student_byId(id,function(err,rows){
                     if (!err) {
                         return reply(rows);
@@ -226,12 +232,15 @@ exports.register = function(server, options, next) {
                 });
             }
         },
-        //查询课程信息
+        //id查询课程信息
         {
             method: "GET",
             path: '/search_lesson_byId',
             handler: function(request, reply) {
                 var id = request.query.id;
+                if (!id) {
+                    return reply({"success":false,"message":"id null","service_info":service_info});
+                }
                 education_api.search_lesson_byId(id,function(err,rows){
                     if (!err) {
                         return reply(rows);
@@ -350,6 +359,9 @@ exports.register = function(server, options, next) {
             path: '/search_task_byId',
             handler: function(request, reply) {
                 var id = request.query.id;
+                if (!id) {
+                    return reply({"success":false,"message":"id null","service_info":service_info});
+                }
                 education_api.search_task_byId(id,function(err,rows){
                     if (!err) {
                         return reply(rows);
@@ -460,6 +472,9 @@ exports.register = function(server, options, next) {
             path: '/search_plan_byId',
             handler: function(request, reply) {
                 var id = request.query.id;
+                if (!id) {
+                    return reply({"success":false,"message":"id null","service_info":service_info});
+                }
                 education_api.search_plan_byId(id,function(err,rows){
                     if (!err) {
                         return reply(rows);
@@ -565,6 +580,9 @@ exports.register = function(server, options, next) {
             path: '/search_grade_byId',
             handler: function(request, reply) {
                 var id = request.query.id;
+                if (!id) {
+                    return reply({"success":false,"message":"id null","service_info":service_info});
+                }
                 education_api.search_grade_byId(id,function(err,rows){
                     if (!err) {
                         return reply(rows);
@@ -682,6 +700,9 @@ exports.register = function(server, options, next) {
             path: '/search_teacher_byId',
             handler: function(request, reply) {
                 var id = request.query.id;
+                if (!id) {
+                    return reply({"success":false,"message":"id null","service_info":service_info});
+                }
                 education_api.search_teacher_byId(id,function(err,rows){
                     if (!err) {
                         return reply(rows);
@@ -774,6 +795,9 @@ exports.register = function(server, options, next) {
             path: '/search_type_byId',
             handler: function(request, reply) {
                 var id = request.query.id;
+                if (!id) {
+                    return reply({"success":false,"message":"id wrong","service_info":service_info});
+                }
                 education_api.search_type_byId(id,function(err,rows){
                     if (!err) {
                         return reply(rows);
@@ -866,6 +890,9 @@ exports.register = function(server, options, next) {
             path: '/add_by_classId',
             handler: function(request, reply) {
                 var class_id = request.query.class_id;
+                if (!class_id) {
+					return reply({"success":false,"message":"class_id null","service_info":service_info});
+				}
                 if (!class_id) {
                     return reply({"success":false,"message":"class_id null"});
                 }
@@ -990,6 +1017,9 @@ exports.register = function(server, options, next) {
             path: '/search_exam_byId',
             handler: function(request, reply) {
                 var id = request.query.id;
+                if (!id) {
+					return reply({"success":false,"message":"id null","service_info":service_info});
+				}
                 education_api.search_exam_byId(id,function(err,rows){
                     if (!err) {
                         return reply(rows);
@@ -1089,6 +1119,9 @@ exports.register = function(server, options, next) {
             path: '/search_record_byId',
             handler: function(request, reply) {
                 var id = request.query.id;
+                if (!id) {
+					return reply({"success":false,"message":"id null","service_info":service_info});
+				}
                 education_api.search_record_byId(id,function(err,rows){
                     if (!err) {
                         return reply(rows);
@@ -1142,6 +1175,9 @@ exports.register = function(server, options, next) {
             path: '/search_learning_record_byId',
             handler: function(request, reply) {
                 var id = request.query.id;
+                if (!id) {
+					return reply({"success":false,"message":"id null","service_info":service_info});
+				}
                 education_api.search_learning_record_byId(id,function(err,rows){
                     if (!err) {
                         return reply(rows);
