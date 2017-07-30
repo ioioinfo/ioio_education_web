@@ -23,6 +23,7 @@ module.exports = {
         play_list: './app/play_list.jsx',
         student_view: './app/student_view.jsx',
         add_student: './app/add_student.jsx',
+        add_class: './app/add_class.jsx',
     },
     output: {
         path: __dirname,

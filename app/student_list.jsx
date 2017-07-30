@@ -135,7 +135,7 @@ class AdminRightTop extends React.Component {
         }else if (this.props.thitem.type=="check") {
           return (
             <td>
-              <input type="checkbox" />
+              <input type="checkbox" name="checkbox" />
             </td>
           );
         }else if (this.props.thitem.type=="level") {

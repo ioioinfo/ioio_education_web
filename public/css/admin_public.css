@@ -16,6 +16,9 @@ thead{
 .cursor_pointer{
   cursor: pointer;
 }
+.overflow_auto{
+  overflow: auto;
+}
 .pagination{
   margin: 0;
 }
@@ -38,6 +41,14 @@ tr{
 tbody{
   overflow: auto;
 }
+.arrow_right_style{
+  text-align: center;
+  font-size: 34px;
+  color: #999;
+}
+.arrow_right_style:hover{
+  color: #009695;
+}
 .operate_announce{
   margin: 2px 0;
   color: #fff;
@@ -52,6 +63,7 @@ tbody{
 .operation_style{
   height: 35px;
   line-height: 35px;
+
 }
 .book_img{
   width: 50px;

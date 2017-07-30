@@ -99,23 +99,44 @@ class AdminRightTop extends React.Component {
 
 //判断特殊列
 var checkTd = function(defaultTd) {
-    var id = this.props.item.id;
+    var props = this.props;
+    var id = props.item.id;
 
-        if(this.props.thitem.type=="operation"){
-          return (
-              <td>
-              <p className=""><a href="borrow_books_view"  className="btn btn-info btn-xs operate_announce">查 看</a></p>
-              </td>
-          );
-        }else if (this.props.thitem.type=="check") {
-          return (
-            <td>
-              <input type="checkbox" />
-            </td>
-          );
-        }else {
-        return defaultTd;
+    var delect = function(e){
+      $.ajax({
+          url: "/delete_class",
+          dataType: 'json',
+          type: 'POST',
+          data: {"id":id},
+          success: function(data) {
+              if (data.success) {
+                  alert("删除成功！");
+              }else {
+                  alert("删除失败！");
+              }
+          }.bind(this),
+          error: function(xhr, status, err) {
+          }.bind(this)
+      });
+
     }
+
+    if(this.props.thitem.type=="operation"){
+      return (
+          <td>
+          <p className=""><a href="borrow_books_view"  className="btn btn-info btn-xs operate_announce">查 看</a></p>
+          <p className=""><span className="btn btn-xs operate_announce weui-btn_warn" id={this.props.item[this.props.thitem.name]} onClick={delect} >删 除</span></p>
+          </td>
+      );
+    }else if (this.props.thitem.type=="check") {
+      return (
+        <td>
+          <input type="checkbox" name="checkbox" />
+        </td>
+      );
+    }else {
+    return defaultTd;
+  }
 };
 
 // 返回到页面

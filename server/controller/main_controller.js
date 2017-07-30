@@ -100,6 +100,15 @@ exports.register = function(server, options, next) {
             },
         },
 
+        //添加班级
+        {
+            method: 'GET',
+            path: '/add_class',
+            handler: function(request, reply) {
+                return reply.view("add_class");
+            },
+        },
+
 
     ]);
 

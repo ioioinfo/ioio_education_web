@@ -122,31 +122,7 @@ class AdminRight extends React.Component {
     return (
       <div className="admin_right col-xs-12 col-sm-8 col-md-10">
         <AdminRightTop/>
-        <div className="admin_creat overflow_hidden">
-            <div className="">
-              <div className="col-xs-12 col-sm-8 col-md-8">
-                <div className="row">
-                  <div className="admin_creat_butto_wrap col-xs-12 col-sm-3 col-md-2 cursor_pointer">
-                    <p  className="button_style_delect text_align_center"><i className="fa fa-trash fa-fw admin_creat_button "></i>&nbsp; 删 除</p>
-                  </div>
-                  <div className="admin_creat_butto_wrap col-xs-12 col-sm-3 col-md-2 cursor_pointer">
-                    <p  className="button_style_new text_align_center"><i className="fa fa-plus fa-fw admin_creat_button "></i>&nbsp; 新 建</p>
-                  </div>
-                </div>
-
-              </div>
-              <div className="col-xs-12 col-sm-4 col-md-4">
-                <div  className="row">
-                  <span className="admin_creat_search  col-xs-8 col-sm-8 col-md-8">
-                    <input className="admin_creat_input" type="search" placeholder="请输入关键字" />
-                  </span>
-                  <button className="admin_creat_button_search col-xs-4 col-sm-4 col-md-4 button_style_search cursor_pointer">搜 索</button>
-                </div>
-              </div>
-
-            </div>
-        </div>
-
+  
         <div className="student_view_wrap">
           <div className="student_view_infor">
             <div className="weui-cell">
