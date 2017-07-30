@@ -29,50 +29,6 @@ class AdminRight extends React.Component {
   componentDidMount() {
       var tableHeight = $(window).height()-112;
       $(".student_view_wrap").css("height",tableHeight+"px");
-
-      $.ajax({
-             url: "/search_class_byId",
-             dataType: 'json',
-             type: 'GET',
-             data:{'id':'1'},
-             success: function(data) {
-
-                if(data.success){
-
-                  plan_id = data.rows[0].plan_id;
-                  for (var i = 0; i < data.plans.length; i++) {
-                    var plans = data.plans[plan_id].name;
-                  }
-                  var name = data.rows[0].name;
-                  var code = data.rows[0].code;
-                  var state = data.rows[0].state;
-                  var starting_date = data.rows[0].starting_date;
-                  var end_date = data.rows[0].end_date;
-                  var class_master = data.rows[0].class_master;
-                  var master_id = data.rows[0].master_id;
-                  var remarks = data.rows[0].remarks;
-                  level_id = data.rows[0].level_id;
-                  for (var i = 0; i < data.grades.length; i++) {
-                    var grades = data.grades[level_id].name;
-                  }
-                  $("#plans").html(plans);
-                  $("#code").val(code);
-                  $("#name").val(name);
-                  $("#starting_date").val(starting_date);
-                  $("#end_date").val(end_date);
-                  $("#master").html(class_master);
-                  $("#master_id").val(master_id);
-                  $("#remarks").val(remarks);
-                  $("#state_up").html(state);
-                  $("#grades").html(grades);
-                }
-
-             }.bind(this),
-             error: function(xhr, status, err) {
-             }.bind(this)
-        });
-
-
       $.ajax({
              url: "/get_lesson_plans",
              dataType: 'json',
@@ -123,7 +79,6 @@ class AdminRight extends React.Component {
   handleClick(e){
     var clas = new Object();
 
-    var id = "1";
     var plan_id = $("#plan_id").val();
     var name = $("#name").val();
     var code = $("#code").val();
@@ -134,7 +89,6 @@ class AdminRight extends React.Component {
     var master_id = $("#master_id").val();
     var remarks = $("#remarks").val();
     var level_id = $("#level_id").val();
-    clas.id=id;
     clas.name=name;
     clas.code=code;
     clas.plan_id=plan_id;
@@ -147,15 +101,15 @@ class AdminRight extends React.Component {
     clas.level_id=level_id;
 
     $.ajax({
-        url: "/update_class",
+        url: "/save_class",
         dataType: 'json',
         type: 'POST',
         data: {"clas":JSON.stringify(clas)},
         success: function(data) {
             if (data.success) {
-                alert("修改成功！");
+                alert("添加成功！");
             }else {
-                alert("修改失败！");
+                alert("添加失败！");
             }
         }.bind(this),
         error: function(xhr, status, err) {
@@ -165,7 +119,7 @@ class AdminRight extends React.Component {
   }
   render() {
     return (
-      <div className="admin_right col-xs-12 col-sm-8 col-md-10 overflow_auto">
+      <div className="admin_right col-xs-12 col-sm-8 col-md-10">
         <AdminRightTop/>
 
         <div className="student_view_wrap">
@@ -189,7 +143,6 @@ class AdminRight extends React.Component {
                 <div className="weui-cell__hd"><label className="weui-label">年级</label></div>
                 <div className="weui-cell__bd student_view_input_style">
                   <select className="weui-input " type="text" placeholder="" id="level_id">
-                  <option id="grades" value={level_id}></option>
                   {this.state.levelItem.map((item,index)  => (
                       <option key={index} value={item.id}>{item.name}</option>))
                   }
@@ -208,7 +161,6 @@ class AdminRight extends React.Component {
                 <div className="weui-cell__hd"><label className="weui-label">班主任</label></div>
                 <div className="weui-cell__bd student_view_input_style">
                   <select className="weui-input " type="text" placeholder="" id="class_master">
-                  <option id="master"></option>
                   {this.state.masterItem.map((item,index)  => (
                       <option key={index} id={item.id}>{item.name}</option>))
                   }
@@ -220,7 +172,7 @@ class AdminRight extends React.Component {
                 <div className="weui-cell__hd"><label className="weui-label">计划列表</label></div>
                 <div className="weui-cell__bd student_view_input_style">
                   <select className="weui-input " type="text" placeholder="" id="plan_id">
-                    <option id="plans" value={plan_id}></option>
+
                     {this.state.planItem.map((item,index)  => (
                         <option key={index} value={item.id}>{item.name}</option>))
                     }
@@ -246,7 +198,6 @@ class AdminRight extends React.Component {
                 <div className="weui-cell__hd"><label className="weui-label">状态</label></div>
                 <div className="weui-cell__bd student_view_input_style">
                   <select className="weui-input " type="text" placeholder="" id="state">
-                      <option id="state_up"></option>
                       <option>未开始</option>
                       <option>已开班</option>
                       <option>已结束</option>
@@ -262,7 +213,7 @@ class AdminRight extends React.Component {
             </div>
 
             <div className="student_view_button_xiugai">
-              <span className="weui-btn weui-btn_primary" onClick={this.handleClick}>修 改</span>
+              <span className="weui-btn weui-btn_primary" onClick={this.handleClick}>保 存</span>
             </div>
 
           </div>

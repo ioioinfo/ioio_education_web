@@ -16,7 +16,7 @@ class Table extends React.Component {
             </thead>
             <tbody>
             {this.props.tabtritems.map((item,index)  => (
-                <Tr key={index} item={item} tabthitems={this.props.tabthitems} refresh={this.props.refresh} checkTd={this.props.checkTd} />))
+                <Tr key={index} item={item} tdstates={this.props.tdstates} tabthitems={this.props.tabthitems} refresh={this.props.refresh} checkTd={this.props.checkTd} />))
             }
             </tbody>
             </table>
@@ -37,7 +37,7 @@ class Tr extends React.Component {
         return (
             <tr>
             {this.props.tabthitems.map((item,index) => (
-                <Td key={index} item={this.props.item} thitem={item} refresh={this.props.refresh} checkTd={this.props.checkTd} />))
+                <Td key={index} item={this.props.item} thitem={item} tdstates={this.props.tdstates} refresh={this.props.refresh} checkTd={this.props.checkTd} />))
             }
             </tr>
         );
@@ -103,6 +103,13 @@ class Th extends React.Component {
 };
 
 class Td extends React.Component {
+    constructor(props) {
+        super(props);
+
+        // 初始化一个空对象
+        this.state = this.props.tdstates || {};
+    }
+
     render() {
         var defaultTd = (<td>{this.props.item[this.props.thitem.name]}</td>);
         var checkTd = this.props.checkTd;

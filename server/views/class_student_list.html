@@ -34,9 +34,9 @@
         if(params.table=="1"){
           $.get("/add_by_classId",{params:JSON.stringify(params),"class_id":"1"},function(data){
               if (data.success) {
-                if (data.message) {
+                if (data.rows) {
                   allNum = data.num;
-                  cb({tabthitems:tt,tabtritems:data.message,allNum:allNum,everyNum:params.everyNum});
+                  cb({tabthitems:tt,tabtritems:data.rows,allNum:allNum,everyNum:params.everyNum});
                 }
               }else {
                   alert(data.message);

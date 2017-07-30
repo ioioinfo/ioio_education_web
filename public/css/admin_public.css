@@ -16,6 +16,9 @@ thead{
 .cursor_pointer{
   cursor: pointer;
 }
+.overflow_auto{
+  overflow: auto;
+}
 .pagination{
   margin: 0;
 }
