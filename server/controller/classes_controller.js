@@ -878,7 +878,7 @@ exports.register = function(server, options, next) {
                 });
             }
         },
-        //查询可以添加到班级的学员
+        //班级添加学员
         {
             method: "POST",
             path: '/add_students',
