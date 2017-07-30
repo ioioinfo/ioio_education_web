@@ -22,6 +22,56 @@ var host = "http://211.149.248.241:18027/";
 
 var nav = function(server) {
     return {
+        update_exam: function(data,cb) {
+            var url = host + "update_exam";
+            uu_request.request(url, data, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,body);
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
+        search_exam_byId: function(id,cb) {
+            var url = host + "search_exam_byId?id=" + id;
+            uu_request.get(url, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,JSON.parse(body));
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
+        delete_exam: function(data,cb) {
+            var url = host + "delete_exam";
+            uu_request.request(url, data, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,body);
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
+        save_exam: function(data,cb) {
+            var url = host + "save_exam";
+            uu_request.request(url, data, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,body);
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
+        get_exams: function(cb) {
+            var url = host + "get_exams";
+            uu_request.get(url, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,JSON.parse(body));
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
         add_students: function(data,cb) {
             var url = host + "add_students";
             uu_request.request(url, data, function(err, response, body) {

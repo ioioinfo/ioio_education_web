@@ -924,6 +924,108 @@ exports.register = function(server, options, next) {
                 });
             }
         },
+        //考试信息列表
+        {
+            method: "GET",
+            path: '/get_exams',
+            handler: function(request, reply) {
+                education_api.get_exams(function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //保存考试
+        {
+            method: "POST",
+            path: '/save_exam',
+            handler: function(request, reply) {
+                var exam = request.payload.exam;
+                exam = JSON.parse(exam);
+
+				if (!exam.name || !exam.code || !exam.level_id || !exam.class_id
+                || !exam.lesson_id || !exam.state || !exam.starting_date || !exam.end_date) {
+					return reply({"success":false,"message":"params wrong","service_info":service_info});
+				}
+
+                var data = {
+                    "exam":JSON.stringify(exam)
+                };
+                education_api.save_exam(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //删除考试
+        {
+            method: "POST",
+            path: '/delete_exam',
+            handler: function(request, reply) {
+                var id = request.payload.id;
+                if (!id) {
+                    return reply({"success":false,"message":"id null","service_info":service_info});
+                }
+                var data = {
+                    "id" : id
+                };
+                education_api.delete_exam(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //id查询考试
+        {
+            method: "GET",
+            path: '/search_exam_byId',
+            handler: function(request, reply) {
+                var id = request.query.id;
+                education_api.search_exam_byId(id,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //更新考试
+        {
+            method: "POST",
+            path: '/update_exam',
+            handler: function(request, reply) {
+                var exam = request.payload.exam;
+                exam = JSON.parse(exam);
+
+				if (!exam.name || !exam.code || !exam.level_id || !exam.class_id
+                || !exam.lesson_id || !exam.state || !exam.starting_date || !exam.end_date || !exam.id) {
+					return reply({"success":false,"message":"params wrong","service_info":service_info});
+				}
+
+                var data = {
+                    "exam":JSON.stringify(exam)
+                };
+                education_api.update_exam(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+
+
 
 
     ]);
