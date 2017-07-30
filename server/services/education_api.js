@@ -22,6 +22,36 @@ var host = "http://211.149.248.241:18027/";
 
 var nav = function(server) {
     return {
+        save_learning_record: function(data,cb) {
+            var url = host + "save_learning_record";
+            uu_request.request(url, data, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,body);
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
+        search_learning_record_byId: function(id,cb) {
+            var url = host + "search_learning_record_byId?id=" + id;
+            uu_request.get(url, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,JSON.parse(body));
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
+        get_learning_records: function(cb) {
+            var url = host + "get_learning_records";
+            uu_request.get(url, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,JSON.parse(body));
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
         update_exam_record: function(data,cb) {
             var url = host + "update_exam_record";
             uu_request.request(url, data, function(err, response, body) {

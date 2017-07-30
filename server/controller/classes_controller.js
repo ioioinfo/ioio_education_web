@@ -1122,6 +1122,59 @@ exports.register = function(server, options, next) {
                 });
             }
         },
+        //学习记录信息列表
+        {
+            method: "GET",
+            path: '/get_learning_records',
+            handler: function(request, reply) {
+                education_api.get_learning_records(function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //id查询学习记录
+        {
+            method: "GET",
+            path: '/search_learning_record_byId',
+            handler: function(request, reply) {
+                var id = request.query.id;
+                education_api.search_learning_record_byId(id,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //保存学习记录
+        {
+            method: "POST",
+            path: '/save_learning_record',
+            handler: function(request, reply) {
+                var learning_record = request.payload.learning_record;
+				learning_record = JSON.parse(learning_record);
+
+                if (!learning_record.student_id || !learning_record.class_id || !learning_record.plan_id || !learning_record.level_id || !learning_record.lesson_id || !learning_record.hours || !learning_record.starting_date || !learning_record.end_date) {
+					return reply({"success":false,"message":"params wrong","service_info":service_info});
+				}
+
+                var data = {
+                    "learning_record":JSON.stringify(learning_record)
+                };
+                education_api.save_learning_record(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
 
 
 
