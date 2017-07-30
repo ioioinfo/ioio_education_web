@@ -1024,7 +1024,104 @@ exports.register = function(server, options, next) {
                 });
             }
         },
+        //考试记录信息列表
+        {
+            method: "GET",
+            path: '/get_exams_records',
+            handler: function(request, reply) {
+                education_api.get_exams_records(function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //保存考试记录
+        {
+            method: "POST",
+            path: '/save_exam_record',
+            handler: function(request, reply) {
+                var exam_record = request.payload.exam_record;
+                exam_record = JSON.parse(exam_record);
 
+                if (!exam_record.exam_id || !exam_record.student_id || !exam_record.state || !exam_record.score) {
+					return reply({"success":false,"message":"params wrong","service_info":service_info});
+				}
+
+                var data = {
+                    "exam_record":JSON.stringify(exam_record)
+                };
+                education_api.save_exam_record(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //删除考试记录
+        {
+            method: "POST",
+            path: '/delete_exam_record',
+            handler: function(request, reply) {
+                var id = request.payload.id;
+                if (!id) {
+                    return reply({"success":false,"message":"id null","service_info":service_info});
+                }
+                var data = {
+                    "id" : id
+                };
+                education_api.delete_exam_record(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //id查询考试记录
+        {
+            method: "GET",
+            path: '/search_record_byId',
+            handler: function(request, reply) {
+                var id = request.query.id;
+                education_api.search_record_byId(id,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //更新考试记录
+        {
+            method: "POST",
+            path: '/update_exam_record',
+            handler: function(request, reply) {
+                var exam_record = request.payload.exam_record;
+                exam_record = JSON.parse(exam_record);
+
+				if (!exam_record.exam_id || !exam_record.student_id || !exam_record.state || !exam_record.score || !exam_record.id) {
+					return reply({"success":false,"message":"params wrong","service_info":service_info});
+				}
+
+                var data = {
+                    "exam_record":JSON.stringify(exam_record)
+                };
+                education_api.update_exam_record(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
 
 
 
