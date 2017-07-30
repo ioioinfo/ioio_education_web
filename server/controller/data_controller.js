@@ -55,6 +55,7 @@ exports.register = function(server, options, next) {
                     {icon:"fa fa-building-o fa-fw",navname:"班级列表",a:"index",snav:[]},
                     {icon:"fa fa-user-plus fa-fw",navname:"班级学员列表",a:"class_student_list",snav:[]},
                     {icon:"fa fa-bookmark fa-fw",navname:"班级详情",a:"class_view",snav:[]},
+                    {icon:"fa fa-plus-square fa-fw",navname:"添加班级",a:"add_class",snav:[]},
                 ];
                 
                 return reply({"success":true,"rows":rows,"message":"ok"});
