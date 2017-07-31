@@ -19,14 +19,14 @@
     var company_name = "{{company_name}}";
     //表头
     var tt = [{name:'id',width:"5%", title:'',type:"checked",sort:false}
-              ,{name:'id',title:'编号',sort:false}
+              ,{name:'id',title:'学员id',sort:false}
               ,{name:'name',title:'名称',sort:false}
               ];
 
     var yy = [{name:'student_id',width:"5%", title:'',type:"check",sort:false}
-              ,{name:'student_id',title:'编号',sort:false}
+              ,{name:'student_id',title:'学员id',sort:false}
               ,{name:'student_name',title:'名称',sort:false}
-              ,{name:'operation',title:'删除',type:"operation"}];
+              ,{name:'operation',title:'操作',type:"operation"}];
 
     function getTableData(params,cb) {
         params.everyNum = 50;

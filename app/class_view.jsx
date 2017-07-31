@@ -27,97 +27,97 @@ class AdminRight extends React.Component {
   }
 
   componentDidMount() {
-      var tableHeight = $(window).height()-112;
-      $(".student_view_wrap").css("height",tableHeight+"px");
-      var master_id;
+var tableHeight = $(window).height()-112;
+$(".student_view_wrap").css("height",tableHeight+"px");
+var master_id;
 
-      $.ajax({
-             url: "/get_lesson_plans",
-             dataType: 'json',
-             type: 'GET',
-             data:{},
-             success: function(data) {
-              if(data.success){
-                this.setState({planItem:data.rows});
-                if (plan_id) {
-                  $("#plan_id").val(plan_id);
-                }
-              }
+$.ajax({
+   url: "/get_lesson_plans",
+   dataType: 'json',
+   type: 'GET',
+   data:{},
+   success: function(data) {
+    if(data.success){
+      this.setState({planItem:data.rows});
+      if (plan_id) {
+        $("#plan_id").val(plan_id);
+      }
+    }
 
-             }.bind(this),
-             error: function(xhr, status, err) {
-             }.bind(this)
-        });
+   }.bind(this),
+   error: function(xhr, status, err) {
+   }.bind(this)
+});
 
-        $.ajax({
-               url: "/get_teachers",
-               dataType: 'json',
-               type: 'GET',
-               data:{},
-               success: function(data) {
-                if(data.success){
-                  this.setState({masterItem:data.rows});
-                  if (master_id) {
-                    $("#class_master").val(master_id);
-                  }
-                }
+$.ajax({
+     url: "/get_teachers",
+     dataType: 'json',
+     type: 'GET',
+     data:{},
+     success: function(data) {
+      if(data.success){
+        this.setState({masterItem:data.rows});
+        if (master_id) {
+          $("#class_master").val(master_id);
+        }
+      }
 
-               }.bind(this),
-               error: function(xhr, status, err) {
-               }.bind(this)
-          });
+     }.bind(this),
+     error: function(xhr, status, err) {
+     }.bind(this)
+});
 
-          $.ajax({
-                 url: "/get_grades",
-                 dataType: 'json',
-                 type: 'GET',
-                 data:{},
-                 success: function(data) {
-                  if(data.success){
-                    this.setState({levelItem:data.rows});
-                    if(level_id){
-                      $("#level_id").val(level_id);
-                    }
-                  }
+$.ajax({
+       url: "/get_grades",
+       dataType: 'json',
+       type: 'GET',
+       data:{},
+       success: function(data) {
+        if(data.success){
+          this.setState({levelItem:data.rows});
+          if(level_id){
+            $("#level_id").val(level_id);
+          }
+        }
 
-                 }.bind(this),
-                 error: function(xhr, status, err) {
-                 }.bind(this)
-            });
+       }.bind(this),
+       error: function(xhr, status, err) {
+       }.bind(this)
+  });
 
-            $.ajax({
-                   url: "/search_class_byId",
-                   dataType: 'json',
-                   type: 'GET',
-                   data:{'id':'1'},
-                   success: function(data) {
+  $.ajax({
+       url: "/search_class_byId",
+       dataType: 'json',
+       type: 'GET',
+       data:{'id':'1'},
+       success: function(data) {
 
-                      if(data.success){
-                        plan_id = data.rows[0].plan_id;
-                        var name = data.rows[0].name;
-                        var code = data.rows[0].code;
-                        var state = data.rows[0].state;
-                        var starting_date = data.rows[0].starting_date;
-                        var end_date = data.rows[0].end_date;
-                        var class_master = data.rows[0].class_master;
-                        master_id = data.rows[0].master_id;
-                        var remarks = data.rows[0].remarks;
-                        level_id = data.rows[0].level_id;
-                        $("#plan_id").val(plan_id);
-                        $("#code").val(code);
-                        $("#name").val(name);
-                        $("#starting_date").val(starting_date);
-                        $("#end_date").val(end_date);
-                        $("#class_master").val(master_id);
-                        $("#remarks").val(remarks);
-                        $("#state_up").html(state);
-                        $("#level_id").val(level_id);
-                      }
+          if(data.success){
+            plan_id = data.rows[0].plan_id;
+            var name = data.rows[0].name;
+            var code = data.rows[0].code;
+            var state = data.rows[0].state;
+            var starting_date = data.rows[0].starting_date;
+            var end_date = data.rows[0].end_date;
+            var class_master = data.rows[0].class_master;
+            master_id = data.rows[0].master_id;
+            var remarks = data.rows[0].remarks;
+            level_id = data.rows[0].level_id;
+            $("#plan_id").val(plan_id);
+            $("#code").val(code);
+            $("#name").val(name);
+            $("#starting_date").val(starting_date);
+            $("#end_date").val(end_date);
+            $("#class_master").val(master_id);
+            $("#remarks").val(remarks);
+            $("#state_up").html(state);
+            $("#level_id").val(level_id);
+          }
 
-                   }.bind(this),
-                   error: function(xhr, status, err) {
-                   }.bind(this)
-              });
+       }.bind(this),
+       error: function(xhr, status, err) {
+       }.bind(this)
+    });
   }
   handleClick(e){
     var clas = new Object();
