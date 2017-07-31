@@ -100,6 +100,20 @@ exports.register = function(server, options, next) {
             handler: function(request, reply) {
                 var clas = request.payload.clas;
                 clas = JSON.parse(clas);
+
+                // clas = {
+                //     "plan_id":1,
+                //     "name":"小二英语",
+                //     "code":"008",
+                //     "state":"未开始",
+                //     "starting_date":"2017-07-30",
+                //     "end_date":"2017-07-30",
+                //     "class_master":"何仙姑",
+                //     "master_id":1,
+                //     "remarks":"重点补习班",
+                //     "level_id":1
+                // }
+
                 if (!clas.plan_id || !clas.name || !clas.code ||!clas.state || !clas.starting_date || !clas.end_date || !clas.class_master
                 || !clas.master_id || !clas.remarks || !clas.level_id) {
                     return reply({"success":false,"message":"params wrong","service_info":service_info});
@@ -108,6 +122,44 @@ exports.register = function(server, options, next) {
                     "clas" : JSON.stringify(clas)
                 };
                 education_api.save_class(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //班级信息修改
+        {
+            method: "POST",
+            path: '/update_class',
+            handler: function(request, reply) {
+                var clas = request.payload.clas;
+                clas = JSON.parse(clas);
+
+                // clas = {
+                //     "plan_id":1,
+                //     "name":"小二英语",
+                //     "code":"008",
+                //     "state":"未开始",
+                //     "starting_date":"2017-07-30",
+                //     "end_date":"2017-07-30",
+                //     "class_master":"何仙姑",
+                //     "master_id":1,
+                //     "remarks":"重点补习班",
+                //     "level_id":1,
+                //     "id":1
+                // }
+
+                if (!clas.plan_id || !clas.name || !clas.code ||!clas.state || !clas.starting_date || !clas.end_date || !clas.class_master
+                || !clas.master_id || !clas.remarks || !clas.level_id || !clas.id) {
+                    return reply({"success":false,"message":"params wrong","service_info":service_info});
+                }
+                var data = {
+                    "clas" : JSON.stringify(clas)
+                };
+                education_api.update_class(data,function(err,rows){
                     if (!err) {
                         return reply(rows);
                     }else {
@@ -761,7 +813,7 @@ exports.register = function(server, options, next) {
             handler: function(request, reply) {
                 var teacher = request.payload.teacher;
                 teacher = JSON.parse(teacher);
-                if (!teacher.id||!teacher.name|| !teacher.code|| !teacher.age|| !teacher.sex|| !teacher.phone|| !teacher.state||!teacher.address|| !teacher.province|| !teacher.city|| !teacher.district|| !teacher.photo|| !teacher.type_id|| !teacher.is_master|| !teacher.is_leader || !teacher.level) {
+                if (!teacher.id||!teacher.name|| !teacher.code|| !teacher.age|| !teacher.sex|| !teacher.phone|| !teacher.state||!teacher.address|| !teacher.province|| !teacher.city|| !teacher.district|| !teacher.photo|| !teacher.type_id || !teacher.level) {
                     return reply({"success":false,"message":"params wrong","service_info":service_info});
                 }
 
@@ -1208,7 +1260,109 @@ exports.register = function(server, options, next) {
                 });
             }
         },
+        //反馈信息列表
+        {
+            method: "GET",
+            path: '/get_feedbacks',
+            handler: function(request, reply) {
+                education_api.get_feedbacks(function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //id查询反馈信息
+        {
+            method: "GET",
+            path: '/search_feedback_byId',
+            handler: function(request, reply) {
+                var id = request.query.id;
+                if (!id) {
+                    return reply({"success":false,"message":"id null","service_info":service_info});
+                }
+                education_api.search_feedback_byId(id,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //删除反馈
+        {
+            method: "POST",
+            path: '/delete_feedback',
+            handler: function(request, reply) {
+                var id = request.payload.id;
+                if (!id) {
+                    return reply({"success":false,"message":"id null","service_info":service_info});
+                }
+                var data = {
+                    "id" : id
+                };
+                education_api.delete_feedback(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //保存反馈
+        {
+            method: "POST",
+            path: '/save_feedback',
+            handler: function(request, reply) {
+                var feedback = request.payload.feedback;
+                feedback = JSON.parse(feedback);
+                if (!feedback.student_id || !feedback.student_name ||
+    			!feedback.feedback_person || !feedback.feedback_content ||
+    			!feedback.state || !feedback.feedback_date) {
+                    return reply({"success":false,"message":"params wrong","service_info":service_info});
+                }
 
+                var data = {
+                    "feedback":JSON.stringify(feedback)
+                };
+                education_api.save_feedback(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //更新反馈
+        {
+            method: "POST",
+            path: '/update_feedback',
+            handler: function(request, reply) {
+                var feedback = request.payload.feedback;
+                feedback = JSON.parse(feedback);
+                if (!feedback.student_id || !feedback.student_name ||
+    			!feedback.feedback_person || !feedback.feedback_content ||
+    			!feedback.state || !feedback.feedback_date || !feedback.id) {
+                    return reply({"success":false,"message":"params wrong","service_info":service_info});
+                }
+
+                var data = {
+                    "feedback":JSON.stringify(feedback)
+                };
+                education_api.update_feedback(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
 
 
     ]);
