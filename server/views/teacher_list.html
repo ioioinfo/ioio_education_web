@@ -20,7 +20,6 @@
     //表头
     var tt = [{name:'check',width:"5%", title:'',type:"check",sort:false}
         ,{name:'id',title:'编号',sort:true}
-        ,{name:'level',title:'年级',type:"level"}
         ,{name:'name',title:'名称',sort:false}
         ,{name:'age',title:'年龄',sort:false}
         ,{name:'sex',title:'性别',sort:false}
@@ -31,7 +30,7 @@
     function getTableData(params,cb) {
         params.everyNum = 50;
         var allNum = 0;
-        $.get("/get_students",{params:JSON.stringify(params)},function(data){
+        $.get("/get_teachers",{params:JSON.stringify(params)},function(data){
             if (data.success) {
               if (data.rows) {
                 allNum = data.num;

@@ -26,6 +26,7 @@ class AdminRight extends React.Component {
       this.setPage=this.setPage.bind(this);
       this.handleSort=this.handleSort.bind(this);
       this.loadData=this.loadData.bind(this);
+      this.refresh=this.refresh.bind(this);
       // 初始化一个空对象
       this.state = {tabthitems:[],tabtritems:[],allNum:0,everyNum:20,thisPage:1,sort:{name:"",dir:""}};
   }
@@ -49,10 +50,12 @@ class AdminRight extends React.Component {
   handleSort(sort){
       this.loadData({sort:sort});
   }
-
+  refresh(){
+    this.loadData({});
+  }
   render() {
     return (
-      <div className="admin_right col-xs-12 col-sm-8 col-md-10">
+      <div className="admin_right col-xs-12 col-sm-8 col-md-10 overflow_auto">
         <AdminRightTop/>
         <div className="admin_creat overflow_hidden">
             <div className="">
@@ -78,7 +81,7 @@ class AdminRight extends React.Component {
 
             </div>
         </div>
-        <Table tabthitems={this.state.tabthitems} tabtritems={this.state.tabtritems} sort={this.state.sort} onSort={this.handleSort}  checkTd={checkTd} />
+        <Table tabthitems={this.state.tabthitems} tabtritems={this.state.tabtritems} sort={this.state.sort} onSort={this.handleSort} refresh={this.refresh}  checkTd={checkTd} />
         <PageTab setPage={this.setPage} allNum={this.state.allNum} everyNum={this.state.everyNum} thisPage={this.state.thisPage} />
       </div>
     );
@@ -99,24 +102,38 @@ class AdminRightTop extends React.Component {
 
 //判断特殊列
 var checkTd = function(defaultTd) {
-    var id = this.props.item.id;
+    var props = this.props;
+    var id = props.item.id;
+    var delect = function(e){
+      $.ajax({
+          url: "/delete_teacher",
+          dataType: 'json',
+          type: 'POST',
+          data: {"id":id},
+          success: function(data) {
+              if (data.success) {
+                  props.refresh();
+                  alert("删除成功！");
+              }else {
+                  alert("删除失败！");
+              }
+          }.bind(this),
+          error: function(xhr, status, err) {
+          }.bind(this)
+      });
 
+    }
         if(this.props.thitem.type=="operation"){
           return (
               <td>
               <p className=""><a href="borrow_books_view"  className="btn btn-info btn-xs operate_announce">查 看</a></p>
+              <p className=""><span className="btn btn-xs operate_announce weui-btn_warn" id={this.props.item[this.props.thitem.name]} onClick={delect} >删 除</span></p>
               </td>
           );
         }else if (this.props.thitem.type=="check") {
           return (
             <td>
               <input type="checkbox" name="checkbox" />
-            </td>
-          );
-        }else if (this.props.thitem.type=="level") {
-          return (
-            <td>
-              {this.props.item[this.props.thitem.name].name}
             </td>
           );
         }else {

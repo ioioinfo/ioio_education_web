@@ -55,7 +55,7 @@ class AdminRight extends React.Component {
   }
   render() {
     return (
-      <div className="admin_right col-xs-12 col-sm-8 col-md-10">
+      <div className="admin_right col-xs-12 col-sm-8 col-md-10 overflow_auto">
         <AdminRightTop/>
         <div className="admin_creat overflow_hidden">
             <div className="">

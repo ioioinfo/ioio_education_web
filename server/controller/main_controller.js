@@ -76,9 +76,26 @@ exports.register = function(server, options, next) {
         //计划列表
         {
             method: 'GET',
-            path: '/play_list',
+            path: '/plan_list',
             handler: function(request, reply) {
-                return reply.view("play_list");
+                return reply.view("plan_list");
+            },
+        },
+        //添加计划
+        {
+            method: 'GET',
+            path: '/add_plan',
+            handler: function(request, reply) {
+                return reply.view("add_plan");
+            },
+        },
+
+        //计划详情
+        {
+            method: 'GET',
+            path: '/plan_view',
+            handler: function(request, reply) {
+                return reply.view("plan_view");
             },
         },
 
@@ -108,6 +125,126 @@ exports.register = function(server, options, next) {
                 return reply.view("add_class");
             },
         },
+
+        //添加班级
+        {
+            method: 'GET',
+            path: '/teacher_view',
+            handler: function(request, reply) {
+                return reply.view("teacher_view");
+            },
+        },
+
+        //添加班级
+        {
+            method: 'GET',
+            path: '/add_teacher',
+            handler: function(request, reply) {
+                return reply.view("add_teacher");
+            },
+        },
+
+        //课程列表
+        {
+            method: 'GET',
+            path: '/lessons_list',
+            handler: function(request, reply) {
+                return reply.view("lessons_list");
+            },
+        },
+
+        //添加课程
+        {
+            method: 'GET',
+            path: '/add_lessons',
+            handler: function(request, reply) {
+                return reply.view("add_lessons");
+            },
+        },
+
+        //课程详情
+        {
+            method: 'GET',
+            path: '/lesson_view',
+            handler: function(request, reply) {
+                return reply.view("lesson_view");
+            },
+        },
+
+        //学习任务列表
+        {
+            method: 'GET',
+            path: '/task_list',
+            handler: function(request, reply) {
+                return reply.view("task_list");
+            },
+        },
+
+        //学习任务列表
+        {
+            method: 'GET',
+            path: '/add_task',
+            handler: function(request, reply) {
+                return reply.view("add_task");
+            },
+        },
+
+        //学习任务详情
+        {
+            method: 'GET',
+            path: '/task_view',
+            handler: function(request, reply) {
+                return reply.view("task_view");
+            },
+        },
+
+        //学习记录列表
+        {
+            method: 'GET',
+            path: '/record_list',
+            handler: function(request, reply) {
+                return reply.view("record_list");
+            },
+        },
+
+        //学习记录详情
+        {
+            method: 'GET',
+            path: '/record_view',
+            handler: function(request, reply) {
+                return reply.view("record_view");
+            },
+        },
+
+
+          //回访记录列表
+          {
+              method: 'GET',
+              path: '/feedbacks_list',
+              handler: function(request, reply) {
+                  return reply.view("feedbacks_list");
+              },
+          },
+
+          //添加回访
+          {
+              method: 'GET',
+              path: '/add_feedbacks',
+              handler: function(request, reply) {
+                  return reply.view("add_feedbacks");
+              },
+          },
+
+          //添加回访
+          {
+              method: 'GET',
+              path: '/feedbacks_view',
+              handler: function(request, reply) {
+                  return reply.view("feedbacks_view");
+              },
+          },
+
+
 
 
     ]);
