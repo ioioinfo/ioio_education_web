@@ -100,6 +100,20 @@ exports.register = function(server, options, next) {
             handler: function(request, reply) {
                 var clas = request.payload.clas;
                 clas = JSON.parse(clas);
+
+                // clas = {
+                //     "plan_id":1,
+                //     "name":"小二英语",
+                //     "code":"008",
+                //     "state":"未开始",
+                //     "starting_date":"2017-07-30",
+                //     "end_date":"2017-07-30",
+                //     "class_master":"何仙姑",
+                //     "master_id":1,
+                //     "remarks":"重点补习班",
+                //     "level_id":1
+                // }
+
                 if (!clas.plan_id || !clas.name || !clas.code ||!clas.state || !clas.starting_date || !clas.end_date || !clas.class_master
                 || !clas.master_id || !clas.remarks || !clas.level_id) {
                     return reply({"success":false,"message":"params wrong","service_info":service_info});
@@ -108,6 +122,44 @@ exports.register = function(server, options, next) {
                     "clas" : JSON.stringify(clas)
                 };
                 education_api.save_class(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //班级信息修改
+        {
+            method: "POST",
+            path: '/update_class',
+            handler: function(request, reply) {
+                var clas = request.payload.clas;
+                clas = JSON.parse(clas);
+
+                // clas = {
+                //     "plan_id":1,
+                //     "name":"小二英语",
+                //     "code":"008",
+                //     "state":"未开始",
+                //     "starting_date":"2017-07-30",
+                //     "end_date":"2017-07-30",
+                //     "class_master":"何仙姑",
+                //     "master_id":1,
+                //     "remarks":"重点补习班",
+                //     "level_id":1,
+                //     "id":1
+                // }
+
+                if (!clas.plan_id || !clas.name || !clas.code ||!clas.state || !clas.starting_date || !clas.end_date || !clas.class_master
+                || !clas.master_id || !clas.remarks || !clas.level_id || !clas.id) {
+                    return reply({"success":false,"message":"params wrong","service_info":service_info});
+                }
+                var data = {
+                    "clas" : JSON.stringify(clas)
+                };
+                education_api.update_class(data,function(err,rows){
                     if (!err) {
                         return reply(rows);
                     }else {
