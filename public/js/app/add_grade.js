@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 191);
+/******/ 	return __webpack_require__(__webpack_require__.s = 190);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -22563,8 +22563,7 @@ module.exports = traverseAllChildren;
 /* 187 */,
 /* 188 */,
 /* 189 */,
-/* 190 */,
-/* 191 */
+/* 190 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22656,35 +22655,23 @@ var AdminRight = function (_React$Component2) {
         }.bind(this),
         error: function (xhr, status, err) {}.bind(this)
       });
-
-      $.ajax({
-        url: "/get_lesson_plans",
-        dataType: 'json',
-        type: 'GET',
-        data: {},
-        success: function (data) {
-          if (data.success) {
-            this.setState({ planItem: data.rows });
-          }
-        }.bind(this),
-        error: function (xhr, status, err) {}.bind(this)
-      });
     }
   }, {
     key: 'handleClick',
     value: function handleClick(e) {
       var name = $("#name").val();
       var code = $("#code").val();
-      var level_id = $("#level_id").val();
-      var teacher_id = $("#teacher_id").val();
-      var plan_id = $("#plan_id").val();
-      var hours = $("#hours").val();
+      var leader_id = $("#grade_leader").val();
+      var grade_leader = $("#grade_leader").find("option:selected").text();
+      var state = $("#state").val();
+      var remark = $("#remark").val();
 
       $.ajax({
-        url: "/save_lesson",
+        url: "/save_grade",
         dataType: 'json',
         type: 'POST',
-        data: { "name": name, "code": code, "level_id": level_id, "hours": hours, "plan_id": plan_id, "teacher_id": teacher_id },
+        data: { "name": name, "code": code, "leader_id": leader_id,
+          "grade_leader": grade_leader, "state": state, "remark": remark },
         success: function (data) {
           if (data.success) {
             alert("添加成功！");
@@ -22717,42 +22704,6 @@ var AdminRight = function (_React$Component2) {
                 React.createElement(
                   'label',
                   { className: 'weui-label' },
-                  '\u7F16\u53F7'
-                )
-              ),
-              React.createElement(
-                'div',
-                { className: 'weui-cell__bd student_view_input_style' },
-                React.createElement('input', { className: 'weui-input ', type: 'text', placeholder: '', id: 'code' })
-              )
-            ),
-            React.createElement(
-              'div',
-              { className: 'weui-cell' },
-              React.createElement(
-                'div',
-                { className: 'weui-cell__hd' },
-                React.createElement(
-                  'label',
-                  { className: 'weui-label' },
-                  '\u8BFE\u7A0B'
-                )
-              ),
-              React.createElement(
-                'div',
-                { className: 'weui-cell__bd student_view_input_style' },
-                React.createElement('input', { className: 'weui-input ', type: 'text', placeholder: '', id: 'name' })
-              )
-            ),
-            React.createElement(
-              'div',
-              { className: 'weui-cell' },
-              React.createElement(
-                'div',
-                { className: 'weui-cell__hd' },
-                React.createElement(
-                  'label',
-                  { className: 'weui-label' },
                   '\u5E74\u7EA7'
                 )
               ),
@@ -22761,7 +22712,7 @@ var AdminRight = function (_React$Component2) {
                 { className: 'weui-cell__bd student_view_input_style' },
                 React.createElement(
                   'select',
-                  { className: 'weui-input ', type: 'text', placeholder: '', id: 'level_id' },
+                  { className: 'weui-input ', type: 'text', placeholder: '', id: 'name' },
                   this.state.levelItem.map(function (item, index) {
                     return React.createElement(
                       'option',
@@ -22781,23 +22732,13 @@ var AdminRight = function (_React$Component2) {
                 React.createElement(
                   'label',
                   { className: 'weui-label' },
-                  '\u8BA1\u5212'
+                  '\u7F16\u53F7'
                 )
               ),
               React.createElement(
                 'div',
                 { className: 'weui-cell__bd student_view_input_style' },
-                React.createElement(
-                  'select',
-                  { className: 'weui-input ', type: 'text', placeholder: '', id: 'plan_id' },
-                  this.state.planItem.map(function (item, index) {
-                    return React.createElement(
-                      'option',
-                      { key: index, value: item.id },
-                      item.name
-                    );
-                  })
-                )
+                React.createElement('input', { className: 'weui-input ', type: 'text', placeholder: '', id: 'code' })
               )
             ),
             React.createElement(
@@ -22809,7 +22750,7 @@ var AdminRight = function (_React$Component2) {
                 React.createElement(
                   'label',
                   { className: 'weui-label' },
-                  '\u8001\u5E08'
+                  '\u73ED\u4E3B\u4EFB'
                 )
               ),
               React.createElement(
@@ -22817,7 +22758,7 @@ var AdminRight = function (_React$Component2) {
                 { className: 'weui-cell__bd student_view_input_style' },
                 React.createElement(
                   'select',
-                  { className: 'weui-input ', type: 'text', placeholder: '', id: 'teacher_id' },
+                  { className: 'weui-input ', type: 'text', placeholder: '', id: 'grade_leader' },
                   this.state.teacherItem.map(function (item, index) {
                     return React.createElement(
                       'option',
@@ -22837,13 +22778,44 @@ var AdminRight = function (_React$Component2) {
                 React.createElement(
                   'label',
                   { className: 'weui-label' },
-                  '\u65F6\u957F(H)'
+                  '\u72B6\u6001'
                 )
               ),
               React.createElement(
                 'div',
                 { className: 'weui-cell__bd student_view_input_style' },
-                React.createElement('input', { className: 'weui-input ', type: 'text', placeholder: '', id: 'hours' })
+                React.createElement(
+                  'select',
+                  { className: 'weui-input ', type: 'text', placeholder: '', id: 'state' },
+                  React.createElement(
+                    'option',
+                    null,
+                    '\u5F00\u653E'
+                  ),
+                  React.createElement(
+                    'option',
+                    null,
+                    '\u672A\u5F00\u653E'
+                  )
+                )
+              )
+            ),
+            React.createElement(
+              'div',
+              { className: 'weui-cell' },
+              React.createElement(
+                'div',
+                { className: 'weui-cell__hd' },
+                React.createElement(
+                  'label',
+                  { className: 'weui-label' },
+                  '\u5907\u6CE8'
+                )
+              ),
+              React.createElement(
+                'div',
+                { className: 'weui-cell__bd student_view_input_style' },
+                React.createElement('textarea', { className: 'weui-input ', id: 'remark' })
               )
             ),
             React.createElement(

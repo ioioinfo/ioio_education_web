@@ -244,6 +244,114 @@ exports.register = function(server, options, next) {
               },
           },
 
+          //年级列表
+          {
+              method: 'GET',
+              path: '/grade_list',
+              handler: function(request, reply) {
+                  return reply.view("grade_list");
+              },
+          },
+
+          //年级添加
+          {
+              method: 'GET',
+              path: '/add_grade',
+              handler: function(request, reply) {
+                  return reply.view("add_grade");
+              },
+          },
+
+          //年级详情
+          {
+              method: 'GET',
+              path: '/grade_view',
+              handler: function(request, reply) {
+                  return reply.view("grade_view");
+              },
+          },
+
+          //老师类型列表
+          {
+              method: 'GET',
+              path: '/teacher_type_list',
+              handler: function(request, reply) {
+                  return reply.view("teacher_type_list");
+              },
+          },
+
+          //添加老师类型
+          {
+              method: 'GET',
+              path: '/add_teacher_type',
+              handler: function(request, reply) {
+                  return reply.view("add_teacher_type");
+              },
+          },
+
+          //老师类型详情
+          {
+              method: 'GET',
+              path: '/teacher_type_view',
+              handler: function(request, reply) {
+                  return reply.view("teacher_type_view");
+              },
+          },
+
+          //考试信息列表
+          {
+              method: 'GET',
+              path: '/exam_list',
+              handler: function(request, reply) {
+                  return reply.view("exam_list");
+              },
+          },
+
+          //考试信息添加
+          {
+              method: 'GET',
+              path: '/add_exam',
+              handler: function(request, reply) {
+                  return reply.view("add_exam");
+              },
+          },
+
+          //考试信息详情
+          {
+              method: 'GET',
+              path: '/exam_view',
+              handler: function(request, reply) {
+                  return reply.view("exam_view");
+              },
+          },
+
+          //考试成绩列表
+          {
+              method: 'GET',
+              path: '/exam_record_list',
+              handler: function(request, reply) {
+                  return reply.view("exam_record_list");
+              },
+          },
+
+          //添加考试成绩
+          {
+              method: 'GET',
+              path: '/add_exam_record',
+              handler: function(request, reply) {
+                  return reply.view("add_exam_record");
+              },
+          },
+
+          //考试成绩详情
+          {
+              method: 'GET',
+              path: '/exam_record_view',
+              handler: function(request, reply) {
+                  return reply.view("exam_record_view");
+              },
+          },
+
 
 
 

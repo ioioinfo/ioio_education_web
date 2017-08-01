@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 191);
+/******/ 	return __webpack_require__(__webpack_require__.s = 200);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -22557,14 +22557,511 @@ module.exports = traverseAllChildren;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 184 */,
-/* 185 */,
+/* 184 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var React = __webpack_require__(32);
+
+// 分页
+
+var PageTab = function (_React$Component) {
+    _inherits(PageTab, _React$Component);
+
+    function PageTab(props) {
+        _classCallCheck(this, PageTab);
+
+        var _this = _possibleConstructorReturn(this, (PageTab.__proto__ || Object.getPrototypeOf(PageTab)).call(this, props));
+
+        _this.gotoFirst = _this.gotoFirst.bind(_this);
+        _this.gotoPrevious = _this.gotoPrevious.bind(_this);
+        _this.gotoLast = _this.gotoLast.bind(_this);
+        _this.gotoNext = _this.gotoNext.bind(_this);
+        return _this;
+    }
+
+    _createClass(PageTab, [{
+        key: "gotoFirst",
+        value: function gotoFirst() {
+            this.props.setPage(1);
+        }
+    }, {
+        key: "gotoPrevious",
+        value: function gotoPrevious() {
+            this.props.setPage(this.props.thisPage - 1);
+        }
+    }, {
+        key: "gotoLast",
+        value: function gotoLast() {
+            var allNum = this.props.allNum;
+            // 每页显示条数everyNum
+            var everyNum = this.props.everyNum;
+            var allPage = Math.ceil(allNum / everyNum);
+            this.props.setPage(allPage);
+        }
+    }, {
+        key: "gotoNext",
+        value: function gotoNext() {
+            this.props.setPage(this.props.thisPage + 1);
+        }
+    }, {
+        key: "render",
+        value: function render() {
+            var _this2 = this;
+
+            //分页显示页数
+            var display_page = 11;
+            var mid_page = (display_page - 1) / 2;
+            var fenitems = [];
+            // 所有条数allNum
+            var allNum = this.props.allNum;
+            // 每页显示条数everyNum
+            var everyNum = this.props.everyNum;
+            // 当前显示页thisPage
+            var thisPage = this.props.thisPage;
+            var allPage = Math.ceil(allNum / everyNum);
+            if (allPage <= display_page) {
+                for (var i = 1; i <= allPage; i++) {
+                    fenitems.push(i);
+                }
+            } else {
+                if (thisPage - mid_page <= 1) {
+                    for (var i = 1; i <= display_page; i++) {
+                        fenitems.push(i);
+                    }
+                } else if (thisPage + mid_page >= allPage) {
+                    for (var i = allPage - mid_page * 2; i <= allPage; i++) {
+                        fenitems.push(i);
+                    }
+                } else {
+                    for (var i = thisPage - mid_page; i <= thisPage + mid_page; i++) {
+                        fenitems.push(i);
+                    }
+                }
+            }
+            var first = React.createElement(
+                "span",
+                { className: "table-tab-span1", onClick: this.gotoFirst },
+                React.createElement("img", { src: "images/httab4.png", alt: "" })
+            );
+            var previous = React.createElement(
+                "li",
+                { className: "", onClick: this.gotoPrevious },
+                React.createElement(
+                    "span",
+                    { "aria-hidden": "true" },
+                    "\xAB"
+                )
+            );
+            var last = React.createElement(
+                "span",
+                { className: "table-tab-span1", onClick: this.gotoLast },
+                React.createElement("img", { src: "images/httab2.png", alt: "" })
+            );
+            var next = React.createElement(
+                "li",
+                { className: "", onClick: this.gotoNext },
+                React.createElement(
+                    "span",
+                    { "aria-hidden": "true" },
+                    "\xBB"
+                )
+            );
+
+            if (thisPage == 1) {
+                var first = React.createElement(
+                    "span",
+                    { className: "table-tab-span1" },
+                    React.createElement("img", { src: "images/httab4_1.png", alt: "" })
+                );
+                var previous = React.createElement(
+                    "li",
+                    { className: "disabled" },
+                    React.createElement(
+                        "span",
+                        { "aria-hidden": "true" },
+                        "\xAB"
+                    )
+                );
+            }
+            if (thisPage == allPage) {
+                var last = React.createElement(
+                    "span",
+                    { className: "table-tab-span1" },
+                    React.createElement("img", { src: "images/httab2_1.png", alt: "" })
+                );
+                var next = React.createElement(
+                    "li",
+                    { className: "disabled" },
+                    React.createElement(
+                        "span",
+                        { "aria-hidden": "true" },
+                        "\xBB"
+                    )
+                );
+            }
+            return React.createElement(
+                "div",
+                { className: "page_wrap" },
+                React.createElement(
+                    "div",
+                    { className: "ouveflow_hidden " },
+                    React.createElement(
+                        "nav",
+                        { "aria-label": "Page navigation", className: "nav_text pull-right" },
+                        React.createElement(
+                            "ul",
+                            { className: "pagination" },
+                            previous,
+                            fenitems.map(function (item) {
+                                return React.createElement(PageLi, { key: item, setPage: _this2.props.setPage, item: item, setSelected: _this2.setSelected, selected: thisPage });
+                            }),
+                            next
+                        )
+                    )
+                ),
+                React.createElement(
+                    "div",
+                    { className: "ouveflow_hidden" },
+                    React.createElement(
+                        "p",
+                        { className: "pull-right" },
+                        React.createElement(
+                            "span",
+                            { className: "table-tab-span4" },
+                            "\u5171",
+                            allPage,
+                            "\u9875"
+                        ),
+                        React.createElement(
+                            "span",
+                            { className: "table-tab-span5" },
+                            "\u5171",
+                            allNum,
+                            "\u6761\u8BB0\u5F55"
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return PageTab;
+}(React.Component);
+
+;
+// 分页数字
+
+var PageLi = function (_React$Component2) {
+    _inherits(PageLi, _React$Component2);
+
+    function PageLi(props) {
+        _classCallCheck(this, PageLi);
+
+        // 初始化一个空对象
+        var _this3 = _possibleConstructorReturn(this, (PageLi.__proto__ || Object.getPrototypeOf(PageLi)).call(this, props));
+
+        _this3.handleClick = _this3.handleClick.bind(_this3);
+        return _this3;
+    }
+
+    _createClass(PageLi, [{
+        key: "handleClick",
+        value: function handleClick(e) {
+            this.props.setPage(this.props.item);
+        }
+    }, {
+        key: "render",
+        value: function render() {
+            var c = "";
+            if (this.props.item == this.props.selected) {
+                c = "active";
+            }
+            return React.createElement(
+                "li",
+                { className: c, onClick: this.handleClick },
+                React.createElement(
+                    "a",
+                    null,
+                    this.props.item
+                )
+            );
+        }
+    }]);
+
+    return PageLi;
+}(React.Component);
+
+;
+
+module.exports = PageTab;
+
+/***/ }),
+/* 185 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var React = __webpack_require__(32);
+
+// 表格
+
+var Table = function (_React$Component) {
+    _inherits(Table, _React$Component);
+
+    function Table() {
+        _classCallCheck(this, Table);
+
+        return _possibleConstructorReturn(this, (Table.__proto__ || Object.getPrototypeOf(Table)).apply(this, arguments));
+    }
+
+    _createClass(Table, [{
+        key: "render",
+        value: function render() {
+            var _this2 = this;
+
+            return React.createElement(
+                "div",
+                { id: "table", className: "tableHeight" },
+                React.createElement(
+                    "div",
+                    { className: "" },
+                    React.createElement(
+                        "table",
+                        { className: "table table-striped table-hover table-bordered" },
+                        React.createElement(
+                            "thead",
+                            null,
+                            React.createElement(
+                                "tr",
+                                null,
+                                this.props.tabthitems.map(function (item, index) {
+                                    return React.createElement(Th, { key: index, item: item, sort: _this2.props.sort, onSort: _this2.props.onSort });
+                                })
+                            )
+                        ),
+                        React.createElement(
+                            "tbody",
+                            null,
+                            this.props.tabtritems.map(function (item, index) {
+                                return React.createElement(Tr, { key: index, item: item, tdstates: _this2.props.tdstates, tabthitems: _this2.props.tabthitems, refresh: _this2.props.refresh, checkTd: _this2.props.checkTd });
+                            })
+                        )
+                    )
+                )
+            );
+        }
+    }]);
+
+    return Table;
+}(React.Component);
+
+;
+
+var Tr = function (_React$Component2) {
+    _inherits(Tr, _React$Component2);
+
+    function Tr(props) {
+        _classCallCheck(this, Tr);
+
+        // 初始化一个空对象
+        var _this3 = _possibleConstructorReturn(this, (Tr.__proto__ || Object.getPrototypeOf(Tr)).call(this, props));
+
+        _this3.state = {};
+        return _this3;
+    }
+
+    _createClass(Tr, [{
+        key: "render",
+        value: function render() {
+            var _this4 = this;
+
+            return React.createElement(
+                "tr",
+                null,
+                this.props.tabthitems.map(function (item, index) {
+                    return React.createElement(Td, { key: index, item: _this4.props.item, thitem: item, tdstates: _this4.props.tdstates, refresh: _this4.props.refresh, checkTd: _this4.props.checkTd });
+                })
+            );
+        }
+    }]);
+
+    return Tr;
+}(React.Component);
+
+;
+
+var Th = function (_React$Component3) {
+    _inherits(Th, _React$Component3);
+
+    function Th(props) {
+        _classCallCheck(this, Th);
+
+        var _this5 = _possibleConstructorReturn(this, (Th.__proto__ || Object.getPrototypeOf(Th)).call(this, props));
+
+        _this5.handleClick = _this5.handleClick.bind(_this5);
+        _this5.handleClick1 = _this5.handleClick1.bind(_this5);
+        return _this5;
+    }
+
+    _createClass(Th, [{
+        key: "handleClick",
+        value: function handleClick(e) {
+            var sort = this.props.sort;
+            if (!sort) {
+                sort = { name: "", dir: "" };
+            }
+
+            if (sort.name != this.props.item.name) {
+                sort.dir = "";
+            }
+            sort.name = this.props.item.name;
+            //排序顺序
+            if (sort.dir == "asc") {
+                sort.dir = "desc";
+            } else {
+                sort.dir = "asc";
+            }
+
+            this.props.onSort(sort);
+        }
+    }, {
+        key: "handleClick1",
+        value: function handleClick1(e) {
+            $("[name='checkbox']").attr("checked", 'true');
+        }
+    }, {
+        key: "render",
+        value: function render() {
+            var img = React.createElement("span", null);
+            if (this.props.item.sort) {
+                var sort = this.props.sort;
+                if (sort && sort.name == this.props.item.name) {
+                    if (sort.dir == "desc") {
+                        img = React.createElement(
+                            "span",
+                            null,
+                            React.createElement("img", { className: "sort_img", src: "images/htpaixu.png", alt: "", onClick: this.handleClick })
+                        );
+                    } else {
+                        img = React.createElement(
+                            "span",
+                            null,
+                            React.createElement("img", { className: "sort_img", src: "images/htpaixu1.png", alt: "", onClick: this.handleClick })
+                        );
+                    }
+                } else {
+                    img = React.createElement(
+                        "span",
+                        null,
+                        React.createElement("img", { className: "sort_img", src: "images/htpaixu2.png", alt: "", onClick: this.handleClick })
+                    );
+                }
+            }
+            var thStyle = {
+                width: this.props.item.width
+            };
+
+            if (this.props.item.type == "check") {
+                return React.createElement(
+                    "th",
+                    { id: "checkall", style: thStyle, onClick: this.handleClick1 },
+                    React.createElement("input", { name: "checkbox", type: "checkbox" }),
+                    this.props.item.title,
+                    " ",
+                    img
+                );
+            } else {
+                return React.createElement(
+                    "th",
+                    { style: thStyle },
+                    this.props.item.title,
+                    " ",
+                    img
+                );
+            }
+        }
+    }]);
+
+    return Th;
+}(React.Component);
+
+;
+
+var Td = function (_React$Component4) {
+    _inherits(Td, _React$Component4);
+
+    function Td(props) {
+        _classCallCheck(this, Td);
+
+        // 初始化一个空对象
+        var _this6 = _possibleConstructorReturn(this, (Td.__proto__ || Object.getPrototypeOf(Td)).call(this, props));
+
+        _this6.state = _this6.props.tdstates || {};
+        return _this6;
+    }
+
+    _createClass(Td, [{
+        key: "render",
+        value: function render() {
+            var defaultTd = React.createElement(
+                "td",
+                null,
+                this.props.item[this.props.thitem.name]
+            );
+            var checkTd = this.props.checkTd;
+
+            if (checkTd) {
+                checkTd = checkTd.bind(this);
+                return checkTd(defaultTd);
+            } else {
+                return defaultTd;
+            }
+        }
+    }]);
+
+    return Td;
+}(React.Component);
+
+;
+
+module.exports = Table;
+
+/***/ }),
 /* 186 */,
 /* 187 */,
 /* 188 */,
 /* 189 */,
 /* 190 */,
-/* 191 */
+/* 191 */,
+/* 192 */,
+/* 193 */,
+/* 194 */,
+/* 195 */,
+/* 196 */,
+/* 197 */,
+/* 198 */,
+/* 199 */,
+/* 200 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22582,6 +23079,8 @@ var React = __webpack_require__(32);
 var ReactDOM = __webpack_require__(83);
 
 var AdminLeft = __webpack_require__(82);
+var Table = __webpack_require__(185);
+var PageTab = __webpack_require__(184);;
 
 var AdminIndex = function (_React$Component) {
   _inherits(AdminIndex, _React$Component);
@@ -22617,83 +23116,49 @@ var AdminRight = function (_React$Component2) {
   function AdminRight(props) {
     _classCallCheck(this, AdminRight);
 
-    // 初始化一个空对象
     var _this2 = _possibleConstructorReturn(this, (AdminRight.__proto__ || Object.getPrototypeOf(AdminRight)).call(this, props));
 
-    _this2.handleClick = _this2.handleClick.bind(_this2);
-    _this2.state = { planItem: [], teacherItem: [], levelItem: [] };
+    _this2.setPage = _this2.setPage.bind(_this2);
+    _this2.handleSort = _this2.handleSort.bind(_this2);
+    _this2.loadData = _this2.loadData.bind(_this2);
+    _this2.refresh = _this2.refresh.bind(_this2);
+    // 初始化一个空对象
+    _this2.state = { tabthitems: [], tabtritems: [], allNum: 0, everyNum: 20, thisPage: 1, sort: { name: "", dir: "" } };
     return _this2;
   }
 
   _createClass(AdminRight, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      var tableHeight = $(window).height() - 112;
-      $(".student_view_wrap").css("height", tableHeight + "px");
+    key: 'loadData',
+    value: function loadData(params1) {
+      var params = { thisPage: this.state.thisPage, sort: this.state.sort };
+      $.extend(params, params1);
 
-      $.ajax({
-        url: "/get_grades",
-        dataType: 'json',
-        type: 'GET',
-        data: {},
-        success: function (data) {
-          if (data.success) {
-            this.setState({ levelItem: data.rows });
-          }
-        }.bind(this),
-        error: function (xhr, status, err) {}.bind(this)
-      });
-
-      $.ajax({
-        url: "/get_teachers",
-        dataType: 'json',
-        type: 'GET',
-        data: {},
-        success: function (data) {
-          if (data.success) {
-            this.setState({ teacherItem: data.rows });
-          }
-        }.bind(this),
-        error: function (xhr, status, err) {}.bind(this)
-      });
-
-      $.ajax({
-        url: "/get_lesson_plans",
-        dataType: 'json',
-        type: 'GET',
-        data: {},
-        success: function (data) {
-          if (data.success) {
-            this.setState({ planItem: data.rows });
-          }
-        }.bind(this),
-        error: function (xhr, status, err) {}.bind(this)
-      });
+      getTableData(params, function (data) {
+        $.extend(data, params1);
+        this.setState(data);
+      }.bind(this));
     }
   }, {
-    key: 'handleClick',
-    value: function handleClick(e) {
-      var name = $("#name").val();
-      var code = $("#code").val();
-      var level_id = $("#level_id").val();
-      var teacher_id = $("#teacher_id").val();
-      var plan_id = $("#plan_id").val();
-      var hours = $("#hours").val();
-
-      $.ajax({
-        url: "/save_lesson",
-        dataType: 'json',
-        type: 'POST',
-        data: { "name": name, "code": code, "level_id": level_id, "hours": hours, "plan_id": plan_id, "teacher_id": teacher_id },
-        success: function (data) {
-          if (data.success) {
-            alert("添加成功！");
-          } else {
-            alert("添加失败！");
-          }
-        }.bind(this),
-        error: function (xhr, status, err) {}.bind(this)
-      });
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var tableHeight = $(window).height() - 181;
+      $("#table").css("height", tableHeight + "px");
+      this.loadData({});
+    }
+  }, {
+    key: 'setPage',
+    value: function setPage(thisPage) {
+      this.loadData({ thisPage: thisPage });
+    }
+  }, {
+    key: 'handleSort',
+    value: function handleSort(sort) {
+      this.loadData({ sort: sort });
+    }
+  }, {
+    key: 'refresh',
+    value: function refresh() {
+      this.loadData({});
     }
   }, {
     key: 'render',
@@ -22704,159 +23169,60 @@ var AdminRight = function (_React$Component2) {
         React.createElement(AdminRightTop, null),
         React.createElement(
           'div',
-          { className: 'student_view_wrap' },
+          { className: 'admin_creat overflow_hidden' },
           React.createElement(
             'div',
-            { className: 'student_view_infor' },
+            { className: '' },
             React.createElement(
               'div',
-              { className: 'weui-cell' },
+              { className: 'col-xs-12 col-sm-8 col-md-8' },
               React.createElement(
                 'div',
-                { className: 'weui-cell__hd' },
+                { className: 'row' },
                 React.createElement(
-                  'label',
-                  { className: 'weui-label' },
-                  '\u7F16\u53F7'
-                )
-              ),
-              React.createElement(
-                'div',
-                { className: 'weui-cell__bd student_view_input_style' },
-                React.createElement('input', { className: 'weui-input ', type: 'text', placeholder: '', id: 'code' })
-              )
-            ),
-            React.createElement(
-              'div',
-              { className: 'weui-cell' },
-              React.createElement(
-                'div',
-                { className: 'weui-cell__hd' },
+                  'div',
+                  { className: 'admin_creat_butto_wrap col-xs-12 col-sm-3 col-md-2 cursor_pointer' },
+                  React.createElement(
+                    'p',
+                    { className: 'button_style_delect text_align_center' },
+                    React.createElement('i', { className: 'fa fa-trash fa-fw admin_creat_button ' }),
+                    '\xA0 \u5220 \u9664'
+                  )
+                ),
                 React.createElement(
-                  'label',
-                  { className: 'weui-label' },
-                  '\u8BFE\u7A0B'
-                )
-              ),
-              React.createElement(
-                'div',
-                { className: 'weui-cell__bd student_view_input_style' },
-                React.createElement('input', { className: 'weui-input ', type: 'text', placeholder: '', id: 'name' })
-              )
-            ),
-            React.createElement(
-              'div',
-              { className: 'weui-cell' },
-              React.createElement(
-                'div',
-                { className: 'weui-cell__hd' },
-                React.createElement(
-                  'label',
-                  { className: 'weui-label' },
-                  '\u5E74\u7EA7'
-                )
-              ),
-              React.createElement(
-                'div',
-                { className: 'weui-cell__bd student_view_input_style' },
-                React.createElement(
-                  'select',
-                  { className: 'weui-input ', type: 'text', placeholder: '', id: 'level_id' },
-                  this.state.levelItem.map(function (item, index) {
-                    return React.createElement(
-                      'option',
-                      { key: index, value: item.id },
-                      item.name
-                    );
-                  })
+                  'div',
+                  { className: 'admin_creat_butto_wrap col-xs-12 col-sm-3 col-md-2 cursor_pointer' },
+                  React.createElement(
+                    'p',
+                    { className: 'button_style_new text_align_center' },
+                    React.createElement('i', { className: 'fa fa-plus fa-fw admin_creat_button ' }),
+                    '\xA0 \u65B0 \u5EFA'
+                  )
                 )
               )
             ),
             React.createElement(
               'div',
-              { className: 'weui-cell' },
+              { className: 'col-xs-12 col-sm-4 col-md-4' },
               React.createElement(
                 'div',
-                { className: 'weui-cell__hd' },
+                { className: 'row' },
                 React.createElement(
-                  'label',
-                  { className: 'weui-label' },
-                  '\u8BA1\u5212'
-                )
-              ),
-              React.createElement(
-                'div',
-                { className: 'weui-cell__bd student_view_input_style' },
+                  'span',
+                  { className: 'admin_creat_search  col-xs-8 col-sm-8 col-md-8' },
+                  React.createElement('input', { className: 'admin_creat_input', type: 'search', placeholder: '\u8BF7\u8F93\u5165\u5173\u952E\u5B57' })
+                ),
                 React.createElement(
-                  'select',
-                  { className: 'weui-input ', type: 'text', placeholder: '', id: 'plan_id' },
-                  this.state.planItem.map(function (item, index) {
-                    return React.createElement(
-                      'option',
-                      { key: index, value: item.id },
-                      item.name
-                    );
-                  })
+                  'button',
+                  { className: 'admin_creat_button_search col-xs-4 col-sm-4 col-md-4 button_style_search cursor_pointer' },
+                  '\u641C \u7D22'
                 )
-              )
-            ),
-            React.createElement(
-              'div',
-              { className: 'weui-cell' },
-              React.createElement(
-                'div',
-                { className: 'weui-cell__hd' },
-                React.createElement(
-                  'label',
-                  { className: 'weui-label' },
-                  '\u8001\u5E08'
-                )
-              ),
-              React.createElement(
-                'div',
-                { className: 'weui-cell__bd student_view_input_style' },
-                React.createElement(
-                  'select',
-                  { className: 'weui-input ', type: 'text', placeholder: '', id: 'teacher_id' },
-                  this.state.teacherItem.map(function (item, index) {
-                    return React.createElement(
-                      'option',
-                      { key: index, value: item.id },
-                      item.name
-                    );
-                  })
-                )
-              )
-            ),
-            React.createElement(
-              'div',
-              { className: 'weui-cell' },
-              React.createElement(
-                'div',
-                { className: 'weui-cell__hd' },
-                React.createElement(
-                  'label',
-                  { className: 'weui-label' },
-                  '\u65F6\u957F(H)'
-                )
-              ),
-              React.createElement(
-                'div',
-                { className: 'weui-cell__bd student_view_input_style' },
-                React.createElement('input', { className: 'weui-input ', type: 'text', placeholder: '', id: 'hours' })
-              )
-            ),
-            React.createElement(
-              'div',
-              { className: 'student_view_button_xiugai' },
-              React.createElement(
-                'span',
-                { className: 'weui-btn weui-btn_primary', onClick: this.handleClick },
-                '\u4FDD \u5B58'
               )
             )
           )
-        )
+        ),
+        React.createElement(Table, { tabthitems: this.state.tabthitems, tabtritems: this.state.tabtritems, sort: this.state.sort, onSort: this.handleSort, refresh: this.refresh, checkTd: checkTd }),
+        React.createElement(PageTab, { setPage: this.setPage, allNum: this.state.allNum, everyNum: this.state.everyNum, thisPage: this.state.thisPage })
       );
     }
   }]);
@@ -22903,6 +23269,63 @@ var AdminRightTop = function (_React$Component3) {
 }(React.Component);
 
 ;
+
+//判断特殊列
+var checkTd = function checkTd(defaultTd) {
+  var props = this.props;
+  var id = props.item.id;
+
+  var delect = function delect(e) {
+    $.ajax({
+      url: "/delete_exam_record",
+      dataType: 'json',
+      type: 'POST',
+      data: { "id": id },
+      success: function (data) {
+        if (data.success) {
+          props.refresh();
+          alert("删除成功！");
+        } else {
+          alert("删除失败！");
+        }
+      }.bind(this),
+      error: function (xhr, status, err) {}.bind(this)
+    });
+  };
+
+  if (this.props.thitem.type == "operation") {
+    return React.createElement(
+      'td',
+      null,
+      React.createElement(
+        'p',
+        { className: '' },
+        React.createElement(
+          'a',
+          { href: 'borrow_books_view', className: 'btn btn-info btn-xs operate_announce' },
+          '\u67E5 \u770B'
+        )
+      ),
+      React.createElement(
+        'p',
+        { className: '' },
+        React.createElement(
+          'span',
+          { className: 'btn btn-xs operate_announce weui-btn_warn', id: this.props.item[this.props.thitem.name], onClick: delect },
+          '\u5220 \u9664'
+        )
+      )
+    );
+  } else if (this.props.thitem.type == "check") {
+    return React.createElement(
+      'td',
+      null,
+      React.createElement('input', { type: 'checkbox', name: 'checkbox' })
+    );
+  } else {
+    return defaultTd;
+  }
+};
 
 // 返回到页面
 ReactDOM.render(React.createElement(AdminIndex, null), document.getElementById("admin"));
