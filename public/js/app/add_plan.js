@@ -22716,6 +22716,11 @@ var AdminRight = function (_React$Component2) {
                 React.createElement(
                   'select',
                   { className: 'weui-input ', type: 'text', placeholder: '', id: 'level_id' },
+                  React.createElement(
+                    'option',
+                    null,
+                    '\u8BF7\u9009\u62E9\u5E74\u7EA7'
+                  ),
                   this.state.levelItem.map(function (item, index) {
                     return React.createElement(
                       'option',

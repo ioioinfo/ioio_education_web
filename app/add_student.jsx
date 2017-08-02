@@ -22,12 +22,27 @@ class AdminRight extends React.Component {
   constructor(props) {
       super(props);
       // 初始化一个空对象
+      this.state={levelItem:[]};
       this.handleClick=this.handleClick.bind(this);
   }
 
   componentDidMount() {
       var tableHeight = $(window).height()-112;
       $(".student_view_wrap").css("height",tableHeight+"px");
+      $.ajax({
+             url: "/get_grades",
+             dataType: 'json',
+             type: 'GET',
+             data:{},
+             success: function(data) {
+              if(data.success){
+                this.setState({levelItem:data.rows});
+              }
+
+             }.bind(this),
+             error: function(xhr, status, err) {
+             }.bind(this)
+        });
 
   }
   handleClick(e){
@@ -46,6 +61,12 @@ class AdminRight extends React.Component {
     var city = "无";
     var district = $("#address").val();
     var level_id = $("#level_id").val();
+
+    var myreg = /^1[3|4|5|8|7][0-9]\d{4,8}$/;
+    if(!myreg.test(phone)){
+        alert('请输入有效的手机号码！');
+        return false;
+    }
     student.name=name;
     student.code=code;
     student.age=age;
@@ -150,7 +171,12 @@ class AdminRight extends React.Component {
             <div className="weui-cell">
                 <div className="weui-cell__hd"><label className="weui-label">年级</label></div>
                 <div className="weui-cell__bd student_view_input_style">
-                    <input className="weui-input " type="text" placeholder="" id="level_id"/>
+                <select className="weui-input " type="text" placeholder="" id="level_id">
+                <option value="">请选择年级</option>
+                {this.state.levelItem.map((item,index)  => (
+                    <option key={index} value={item.id}>{item.name}</option>))
+                }
+                </select>
                 </div>
             </div>
 

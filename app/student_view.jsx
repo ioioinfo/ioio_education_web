@@ -22,13 +22,28 @@ class AdminRight extends React.Component {
   constructor(props) {
       super(props);
       // 初始化一个空对象
-      this.state = {item:{}};
+      this.state = {item:{},levelItem:[]};
       this.handleClick=this.handleClick.bind(this);
   }
 
   componentDidMount() {
       var tableHeight = $(window).height()-112;
       $(".student_view_wrap").css("height",tableHeight+"px");
+      $.ajax({
+             url: "/get_grades",
+             dataType: 'json',
+             type: 'GET',
+             data:{},
+             success: function(data) {
+              if(data.success){
+                this.setState({levelItem:data.rows});
+              }
+
+             }.bind(this),
+             error: function(xhr, status, err) {
+             }.bind(this)
+        });
+
 
       $.ajax({
              url: "/search_student_byId",
@@ -85,7 +100,7 @@ class AdminRight extends React.Component {
     var province = "无";
     var city = "无";
     var district = $("#address").val();
-    var level_id = this.state.item.level_id;
+    var level_id = $("#level_id").val();
     obj.id=id;
     obj.name=name;
     obj.code=code;
@@ -157,6 +172,17 @@ class AdminRight extends React.Component {
                 <div className="weui-cell__hd"><label className="weui-label">手机</label></div>
                 <div className="weui-cell__bd student_view_input_style">
                     <input className="weui-input " type="text" placeholder="" id="phone"/>
+                </div>
+            </div>
+
+            <div className="weui-cell">
+                <div className="weui-cell__hd"><label className="weui-label">年级</label></div>
+                <div className="weui-cell__bd student_view_input_style">
+                  <select className="weui-input " type="text" placeholder="" id="level_id">
+                  {this.state.levelItem.map((item,index)  => (
+                      <option key={index} value={item.id}>{item.name}</option>))
+                  }
+                  </select>
                 </div>
             </div>
 

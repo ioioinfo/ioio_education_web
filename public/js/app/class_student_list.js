@@ -23140,6 +23140,7 @@ var AdminRight = function (_React$Component2) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
+      $(".page_wrap").css("display", "none");
       var tableHeight = $(window).height() - 181;
       $(".tableHeight").css("height", tableHeight + "px");
       $(".arrow_right_style").css("height", tableHeight + "px");

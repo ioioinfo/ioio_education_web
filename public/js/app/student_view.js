@@ -22644,7 +22644,7 @@ var AdminRight = function (_React$Component2) {
         // 初始化一个空对象
         var _this2 = _possibleConstructorReturn(this, (AdminRight.__proto__ || Object.getPrototypeOf(AdminRight)).call(this, props));
 
-        _this2.state = { item: {} };
+        _this2.state = { item: {}, levelItem: [] };
         _this2.handleClick = _this2.handleClick.bind(_this2);
         return _this2;
     }
@@ -22654,6 +22654,18 @@ var AdminRight = function (_React$Component2) {
         value: function componentDidMount() {
             var tableHeight = $(window).height() - 112;
             $(".student_view_wrap").css("height", tableHeight + "px");
+            $.ajax({
+                url: "/get_grades",
+                dataType: 'json',
+                type: 'GET',
+                data: {},
+                success: function (data) {
+                    if (data.success) {
+                        this.setState({ levelItem: data.rows });
+                    }
+                }.bind(this),
+                error: function (xhr, status, err) {}.bind(this)
+            });
 
             $.ajax({
                 url: "/search_student_byId",
@@ -22709,7 +22721,7 @@ var AdminRight = function (_React$Component2) {
             var province = "无";
             var city = "无";
             var district = $("#address").val();
-            var level_id = this.state.item.level_id;
+            var level_id = $("#level_id").val();
             obj.id = id;
             obj.name = name;
             obj.code = code;
@@ -22841,6 +22853,34 @@ var AdminRight = function (_React$Component2) {
                                 'div',
                                 { className: 'weui-cell__bd student_view_input_style' },
                                 React.createElement('input', { className: 'weui-input ', type: 'text', placeholder: '', id: 'phone' })
+                            )
+                        ),
+                        React.createElement(
+                            'div',
+                            { className: 'weui-cell' },
+                            React.createElement(
+                                'div',
+                                { className: 'weui-cell__hd' },
+                                React.createElement(
+                                    'label',
+                                    { className: 'weui-label' },
+                                    '\u5E74\u7EA7'
+                                )
+                            ),
+                            React.createElement(
+                                'div',
+                                { className: 'weui-cell__bd student_view_input_style' },
+                                React.createElement(
+                                    'select',
+                                    { className: 'weui-input ', type: 'text', placeholder: '', id: 'level_id' },
+                                    this.state.levelItem.map(function (item, index) {
+                                        return React.createElement(
+                                            'option',
+                                            { key: index, value: item.id },
+                                            item.name
+                                        );
+                                    })
+                                )
                             )
                         ),
                         React.createElement(

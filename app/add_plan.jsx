@@ -88,6 +88,7 @@ class AdminRight extends React.Component {
                 <div className="weui-cell__hd"><label className="weui-label">年级</label></div>
                 <div className="weui-cell__bd student_view_input_style">
                   <select className="weui-input " type="text" placeholder="" id="level_id">
+                  <option>请选择年级</option>
                   {this.state.levelItem.map((item,index)  => (
                       <option key={index} value={item.id}>{item.name}</option>))
                   }

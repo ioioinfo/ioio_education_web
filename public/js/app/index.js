@@ -23281,23 +23281,28 @@ var AdminRightTop = function (_React$Component3) {
 var checkTd = function checkTd(defaultTd) {
   var props = this.props;
   var id = props.item.id;
+  var state = props.item.state;
 
   var delect = function delect(e) {
-    $.ajax({
-      url: "/delete_class",
-      dataType: 'json',
-      type: 'POST',
-      data: { "id": id },
-      success: function (data) {
-        if (data.success) {
-          props.refresh();
-          alert("删除成功！");
-        } else {
-          alert("删除失败！");
-        }
-      }.bind(this),
-      error: function (xhr, status, err) {}.bind(this)
-    });
+    if (state == "已关闭") {
+      $.ajax({
+        url: "/delete_class",
+        dataType: 'json',
+        type: 'POST',
+        data: { "id": id },
+        success: function (data) {
+          if (data.success) {
+            props.refresh();
+            alert("删除成功！");
+          } else {
+            alert("删除失败！");
+          }
+        }.bind(this),
+        error: function (xhr, status, err) {}.bind(this)
+      });
+    } else {
+      alert("不允许删除");
+    }
   };
 
   if (this.props.thitem.type == "operation") {
