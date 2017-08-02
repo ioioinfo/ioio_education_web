@@ -96,7 +96,8 @@ exports.register = function(server, options, next) {
             method: 'GET',
             path: '/plan_view',
             handler: function(request, reply) {
-                return reply.view("plan_view");
+                var id = request.query.id;
+                return reply.view("plan_view",{"id":id});
             },
         },
 
@@ -133,7 +134,8 @@ exports.register = function(server, options, next) {
             method: 'GET',
             path: '/teacher_view',
             handler: function(request, reply) {
-                return reply.view("teacher_view");
+                var id = request.query.id;
+                return reply.view("teacher_view",{"id":id});
             },
         },
 
@@ -169,7 +171,8 @@ exports.register = function(server, options, next) {
             method: 'GET',
             path: '/lesson_view',
             handler: function(request, reply) {
-                return reply.view("lesson_view");
+                var id = request.query.id;
+                return reply.view("lesson_view",{"id":id});
             },
         },
 
@@ -196,7 +199,8 @@ exports.register = function(server, options, next) {
             method: 'GET',
             path: '/task_view',
             handler: function(request, reply) {
-                return reply.view("task_view");
+                var id = request.query.id;
+                return reply.view("task_view",{"id":id});
             },
         },
 
@@ -214,7 +218,8 @@ exports.register = function(server, options, next) {
             method: 'GET',
             path: '/record_view',
             handler: function(request, reply) {
-                return reply.view("record_view");
+                var id = request.query.id;
+                return reply.view("record_view",{"id":id});
             },
         },
 
@@ -242,7 +247,8 @@ exports.register = function(server, options, next) {
               method: 'GET',
               path: '/feedbacks_view',
               handler: function(request, reply) {
-                  return reply.view("feedbacks_view");
+                  var id = request.query.id;
+                  return reply.view("feedbacks_view",{"id":id});
               },
           },
 
@@ -269,7 +275,8 @@ exports.register = function(server, options, next) {
               method: 'GET',
               path: '/grade_view',
               handler: function(request, reply) {
-                  return reply.view("grade_view");
+                  var id = request.query.id;
+                  return reply.view("grade_view",{"id":id});
               },
           },
 
@@ -296,7 +303,8 @@ exports.register = function(server, options, next) {
               method: 'GET',
               path: '/teacher_type_view',
               handler: function(request, reply) {
-                  return reply.view("teacher_type_view");
+                  var id = request.query.id;
+                  return reply.view("teacher_type_view",{"id":id});
               },
           },
 
@@ -323,7 +331,8 @@ exports.register = function(server, options, next) {
               method: 'GET',
               path: '/exam_view',
               handler: function(request, reply) {
-                  return reply.view("exam_view");
+                  var id = request.query.id;
+                  return reply.view("exam_view",{"id":id});
               },
           },
 
@@ -350,7 +359,8 @@ exports.register = function(server, options, next) {
               method: 'GET',
               path: '/exam_record_view',
               handler: function(request, reply) {
-                  return reply.view("exam_record_view");
+                  var id = request.query.id;
+                  return reply.view("exam_record_view",{"id":id});
               },
           },
 
