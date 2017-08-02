@@ -42,7 +42,8 @@ exports.register = function(server, options, next) {
             method: 'GET',
             path: '/class_view',
             handler: function(request, reply) {
-                return reply.view("class_view");
+                var id = request.query.id;
+                return reply.view("class_view",{"id":id});
             },
         },
 
@@ -96,7 +97,8 @@ exports.register = function(server, options, next) {
             method: 'GET',
             path: '/student_view',
             handler: function(request, reply) {
-                return reply.view("student_view");
+                var id = request.query.id;
+                return reply.view("student_view",{"id":id});
             },
         },
 
