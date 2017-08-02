@@ -23314,7 +23314,7 @@ var checkTd = function checkTd(defaultTd) {
         { className: '' },
         React.createElement(
           'a',
-          { href: 'borrow_books_view', className: 'btn btn-info btn-xs operate_announce' },
+          { href: "record_view?id=" + id, className: 'btn btn-info btn-xs operate_announce' },
           '\u67E5 \u770B'
         )
       ),

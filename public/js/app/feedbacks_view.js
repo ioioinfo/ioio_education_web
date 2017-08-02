@@ -22647,7 +22647,7 @@ var AdminRight = function (_React$Component2) {
                 url: "/search_feedback_byId",
                 dataType: 'json',
                 type: 'get',
-                data: { 'id': '1' },
+                data: { 'id': id },
                 success: function (data) {
                     if (data.success) {
                         var student_id = data.rows[0].student_id;

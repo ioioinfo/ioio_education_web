@@ -22685,7 +22685,7 @@ var AdminRight = function (_React$Component2) {
         url: "/search_exam_byId",
         dataType: 'json',
         type: 'GET',
-        data: { 'id': '1' },
+        data: { 'id': id },
         success: function (data) {
           if (data.success) {
             var name = data.rows[0].name;

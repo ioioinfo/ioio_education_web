@@ -39,7 +39,7 @@ class AdminRight extends React.Component {
            url: "/search_task_byId",
            dataType: 'json',
            type: 'GET',
-           data:{'id':'1'},
+           data:{'id':id},
            success: function(data) {
             if(data.success){
               plan_id = data.rows[0].plan_id;

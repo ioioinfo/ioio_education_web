@@ -22644,7 +22644,7 @@ var AdminRight = function (_React$Component2) {
         url: "/search_record_byId",
         dataType: 'json',
         type: 'GET',
-        data: { 'id': '2' },
+        data: { 'id': id },
         success: function (data) {
           if (data.success) {
             var state = data.rows[0].state;

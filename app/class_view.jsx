@@ -89,7 +89,7 @@ $.ajax({
        url: "/search_class_byId",
        dataType: 'json',
        type: 'GET',
-       data:{'id':'1'},
+       data:{'id':id},
        success: function(data) {
 
           if(data.success){

@@ -33,7 +33,7 @@ class AdminRight extends React.Component {
              url: "/search_type_byId",
              dataType: 'json',
              type: 'GET',
-             data:{'id':'1'},
+             data:{'id':id},
              success: function(data) {
               if(data.success){
                 var name = data.rows[0].name;

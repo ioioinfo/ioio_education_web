@@ -22661,7 +22661,7 @@ var AdminRight = function (_React$Component2) {
         url: "/search_learning_record_byId",
         dataType: 'json',
         type: 'GET',
-        data: { 'id': '1' },
+        data: { 'id': id },
         success: function (data) {
           if (data.success) {
             plan_id = data.rows[0].plan_id;

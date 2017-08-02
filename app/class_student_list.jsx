@@ -182,7 +182,7 @@ var checkTd = function(defaultTd) {
         if(this.props.thitem.type=="operation"){
           return (
               <td>
-              <span className=""><a href="borrow_books_view"  className="btn btn-info btn-xs operate_announce">查 看</a></span>
+              <span className=""><a href={"student_view?id="+id}  className="btn btn-info btn-xs operate_announce">查 看</a></span>
               </td>
           );
         }else if (this.props.thitem.type=="checked" || this.props.thitem.type=="check") {
