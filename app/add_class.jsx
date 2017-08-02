@@ -119,7 +119,7 @@ class AdminRight extends React.Component {
   }
   render() {
     return (
-      <div className="admin_right col-xs-12 col-sm-8 col-md-10">
+      <div className="admin_right col-xs-12 col-sm-8 col-md-10 overflow_auto">
         <AdminRightTop/>
 
         <div className="student_view_wrap">
@@ -195,6 +195,7 @@ class AdminRight extends React.Component {
                       <option>未开始</option>
                       <option>已开班</option>
                       <option>已结束</option>
+                      <option>已关闭</option>
                   </select>
                 </div>
             </div>

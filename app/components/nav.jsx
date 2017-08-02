@@ -4,7 +4,7 @@ var React = require('react');
 class AdminLeft extends React.Component {
   render() {
     return (
-      <div className="admin_left col-xs-6 col-sm-4 col-md-2">
+      <div className="admin_left col-xs-6 col-sm-4 col-md-2 overflow_auto">
         <div className="admin_logo">
           <span className="admin_index_logo">{platform_name}</span><br/>
           <span className="admin_index_name">{company_name}</span>

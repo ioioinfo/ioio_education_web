@@ -26,6 +26,7 @@ class AdminRight extends React.Component {
       this.setPage=this.setPage.bind(this);
       this.handleSort=this.handleSort.bind(this);
       this.loadData=this.loadData.bind(this);
+      this.refresh=this.refresh.bind(this);
       // 初始化一个空对象
       this.state = {tabthitems:[],tabtritems:[],allNum:0,everyNum:20,thisPage:1,sort:{name:"",dir:""}};
   }
@@ -49,10 +50,12 @@ class AdminRight extends React.Component {
   handleSort(sort){
       this.loadData({sort:sort});
   }
-
+  refresh(){
+    this.loadData({});
+  }
   render() {
     return (
-      <div className="admin_right col-xs-12 col-sm-8 col-md-10">
+      <div className="admin_right col-xs-12 col-sm-8 col-md-10 overflow_auto">
         <AdminRightTop/>
         <div className="admin_creat overflow_hidden">
             <div className="">
@@ -78,7 +81,7 @@ class AdminRight extends React.Component {
 
             </div>
         </div>
-        <Table tabthitems={this.state.tabthitems} tabtritems={this.state.tabtritems} sort={this.state.sort} onSort={this.handleSort}  checkTd={checkTd} />
+        <Table tabthitems={this.state.tabthitems} tabtritems={this.state.tabtritems} sort={this.state.sort} onSort={this.handleSort} refresh={this.refresh}  checkTd={checkTd} />
         <PageTab setPage={this.setPage} allNum={this.state.allNum} everyNum={this.state.everyNum} thisPage={this.state.thisPage} />
       </div>
     );
@@ -110,6 +113,7 @@ var checkTd = function(defaultTd) {
           data: {"id":id},
           success: function(data) {
               if (data.success) {
+                  props.refresh();
                   alert("删除成功！");
               }else {
                   alert("删除失败！");

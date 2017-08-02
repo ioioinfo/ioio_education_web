@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>回访记录列表</title>
+    <link rel="stylesheet" href="css/weui.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/admin_public.css">
+    <link rel="stylesheet" href="css/admin_nav.css">
+    <link rel="stylesheet" href="css/admin_view.css">
+
+</head>
+<body>
+    <div id="admin"></div>
+    <script type="text/javascript">
+    var platform_name = "{{platform_name}}";
+    var company_name = "{{company_name}}";
+    //表头
+    var tt = [{name:'check',width:"5%", title:'',type:"check",sort:false}
+        ,{name:'id',title:'编号',sort:true}
+        ,{name:'student_name',title:'姓名',sort:false}
+        ,{name:'feedback_person',title:'回访员',sort:false}
+        ,{name:'feedback_content',title:'回访记录',sort:false}
+        ,{name:'state',title:'状态',sort:false}
+        ,{name:'feedback_date',title:'回访时间',sort:false}
+        ,{name:'operation',title:'操作',type:"operation"}];
+
+    function getTableData(params,cb) {
+        params.everyNum = 50;
+        var allNum = 0;
+        $.get("/get_feedbacks",{params:JSON.stringify(params)},function(data){
+            if (data.success) {
+              if (data.rows) {
+                allNum = data.num;
+                cb({tabthitems:tt,tabtritems:data.rows,allNum:allNum,everyNum:params.everyNum});
+              }
+            }else {
+                alert(data.message);
+            }
+        });
+    };
+    </script>
+
+    <script type="text/javascript">
+    </script>
+    <script src="js/jquery-3.1.1.min.js" type="text/javascript"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/app/feedbacks_list.js"></script>
+
+</body>
+</html>

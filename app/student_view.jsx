@@ -120,9 +120,9 @@ class AdminRight extends React.Component {
   }
   render() {
     return (
-      <div className="admin_right col-xs-12 col-sm-8 col-md-10">
+      <div className="admin_right col-xs-12 col-sm-8 col-md-10 overflow_auto">
         <AdminRightTop/>
-  
+
         <div className="student_view_wrap">
           <div className="student_view_infor">
             <div className="weui-cell">
