@@ -114,7 +114,7 @@ exports.register = function(server, options, next) {
                 //     "level_id":1
                 // }
 
-                if (!clas.plan_id || !clas.name || !clas.code ||!clas.state || !clas.starting_date || !clas.end_date || !clas.class_master
+                if (!clas.classroom_id || !clas.name || !clas.code ||!clas.state || !clas.starting_date || !clas.end_date || !clas.class_master
                 || !clas.master_id || !clas.remarks || !clas.level_id) {
                     return reply({"success":false,"message":"params wrong","service_info":service_info});
                 }
@@ -152,7 +152,7 @@ exports.register = function(server, options, next) {
                 //     "id":1
                 // }
 
-                if (!clas.plan_id || !clas.name || !clas.code ||!clas.state || !clas.starting_date || !clas.end_date || !clas.class_master
+                if (!clas.classroom_id || !clas.name || !clas.code ||!clas.state || !clas.starting_date || !clas.end_date || !clas.class_master
                 || !clas.master_id || !clas.remarks || !clas.level_id || !clas.id) {
                     return reply({"success":false,"message":"params wrong","service_info":service_info});
                 }
