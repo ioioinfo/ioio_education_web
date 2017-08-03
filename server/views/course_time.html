@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>创建课程时间</title>
+    <link rel="stylesheet" href="css/weui.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="css/admin_public.css">
+    <link rel="stylesheet" href="css/admin_nav.css">
+    <link rel="stylesheet" href="css/admin_view.css">
+    <link rel="stylesheet" href="css/course_time.css">
+
+</head>
+<body>
+    <div id="admin"></div>
+    <script type="text/javascript">
+    var platform_name = "{{platform_name}}";
+    var company_name = "{{company_name}}";
+
+    </script>
+
+    <script src="js/jquery-3.1.1.min.js" type="text/javascript"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-datetimepicker.min.js"></script>
+    <script src="js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script src="js/app/course_time.js"></script>
+
+    <script type="text/javascript">
+
+    $(function(){
+        $(".datetime1").datetimepicker({
+            language:"zh-CN",
+            format: 'hh:ii',
+            autoclose: true,
+            startView:1, //or 'hour' for the hour view
+            //minView:6,        关闭时分秒
+            timepicker:true,    //关闭时间选项
+            todayButton:false    //关闭选择今天按钮
+        });
+      })
+
+      $(function(){
+          $(".datetime2").datetimepicker({
+              language:"zh-CN",
+              format: 'hh:ii',
+              autoclose: true,
+              startView:1, //or 'hour' for the hour view
+              //minView:6,        关闭时分秒
+              timepicker:true,    //关闭时间选项
+              todayButton:false    //关闭选择今天按钮
+          });
+    })
+
+    var remove = function(elem){
+      $(elem).remove();
+    }
+
+    </script>
+
+</body>
+</html>

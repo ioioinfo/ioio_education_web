@@ -1,12 +1,14 @@
 .button_style_delect{
-  background: #FF7E00;
+  background: #1FB4AC;
   color: #fff;
   cursor: pointer;
+  margin: 0 13px;
 }
 .button_style_new{
-  background: #7EBE2C;
+  background: #03CC6B;
   color: #fff;
   cursor: pointer;
+  margin: 0 13px;
 }
 .button_style_search{
   background: #009695;
@@ -32,4 +34,9 @@
 
 #table{
   background: #fff;
+}
+
+.course_time_add_button{
+  background: #1FB4AC;
+  color: #fff;
 }

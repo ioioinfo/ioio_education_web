@@ -49,7 +49,7 @@ class AdminRight extends React.Component {
                url: "/search_grade_byId",
                dataType: 'json',
                type: 'GET',
-               data:{'id':id'},
+               data:{'id':id},
                success: function(data) {
                 if(data.success){
                   var name =data.rows[0].name;

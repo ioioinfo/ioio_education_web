@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 213);
+/******/ 	return __webpack_require__(__webpack_require__.s = 214);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -9788,7 +9788,7 @@ var AdminLeft = function (_React$Component) {
     value: function render() {
       return React.createElement(
         "div",
-        { className: "admin_left col-xs-6 col-sm-4 col-md-2 overflow_auto" },
+        { className: "admin_left col-xs-6 col-sm-4 col-md-2" },
         React.createElement(
           "div",
           { className: "admin_logo" },
@@ -9839,6 +9839,8 @@ var AdminLeftNav = function (_React$Component2) {
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
+      var tableHeight = $(window).height() - 220;
+      $(".admin_index_nav").css("height", tableHeight + "px");
       $.ajax({
         url: "/menu_list",
         dataType: 'json',
@@ -9857,7 +9859,7 @@ var AdminLeftNav = function (_React$Component2) {
 
       return React.createElement(
         "div",
-        { className: "admin_index_nav" },
+        { className: "admin_index_nav overflow_auto" },
         this.state.items.map(function (item, index) {
           return React.createElement(
             "div",
@@ -22586,7 +22588,8 @@ module.exports = traverseAllChildren;
 /* 210 */,
 /* 211 */,
 /* 212 */,
-/* 213 */
+/* 213 */,
+/* 214 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

@@ -4,7 +4,7 @@ var React = require('react');
 class AdminLeft extends React.Component {
   render() {
     return (
-      <div className="admin_left col-xs-6 col-sm-4 col-md-2 overflow_auto">
+      <div className="admin_left col-xs-6 col-sm-4 col-md-2">
         <div className="admin_logo">
           <span className="admin_index_logo">{platform_name}</span><br/>
           <span className="admin_index_name">{company_name}</span>
@@ -29,6 +29,8 @@ class AdminLeftNav extends React.Component {
     $("#"+second_nav).slideToggle(400);
   }
   componentDidMount() {
+    var tableHeight = $(window).height()-220;
+    $(".admin_index_nav").css("height",tableHeight+"px");
     $.ajax({
          url: "/menu_list",
          dataType: 'json',
@@ -43,7 +45,7 @@ class AdminLeftNav extends React.Component {
   }
   render() {
     return (
-      <div className="admin_index_nav">
+      <div className="admin_index_nav overflow_auto">
         {this.state.items.map((item,index) => (
             <div className="nav_public  font_color" key={index} >
                 <a href={item.a}>

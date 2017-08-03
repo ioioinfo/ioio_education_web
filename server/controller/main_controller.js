@@ -364,6 +364,16 @@ exports.register = function(server, options, next) {
               },
           },
 
+          //上课时间段设置
+          {
+              method: 'GET',
+              path: '/course_time',
+              handler: function(request, reply) {
+                  var id = request.query.id;
+                  return reply.view("course_time");
+              },
+          },
+
 
 
 

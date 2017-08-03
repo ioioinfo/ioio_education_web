@@ -51,6 +51,8 @@ module.exports = {
         exam_record_list: './app/exam_record_list.jsx',
         add_exam_record: './app/add_exam_record.jsx',
         exam_record_view: './app/exam_record_view.jsx',
+        exam_record_view: './app/exam_record_view.jsx',
+        course_time:'./app/course_time.jsx',
     },
     output: {
         path: __dirname,
