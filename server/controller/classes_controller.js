@@ -1363,7 +1363,106 @@ exports.register = function(server, options, next) {
                 });
             }
         },
+        //新教学计划信息列表
+        {
+            method: "GET",
+            path: '/get_education_plans',
+            handler: function(request, reply) {
+                education_api.get_education_plans(function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //新教学计划id查询
+        {
+            method: "GET",
+            path: '/search_education_plan_byId',
+            handler: function(request, reply) {
+                var id = request.query.id;
+                if (!id) {
+                    return reply({"success":false,"message":"id null","service_info":service_info});
+                }
+                education_api.search_education_plan_byId(id,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //删除新教学计划
+        {
+            method: "POST",
+            path: '/delete_education_plan',
+            handler: function(request, reply) {
+                var id = request.payload.id;
+                if (!id) {
+                    return reply({"success":false,"message":"id null","service_info":service_info});
+                }
+                var data = {
+                    "id" : id
+                };
+                education_api.delete_education_plan(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //保存新教学计划
+        {
+            method: "POST",
+            path: '/save_education_plan',
+            handler: function(request, reply) {
+                var plan = request.payload.plan;
+                plan = JSON.parse(plan);
+                if (!plan.class_id|| !plan.name || !plan.code|| !plan.hours|| !plan.teacher_id|| !plan.assistant_id ||!plan.subject_id||!plan.starting_date|| !plan.end_date) {
+                    return reply({"success":false,"message":"params wrong","service_info":service_info});
+                }
 
+                var data = {
+                    "plan":JSON.stringify(plan)
+                };
+                education_api.save_education_plan(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //更新反馈
+        {
+            method: "POST",
+            path: '/update_education_plan',
+            handler: function(request, reply) {
+                var plan = request.payload.plan;
+                plan = JSON.parse(plan);
+
+                if (!plan.class_id|| !plan.name || !plan.code|| !plan.hours|| !plan.teacher_id|| !plan.assistant_id ||!plan.subject_id||!plan.starting_date|| !plan.end_date|| !plan.id) {
+                    return reply({"success":false,"message":"params wrong","service_info":service_info});
+                }
+
+                var data = {
+                    "plan":JSON.stringify(plan)
+                };
+                education_api.update_education_plan(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
 
     ]);
 
