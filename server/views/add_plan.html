@@ -28,6 +28,29 @@
     <script src="js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
     <script src="js/app/add_plan.js"></script>
 
+    <script type="text/javascript">
 
+    $(function(){
+        $("#starting_date").datetimepicker({
+            language:"zh-CN",
+            format: 'yyyy-mm-dd',
+            autoclose: true,
+            //minView:6,        关闭时分秒
+            timepicker:false,    //关闭时间选项
+            todayButton:false    //关闭选择今天按钮
+        });
+    })
+
+    $(function(){
+        $("#end_date").datetimepicker({
+            language:"zh-CN",
+            format: 'yyyy-mm-dd',
+            autoclose: true,
+            //minView:6,        关闭时分秒
+            timepicker:false,    //关闭时间选项
+            todayButton:false    //关闭选择今天按钮
+        });
+    })
+    </script>
 </body>
 </html>

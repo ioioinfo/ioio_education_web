@@ -93,7 +93,7 @@ $.ajax({
        success: function(data) {
 
           if(data.success){
-            plan_id = data.rows[0].plan_id;
+            classroom_id = data.rows[0].classroom_id;
             var name = data.rows[0].name;
             var code = data.rows[0].code;
             var state = data.rows[0].state;
@@ -103,7 +103,6 @@ $.ajax({
             master_id = data.rows[0].master_id;
             var remarks = data.rows[0].remarks;
             level_id = data.rows[0].level_id;
-            $("#plan_id").val(plan_id);
             $("#code").val(code);
             $("#name").val(name);
             $("#starting_date").val(starting_date);
@@ -123,7 +122,7 @@ $.ajax({
     var clas = new Object();
 
     var id = "1";
-    plan_id = $("#plan_id").val();
+    classroom_id = this.state.item.classroom_id;
     var name = $("#name").val();
     var code = $("#code").val();
     var state = $("#state").val();
@@ -136,7 +135,7 @@ $.ajax({
     clas.id=id;
     clas.name=name;
     clas.code=code;
-    clas.plan_id=plan_id;
+    clas.classroom_id=classroom_id;
     clas.starting_date=starting_date;
     clas.end_date=end_date;
     clas.state=state;
@@ -203,17 +202,6 @@ $.ajax({
                   {this.state.masterItem.map((item,index)  => (
                       <option key={index} value={item.id}>{item.name}</option>))
                   }
-                  </select>
-                </div>
-            </div>
-
-            <div className="weui-cell">
-                <div className="weui-cell__hd"><label className="weui-label">计划列表</label></div>
-                <div className="weui-cell__bd student_view_input_style">
-                  <select className="weui-input " type="text" placeholder="" id="plan_id">
-                    {this.state.planItem.map((item,index)  => (
-                        <option key={index} value={item.id}>{item.name}</option>))
-                    }
                   </select>
                 </div>
             </div>

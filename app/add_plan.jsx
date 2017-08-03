@@ -23,7 +23,7 @@ class AdminRight extends React.Component {
       super(props);
       // 初始化一个空对象
       this.handleClick=this.handleClick.bind(this);
-      this.state={planItem:[],masterItem:[],levelItem:[]};
+      this.state={teacherItem:[],masterItem:[],subjectItem:[],classItem:[]};
   }
 
   componentDidMount() {
@@ -45,18 +45,80 @@ class AdminRight extends React.Component {
                  }.bind(this)
             });
 
+            // 班级
+          $.ajax({
+                 url: "/get_classes",
+                 dataType: 'json',
+                 type: 'GET',
+                 data:{},
+                 success: function(data) {
+                  if(data.success){
+                    this.setState({classItem:data.rows});
+                  }
+
+                 }.bind(this),
+                 error: function(xhr, status, err) {
+                 }.bind(this)
+            });
+
+            $.ajax({
+                   url: "/get_teachers",
+                   dataType: 'json',
+                   type: 'GET',
+                   data:{},
+                   success: function(data) {
+                    if(data.success){
+                      this.setState({teacherItem:data.rows});
+                    }
+
+                   }.bind(this),
+                   error: function(xhr, status, err) {
+                   }.bind(this)
+              });
+
+              $.ajax({
+                     url: "/get_lessons",
+                     dataType: 'json',
+                     type: 'GET',
+                     data:{},
+                     success: function(data) {
+                      if(data.success){
+                        this.setState({subjectItem:data.rows});
+                      }
+
+                     }.bind(this),
+                     error: function(xhr, status, err) {
+                     }.bind(this)
+                });
+
+
 
   }
   handleClick(e){
+    var plan = new Object();
+    var class_id = $("#class_id").val();
     var name = $("#name").val();
     var code = $("#code").val();
-    var level_id = $("#level_id").val();
-
+    var hours = $("#hours").val();
+    var teacher_id = $("#teacher_id").val();
+    var subject_id = $("#subject_id").val();
+    var starting_date = $("#starting_date").val();
+    var end_date = $("#end_date").val();
+    var assistant_id = '1';
+    plan.class_id=class_id;
+    plan.name=name;
+    plan.code=code;
+    plan.hours=hours;
+    plan.teacher_id=teacher_id;
+    plan.subject_id=subject_id;
+    plan.starting_date=starting_date;
+    plan.end_date=end_date;
+    plan.assistant_id=assistant_id;
     $.ajax({
-        url: "/save_plan",
+        url: "/save_education_plan",
         dataType: 'json',
         type: 'POST',
-        data: {"name":name,"code":code,"level_id":level_id},
+        data: {'plan':JSONstringify(plan)},
         success: function(data) {
             if (data.success) {
                 alert("添加成功！");
@@ -85,11 +147,25 @@ class AdminRight extends React.Component {
             </div>
 
             <div className="weui-cell">
-                <div className="weui-cell__hd"><label className="weui-label">年级</label></div>
+                <div className="weui-cell__hd"><label className="weui-label">开班时间</label></div>
+                <div className="weui-cell__bd student_view_input_style">
+                  <input className="weui-input" type="text" id="starting_date"/>
+                </div>
+            </div>
+
+            <div className="weui-cell">
+                <div className="weui-cell__hd"><label className="weui-label">放假时间</label></div>
+                <div className="weui-cell__bd student_view_input_style">
+                    <input className="weui-input" type="text" id="end_date"/>
+                </div>
+            </div>
+
+            <div className="weui-cell">
+                <div className="weui-cell__hd"><label className="weui-label">班级</label></div>
                 <div className="weui-cell__bd student_view_input_style">
                   <select className="weui-input " type="text" placeholder="" id="level_id">
-                  <option>请选择年级</option>
-                  {this.state.levelItem.map((item,index)  => (
+                  <option value="">请选择年级</option>
+                  {this.state.classItem.map((item,index)  => (
                       <option key={index} value={item.id}>{item.name}</option>))
                   }
                   </select>
@@ -97,9 +173,40 @@ class AdminRight extends React.Component {
             </div>
 
             <div className="weui-cell">
-                <div className="weui-cell__hd"><label className="weui-label">名字</label></div>
+                <div className="weui-cell__hd"><label className="weui-label">老师</label></div>
+                <div className="weui-cell__bd student_view_input_style">
+                  <select className="weui-input " type="text" placeholder="" id="teacher_id">
+                  <option value="">请选择老师</option>
+                  {this.state.teacherItem.map((item,index)  => (
+                      <option key={index} value={item.id}>{item.name}</option>))
+                  }
+                  </select>
+                </div>
+            </div>
+
+            <div className="weui-cell">
+                <div className="weui-cell__hd"><label className="weui-label">课程</label></div>
+                <div className="weui-cell__bd student_view_input_style">
+                  <select className="weui-input " type="text" placeholder="" id="subject_id">
+                  <option value="">请选择课程</option>
+                  {this.state.subjectItem.map((item,index)  => (
+                      <option key={index} value={item.id}>{item.name}</option>))
+                  }
+                  </select>
+                </div>
+            </div>
+
+            <div className="weui-cell">
+                <div className="weui-cell__hd"><label className="weui-label">计划名字</label></div>
                 <div className="weui-cell__bd student_view_input_style">
                     <input className="weui-input " type="text" placeholder="" id="name"/>
+                </div>
+            </div>
+
+            <div className="weui-cell">
+                <div className="weui-cell__hd"><label className="weui-label">课时</label></div>
+                <div className="weui-cell__bd student_view_input_style">
+                    <input className="weui-input " type="text" placeholder="" id="hours"/>
                 </div>
             </div>
 

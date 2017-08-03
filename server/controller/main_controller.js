@@ -374,6 +374,17 @@ exports.register = function(server, options, next) {
               },
           },
 
+          //课程表
+          {
+              method: 'GET',
+              path: '/course_list',
+              handler: function(request, reply) {
+                  var id = request.query.id;
+                  return reply.view("course_list");
+              },
+          },
+
+
 
 
 

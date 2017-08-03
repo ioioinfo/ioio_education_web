@@ -79,7 +79,7 @@ class AdminRight extends React.Component {
   handleClick(e){
     var clas = new Object();
 
-    var plan_id = $("#plan_id").val();
+    var classroom_id = this.state.item.classroom_id;
     var name = $("#name").val();
     var code = $("#code").val();
     var state = $("#state").val();
@@ -91,7 +91,7 @@ class AdminRight extends React.Component {
     var level_id = $("#level_id").val();
     clas.name=name;
     clas.code=code;
-    clas.plan_id=plan_id;
+    clas.classroom_id=classroom_id;
     clas.starting_date=starting_date;
     clas.end_date=end_date;
     clas.state=state;
@@ -158,18 +158,6 @@ class AdminRight extends React.Component {
                   {this.state.masterItem.map((item,index)  => (
                       <option key={index} value={item.id}>{item.name}</option>))
                   }
-                  </select>
-                </div>
-            </div>
-
-            <div className="weui-cell">
-                <div className="weui-cell__hd"><label className="weui-label">计划列表</label></div>
-                <div className="weui-cell__bd student_view_input_style">
-                  <select className="weui-input " type="text" placeholder="" id="plan_id">
-
-                    {this.state.planItem.map((item,index)  => (
-                        <option key={index} value={item.id}>{item.name}</option>))
-                    }
                   </select>
                 </div>
             </div>

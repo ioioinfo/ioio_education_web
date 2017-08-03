@@ -53,6 +53,7 @@ module.exports = {
         exam_record_view: './app/exam_record_view.jsx',
         exam_record_view: './app/exam_record_view.jsx',
         course_time:'./app/course_time.jsx',
+        course_list:'./app/course_list.jsx',
     },
     output: {
         path: __dirname,

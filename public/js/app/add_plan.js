@@ -22624,7 +22624,7 @@ var AdminRight = function (_React$Component2) {
     var _this2 = _possibleConstructorReturn(this, (AdminRight.__proto__ || Object.getPrototypeOf(AdminRight)).call(this, props));
 
     _this2.handleClick = _this2.handleClick.bind(_this2);
-    _this2.state = { planItem: [], masterItem: [], levelItem: [] };
+    _this2.state = { teacherItem: [], masterItem: [], subjectItem: [], classItem: [] };
     return _this2;
   }
 
@@ -22646,19 +22646,74 @@ var AdminRight = function (_React$Component2) {
         }.bind(this),
         error: function (xhr, status, err) {}.bind(this)
       });
+
+      // 班级
+      $.ajax({
+        url: "/get_classes",
+        dataType: 'json',
+        type: 'GET',
+        data: {},
+        success: function (data) {
+          if (data.success) {
+            this.setState({ classItem: data.rows });
+          }
+        }.bind(this),
+        error: function (xhr, status, err) {}.bind(this)
+      });
+
+      $.ajax({
+        url: "/get_teachers",
+        dataType: 'json',
+        type: 'GET',
+        data: {},
+        success: function (data) {
+          if (data.success) {
+            this.setState({ teacherItem: data.rows });
+          }
+        }.bind(this),
+        error: function (xhr, status, err) {}.bind(this)
+      });
+
+      $.ajax({
+        url: "/get_lessons",
+        dataType: 'json',
+        type: 'GET',
+        data: {},
+        success: function (data) {
+          if (data.success) {
+            this.setState({ subjectItem: data.rows });
+          }
+        }.bind(this),
+        error: function (xhr, status, err) {}.bind(this)
+      });
     }
   }, {
     key: 'handleClick',
     value: function handleClick(e) {
+      var plan = new Object();
+      var class_id = $("#class_id").val();
       var name = $("#name").val();
       var code = $("#code").val();
-      var level_id = $("#level_id").val();
-
+      var hours = $("#hours").val();
+      var teacher_id = $("#teacher_id").val();
+      var subject_id = $("#subject_id").val();
+      var starting_date = $("#starting_date").val();
+      var end_date = $("#end_date").val();
+      var assistant_id = '1';
+      plan.class_id = class_id;
+      plan.name = name;
+      plan.code = code;
+      plan.hours = hours;
+      plan.teacher_id = teacher_id;
+      plan.subject_id = subject_id;
+      plan.starting_date = starting_date;
+      plan.end_date = end_date;
+      plan.assistant_id = assistant_id;
       $.ajax({
-        url: "/save_plan",
+        url: "/save_education_plan",
         dataType: 'json',
         type: 'POST',
-        data: { "name": name, "code": code, "level_id": level_id },
+        data: { 'plan': JSONstringify(plan) },
         success: function (data) {
           if (data.success) {
             alert("添加成功！");
@@ -22709,7 +22764,43 @@ var AdminRight = function (_React$Component2) {
                 React.createElement(
                   'label',
                   { className: 'weui-label' },
-                  '\u5E74\u7EA7'
+                  '\u5F00\u73ED\u65F6\u95F4'
+                )
+              ),
+              React.createElement(
+                'div',
+                { className: 'weui-cell__bd student_view_input_style' },
+                React.createElement('input', { className: 'weui-input', type: 'text', id: 'starting_date' })
+              )
+            ),
+            React.createElement(
+              'div',
+              { className: 'weui-cell' },
+              React.createElement(
+                'div',
+                { className: 'weui-cell__hd' },
+                React.createElement(
+                  'label',
+                  { className: 'weui-label' },
+                  '\u653E\u5047\u65F6\u95F4'
+                )
+              ),
+              React.createElement(
+                'div',
+                { className: 'weui-cell__bd student_view_input_style' },
+                React.createElement('input', { className: 'weui-input', type: 'text', id: 'end_date' })
+              )
+            ),
+            React.createElement(
+              'div',
+              { className: 'weui-cell' },
+              React.createElement(
+                'div',
+                { className: 'weui-cell__hd' },
+                React.createElement(
+                  'label',
+                  { className: 'weui-label' },
+                  '\u73ED\u7EA7'
                 )
               ),
               React.createElement(
@@ -22720,10 +22811,10 @@ var AdminRight = function (_React$Component2) {
                   { className: 'weui-input ', type: 'text', placeholder: '', id: 'level_id' },
                   React.createElement(
                     'option',
-                    null,
+                    { value: '' },
                     '\u8BF7\u9009\u62E9\u5E74\u7EA7'
                   ),
-                  this.state.levelItem.map(function (item, index) {
+                  this.state.classItem.map(function (item, index) {
                     return React.createElement(
                       'option',
                       { key: index, value: item.id },
@@ -22742,13 +22833,97 @@ var AdminRight = function (_React$Component2) {
                 React.createElement(
                   'label',
                   { className: 'weui-label' },
-                  '\u540D\u5B57'
+                  '\u8001\u5E08'
+                )
+              ),
+              React.createElement(
+                'div',
+                { className: 'weui-cell__bd student_view_input_style' },
+                React.createElement(
+                  'select',
+                  { className: 'weui-input ', type: 'text', placeholder: '', id: 'teacher_id' },
+                  React.createElement(
+                    'option',
+                    { value: '' },
+                    '\u8BF7\u9009\u62E9\u8001\u5E08'
+                  ),
+                  this.state.teacherItem.map(function (item, index) {
+                    return React.createElement(
+                      'option',
+                      { key: index, value: item.id },
+                      item.name
+                    );
+                  })
+                )
+              )
+            ),
+            React.createElement(
+              'div',
+              { className: 'weui-cell' },
+              React.createElement(
+                'div',
+                { className: 'weui-cell__hd' },
+                React.createElement(
+                  'label',
+                  { className: 'weui-label' },
+                  '\u8BFE\u7A0B'
+                )
+              ),
+              React.createElement(
+                'div',
+                { className: 'weui-cell__bd student_view_input_style' },
+                React.createElement(
+                  'select',
+                  { className: 'weui-input ', type: 'text', placeholder: '', id: 'subject_id' },
+                  React.createElement(
+                    'option',
+                    { value: '' },
+                    '\u8BF7\u9009\u62E9\u8BFE\u7A0B'
+                  ),
+                  this.state.subjectItem.map(function (item, index) {
+                    return React.createElement(
+                      'option',
+                      { key: index, value: item.id },
+                      item.name
+                    );
+                  })
+                )
+              )
+            ),
+            React.createElement(
+              'div',
+              { className: 'weui-cell' },
+              React.createElement(
+                'div',
+                { className: 'weui-cell__hd' },
+                React.createElement(
+                  'label',
+                  { className: 'weui-label' },
+                  '\u8BA1\u5212\u540D\u5B57'
                 )
               ),
               React.createElement(
                 'div',
                 { className: 'weui-cell__bd student_view_input_style' },
                 React.createElement('input', { className: 'weui-input ', type: 'text', placeholder: '', id: 'name' })
+              )
+            ),
+            React.createElement(
+              'div',
+              { className: 'weui-cell' },
+              React.createElement(
+                'div',
+                { className: 'weui-cell__hd' },
+                React.createElement(
+                  'label',
+                  { className: 'weui-label' },
+                  '\u8BFE\u65F6'
+                )
+              ),
+              React.createElement(
+                'div',
+                { className: 'weui-cell__bd student_view_input_style' },
+                React.createElement('input', { className: 'weui-input ', type: 'text', placeholder: '', id: 'hours' })
               )
             ),
             React.createElement(

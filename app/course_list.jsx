@@ -107,7 +107,7 @@ class AdminRightTop extends React.Component {
 
         var delect = function(e){
           $.ajax({
-              url: "/delete_education_plan",
+              url: "/delete_exam",
               dataType: 'json',
               type: 'POST',
               data: {"id":id},
@@ -128,7 +128,7 @@ class AdminRightTop extends React.Component {
         if(this.props.thitem.type=="operation"){
           return (
               <td>
-              <p className=""><a href={"plan_view?id="+id}  className="btn btn-info btn-xs operate_announce">查 看</a></p>
+              <p className=""><a href={"exam_view?id="+id}  className="btn btn-info btn-xs operate_announce">查 看</a></p>
               <p className=""><span className="btn btn-xs operate_announce weui-btn_warn" id={this.props.item[this.props.thitem.name]} onClick={delect} >删 除</span></p>
               </td>
           );
@@ -136,24 +136,6 @@ class AdminRightTop extends React.Component {
           return (
             <td>
               <input type="checkbox" name="checkbox" />
-            </td>
-          );
-        }else if (this.props.thitem.type=="grade_leader") {
-          return (
-            <td>
-              {this.props.item[this.props.thitem.name].grade_leader}
-            </td>
-          );
-        }else if (this.props.thitem.type=="state") {
-          return (
-            <td>
-              {this.props.item[this.props.thitem.name].state}
-            </td>
-          );
-        }else if (this.props.thitem.type=="remark") {
-          return (
-            <td>
-              {this.props.item[this.props.thitem.name].remark}
             </td>
           );
         }else {
