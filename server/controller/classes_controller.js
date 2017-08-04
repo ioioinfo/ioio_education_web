@@ -328,24 +328,15 @@ exports.register = function(server, options, next) {
             method: "POST",
             path: '/save_lesson',
             handler: function(request, reply) {
-                var plan_id = request.payload.plan_id;
-				var teacher_id = request.payload.teacher_id;
-				var name = request.payload.name;
+                var name = request.payload.name;
 				var code = request.payload.code;
-				var hours = request.payload.hours;
-				var level_id = request.payload.level_id;
 
-				if (!plan_id || !teacher_id || !name || !code || !hours || !level_id) {
+				if (!name || !code) {
 					return reply({"success":false,"message":"params wrong","service_info":service_info});
 				}
-
                 var data = {
-                    "plan_id": plan_id,
-                    "teacher_id": teacher_id,
                     "name": name,
-                    "code": code,
-                    "hours": hours,
-                    "level_id": level_id
+                    "code": code
                 };
                 education_api.save_lesson(data,function(err,rows){
                     if (!err) {
@@ -362,25 +353,17 @@ exports.register = function(server, options, next) {
             path: '/update_lesson',
             handler: function(request, reply) {
                 var id = request.payload.id;
-                var plan_id = request.payload.plan_id;
-                var teacher_id = request.payload.teacher_id;
-                var name = request.payload.name;
-                var code = request.payload.code;
-                var hours = request.payload.hours;
-                var level_id = request.payload.level_id;
+				var name = request.payload.name;
+				var code = request.payload.code;
 
-                if (!id ||!plan_id || !teacher_id || !name || !code || !hours || !level_id) {
-                    return reply({"success":false,"message":"params wrong","service_info":service_info});
-                }
+				if (!id || !name || !code ) {
+					return reply({"success":false,"message":"params wrong","service_info":service_info});
+				}
 
                 var data = {
                     "id":id,
-                    "plan_id": plan_id,
-                    "teacher_id": teacher_id,
                     "name": name,
-                    "code": code,
-                    "hours": hours,
-                    "level_id": level_id
+                    "code": code
                 };
                 education_api.update_lesson(data,function(err,rows){
                     if (!err) {
@@ -1559,6 +1542,323 @@ exports.register = function(server, options, next) {
                     "code":code
                 };
                 education_api.update_subject(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //教室信息列表
+        {
+            method: "GET",
+            path: '/get_classrooms',
+            handler: function(request, reply) {
+                education_api.get_classrooms(function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //教室id查询
+        {
+            method: "GET",
+            path: '/search_classroom_byId',
+            handler: function(request, reply) {
+                var id = request.query.id;
+                if (!id) {
+                    return reply({"success":false,"message":"id null","service_info":service_info});
+                }
+                education_api.search_classroom_byId(id,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //删除教室
+        {
+            method: "POST",
+            path: '/delete_classroom',
+            handler: function(request, reply) {
+                var id = request.payload.id;
+                if (!id) {
+                    return reply({"success":false,"message":"id null","service_info":service_info});
+                }
+                var data = {
+                    "id" : id
+                };
+                education_api.delete_classroom(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //保存教室
+        {
+            method: "POST",
+            path: '/save_classroom',
+            handler: function(request, reply) {
+                var name = request.payload.name;
+				var code = request.payload.code;
+				var location =  request.payload.location;
+
+				if (!name || !code || !location) {
+					return reply({"success":false,"message":"params wrong","service_info":service_info});
+				}
+                var data = {
+                    "name":name,
+                    "code":code,
+                    "location":location
+                };
+                education_api.save_classroom(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //更新教室
+        {
+            method: "POST",
+            path: '/update_classroom',
+            handler: function(request, reply) {
+                var id = request.payload.id;
+                var name = request.payload.name;
+				var code = request.payload.code;
+				var location =  request.payload.location;
+
+				if (!name || !code || !id || !location) {
+					return reply({"success":false,"message":"params wrong","service_info":service_info});
+				}
+
+
+                var data = {
+                    "id":id,
+                    "name":name,
+                    "code":code,
+                    "location":location
+                };
+                education_api.update_classroom(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //时刻表信息列表
+        {
+            method: "GET",
+            path: '/get_timetables',
+            handler: function(request, reply) {
+                education_api.get_timetables(function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //时刻表id查询
+        {
+            method: "GET",
+            path: '/search_timetable_byId',
+            handler: function(request, reply) {
+                var id = request.query.id;
+                if (!id) {
+                    return reply({"success":false,"message":"id null","service_info":service_info});
+                }
+                education_api.search_timetable_byId(id,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //删除时刻表
+        {
+            method: "POST",
+            path: '/delete_timetable',
+            handler: function(request, reply) {
+                var id = request.payload.id;
+                if (!id) {
+                    return reply({"success":false,"message":"id null","service_info":service_info});
+                }
+                var data = {
+                    "id" : id
+                };
+                education_api.delete_timetable(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //保存时刻表
+        {
+            method: "POST",
+            path: '/save_timetable',
+            handler: function(request, reply) {
+                var name = request.payload.name;
+				var starting_time = request.payload.starting_time;
+				var end_time =  request.payload.end_time;
+
+				if (!name || !starting_time || !end_time) {
+					return reply({"success":false,"message":"params wrong","service_info":service_info});
+				}
+                var data = {
+                    "name":name,
+                    "starting_time":starting_time,
+                    "end_time":end_time
+                };
+                education_api.save_timetable(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //更新时刻表
+        {
+            method: "POST",
+            path: '/update_timetable',
+            handler: function(request, reply) {
+                var id = request.payload.id;
+                var name = request.payload.name;
+				var starting_time = request.payload.starting_time;
+				var end_time =  request.payload.end_time;
+
+				if (!name || !starting_time || !end_time || !id) {
+					return reply({"success":false,"message":"params wrong","service_info":service_info});
+				}
+
+                var data = {
+                    "id":id,
+                    "name":name,
+                    "starting_time":starting_time,
+                    "end_time":end_time
+                };
+                education_api.update_timetable(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //课程表信息列表
+        {
+            method: "GET",
+            path: '/get_schedules',
+            handler: function(request, reply) {
+                education_api.get_schedules(function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //课程表id查询
+        {
+            method: "GET",
+            path: '/search_schedule_byId',
+            handler: function(request, reply) {
+                var id = request.query.id;
+                if (!id) {
+                    return reply({"success":false,"message":"id null","service_info":service_info});
+                }
+                education_api.search_schedule_byId(id,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //删除课程表
+        {
+            method: "POST",
+            path: '/delete_schedule',
+            handler: function(request, reply) {
+                var id = request.payload.id;
+                if (!id) {
+                    return reply({"success":false,"message":"id null","service_info":service_info});
+                }
+                var data = {
+                    "id" : id
+                };
+                education_api.delete_schedule(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //保存时刻表
+        {
+            method: "POST",
+            path: '/save_schedule',
+            handler: function(request, reply) {
+                var schedule = request.payload.schedule;
+				schedule = JSON.parse(schedule);
+
+                if (!schedule.name|| !schedule.plan_id||!schedule.time_id|| !schedule.class_id|| !schedule.day) {
+					return reply({"success":false,"message":"params wrong","service_info":service_info});
+				}
+                var data = {
+                    "schedule":JSON.stringify(schedule)
+                };
+                education_api.save_schedule(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //更新时刻表
+        {
+            method: "POST",
+            path: '/update_schedule',
+            handler: function(request, reply) {
+                var schedule = request.payload.schedule;
+				schedule = JSON.parse(schedule);
+
+				if (!schedule.name|| !schedule.plan_id||!schedule.time_id|| !schedule.class_id|| !schedule.day || !schedule.id) {
+					return reply({"success":false,"message":"params wrong","service_info":service_info});
+				}
+
+                var data = {
+                    "schedule":JSON.stringify(schedule)
+                };
+                education_api.update_schedule(data,function(err,rows){
                     if (!err) {
                         return reply(rows);
                     }else {
