@@ -1676,7 +1676,114 @@ exports.register = function(server, options, next) {
                 });
             }
         },
+        //时刻表信息列表
+        {
+            method: "GET",
+            path: '/get_timetables',
+            handler: function(request, reply) {
+                education_api.get_timetables(function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //时刻表id查询
+        {
+            method: "GET",
+            path: '/search_timetable_byId',
+            handler: function(request, reply) {
+                var id = request.query.id;
+                if (!id) {
+                    return reply({"success":false,"message":"id null","service_info":service_info});
+                }
+                education_api.search_timetable_byId(id,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //删除时刻表
+        {
+            method: "POST",
+            path: '/delete_timetable',
+            handler: function(request, reply) {
+                var id = request.payload.id;
+                if (!id) {
+                    return reply({"success":false,"message":"id null","service_info":service_info});
+                }
+                var data = {
+                    "id" : id
+                };
+                education_api.delete_timetable(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //保存时刻表
+        {
+            method: "POST",
+            path: '/save_timetable',
+            handler: function(request, reply) {
+                var name = request.payload.name;
+				var starting_time = request.payload.starting_time;
+				var end_time =  request.payload.end_time;
 
+				if (!name || !starting_time || !end_time) {
+					return reply({"success":false,"message":"params wrong","service_info":service_info});
+				}
+                var data = {
+                    "name":name,
+                    "starting_time":starting_time,
+                    "end_time":end_time
+                };
+                education_api.save_timetable(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //更新时刻表
+        {
+            method: "POST",
+            path: '/update_timetable',
+            handler: function(request, reply) {
+                var id = request.payload.id;
+                var name = request.payload.name;
+				var starting_time = request.payload.starting_time;
+				var end_time =  request.payload.end_time;
+
+				if (!name || !starting_time || !end_time || !id) {
+					return reply({"success":false,"message":"params wrong","service_info":service_info});
+				}
+
+                var data = {
+                    "id":id,
+                    "name":name,
+                    "starting_time":starting_time,
+                    "end_time":end_time
+                };
+                education_api.update_timetable(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
 
 
     ]);
