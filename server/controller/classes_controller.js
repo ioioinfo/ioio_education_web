@@ -328,24 +328,15 @@ exports.register = function(server, options, next) {
             method: "POST",
             path: '/save_lesson',
             handler: function(request, reply) {
-                var plan_id = request.payload.plan_id;
-				var teacher_id = request.payload.teacher_id;
-				var name = request.payload.name;
+                var name = request.payload.name;
 				var code = request.payload.code;
-				var hours = request.payload.hours;
-				var level_id = request.payload.level_id;
 
-				if (!plan_id || !teacher_id || !name || !code || !hours || !level_id) {
+				if (!name || !code) {
 					return reply({"success":false,"message":"params wrong","service_info":service_info});
 				}
-
                 var data = {
-                    "plan_id": plan_id,
-                    "teacher_id": teacher_id,
                     "name": name,
-                    "code": code,
-                    "hours": hours,
-                    "level_id": level_id
+                    "code": code
                 };
                 education_api.save_lesson(data,function(err,rows){
                     if (!err) {
@@ -362,25 +353,17 @@ exports.register = function(server, options, next) {
             path: '/update_lesson',
             handler: function(request, reply) {
                 var id = request.payload.id;
-                var plan_id = request.payload.plan_id;
-                var teacher_id = request.payload.teacher_id;
-                var name = request.payload.name;
-                var code = request.payload.code;
-                var hours = request.payload.hours;
-                var level_id = request.payload.level_id;
+				var name = request.payload.name;
+				var code = request.payload.code;
 
-                if (!id ||!plan_id || !teacher_id || !name || !code || !hours || !level_id) {
-                    return reply({"success":false,"message":"params wrong","service_info":service_info});
-                }
+				if (!id || !name || !code ) {
+					return reply({"success":false,"message":"params wrong","service_info":service_info});
+				}
 
                 var data = {
                     "id":id,
-                    "plan_id": plan_id,
-                    "teacher_id": teacher_id,
                     "name": name,
-                    "code": code,
-                    "hours": hours,
-                    "level_id": level_id
+                    "code": code
                 };
                 education_api.update_lesson(data,function(err,rows){
                     if (!err) {
