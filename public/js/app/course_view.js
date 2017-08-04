@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 199);
+/******/ 	return __webpack_require__(__webpack_require__.s = 203);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -23062,7 +23062,11 @@ module.exports = Table;
 /* 196 */,
 /* 197 */,
 /* 198 */,
-/* 199 */
+/* 199 */,
+/* 200 */,
+/* 201 */,
+/* 202 */,
+/* 203 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23117,108 +23121,14 @@ var AdminRight = function (_React$Component2) {
   function AdminRight(props) {
     _classCallCheck(this, AdminRight);
 
+    // 初始化一个空对象
     var _this2 = _possibleConstructorReturn(this, (AdminRight.__proto__ || Object.getPrototypeOf(AdminRight)).call(this, props));
 
-    _this2.setPage = _this2.setPage.bind(_this2);
-    _this2.handleSort = _this2.handleSort.bind(_this2);
-    _this2.loadData = _this2.loadData.bind(_this2);
-    _this2.delect = _this2.delect.bind(_this2);
-    _this2.addClick = _this2.addClick.bind(_this2);
-    _this2.addClick = _this2.addClick.bind(_this2);
-    // 初始化一个空对象
-    _this2.state = { tabthitems: [], tabtritems: [], tabthitems1: [], tabtritems1: [], allNum: 0, everyNum: 20, thisPage: 1, sort: { name: "", dir: "" }, tdstates: { "checked": false, "1": false } };
+    _this2.state = {};
     return _this2;
   }
 
   _createClass(AdminRight, [{
-    key: 'loadData',
-    value: function loadData(params1) {
-      var params = { thisPage: this.state.thisPage, sort: this.state.sort };
-      $.extend(params, params1);
-
-      getTableData(params, function (data) {
-        $.extend(data, params1);
-        this.setState(data);
-      }.bind(this));
-    }
-  }, {
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      $(".page_wrap").css("display", "none");
-      var tableHeight = $(window).height() - 181;
-      $(".tableHeight").css("height", tableHeight + "px");
-      $(".arrow_right_style").css("height", tableHeight + "px");
-      $(".arrow_right_style").css("line-height", tableHeight + "px");
-      this.loadData({ "table": "1" });
-      this.loadData({ "table": "2" });
-    }
-  }, {
-    key: 'setPage',
-    value: function setPage(thisPage) {
-      this.loadData({ thisPage: thisPage });
-    }
-  }, {
-    key: 'handleSort',
-    value: function handleSort(sort) {
-      this.loadData({ sort: sort });
-    }
-  }, {
-    key: 'delect',
-    value: function delect(e) {
-      var students = [];
-      $(".tabthitems1_wrap td [name=checkbox]").each(function () {
-        if ($(this).is(":checked")) {
-          var id = $(this).attr("data-id");
-          students.push(id);
-        }
-      });
-      $.ajax({
-
-        url: "/delete_class_student",
-        dataType: 'json',
-        type: 'POST',
-        data: { "class_id": "1", "student_ids": JSON.stringify(students) },
-        success: function (data) {
-          if (data.success) {
-            $(".tabthitems1_wrap td [name=checkbox]").prop("checked", false);
-            this.loadData({ "table": "1" });
-            this.loadData({ "table": "2" });
-          } else {
-            alert("删除失败！");
-          }
-        }.bind(this),
-        error: function (xhr, status, err) {}.bind(this)
-      });
-    }
-  }, {
-    key: 'addClick',
-    value: function addClick(e) {
-      var student_ids = new Array();
-      $(".tabthitems_wrap td [name=checkbox]").each(function (index) {
-        if ($(this).is(":checked")) {
-          var id = $(this).attr("data-id");
-          student_ids.push(id);
-        }
-      });
-
-      $.ajax({
-        url: "/add_students",
-        dataType: 'json',
-        type: 'POST',
-        data: { "class_id": "1", "student_ids": JSON.stringify(student_ids) },
-        success: function (data) {
-          if (data.success) {
-            $(".tabthitems_wrap td [name=checkbox]").prop("checked", false);
-            this.loadData({ "table": "1" });
-            this.loadData({ "table": "2" });
-          } else {
-            alert("添加失败！");
-          }
-        }.bind(this),
-        error: function (xhr, status, err) {}.bind(this)
-      });
-    }
-  }, {
     key: 'render',
     value: function render() {
       return React.createElement(
@@ -23242,7 +23152,7 @@ var AdminRight = function (_React$Component2) {
                   { className: 'admin_creat_butto_wrap col-xs-12 col-sm-3 col-md-2 cursor_pointer' },
                   React.createElement(
                     'p',
-                    { className: 'button_style_delect text_align_center', onClick: this.delect },
+                    { className: 'button_style_delect text_align_center' },
                     React.createElement('i', { className: 'fa fa-trash fa-fw admin_creat_button ' }),
                     '\xA0 \u5220 \u9664'
                   )
@@ -23279,23 +23189,7 @@ var AdminRight = function (_React$Component2) {
             )
           )
         ),
-        React.createElement(
-          'div',
-          { className: 'col-xs-12 col-md-5 tabthitems_wrap' },
-          React.createElement(Table, { tabthitems: this.state.tabthitems, tabtritems: this.state.tabtritems, sort: this.state.sort, onSort: this.handleSort, tdstates: this.state.tdstates, checkTd: checkTd }),
-          React.createElement(PageTab, { setPage: this.setPage, allNum: this.state.allNum, everyNum: this.state.everyNum, thisPage: this.state.thisPage })
-        ),
-        React.createElement(
-          'div',
-          { className: 'col-xs-12 col-md-2 arrow_right_style' },
-          React.createElement('i', { className: 'fa fa-arrow-right fa-fw cursor_pointer', onClick: this.addClick })
-        ),
-        React.createElement(
-          'div',
-          { className: 'col-xs-12 col-md-5 tabthitems1_wrap' },
-          React.createElement(Table, { tabthitems: this.state.tabthitems1, tabtritems: this.state.tabtritems1, sort: this.state.sort, onSort: this.handleSort, tdstates: this.state.tdstates, checkTd: checkTd }),
-          React.createElement(PageTab, { setPage: this.setPage, allNum: this.state.allNum, everyNum: this.state.everyNum, thisPage: this.state.thisPage })
-        )
+        React.createElement(Course, null)
       );
     }
   }]);
@@ -23307,8 +23201,333 @@ var AdminRight = function (_React$Component2) {
 
 // 右边 头部
 
-var AdminRightTop = function (_React$Component3) {
-  _inherits(AdminRightTop, _React$Component3);
+var Course = function (_React$Component3) {
+  _inherits(Course, _React$Component3);
+
+  function Course(props) {
+    _classCallCheck(this, Course);
+
+    // 初始化一个空对象
+    var _this3 = _possibleConstructorReturn(this, (Course.__proto__ || Object.getPrototypeOf(Course)).call(this, props));
+
+    _this3.state = { planItems: [], timeItems: [] };
+    return _this3;
+  }
+
+  _createClass(Course, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      $.ajax({
+        url: "/get_education_plans",
+        dataType: 'json',
+        type: 'GET',
+        data: {},
+        success: function (data) {
+          if (data.success) {
+            this.setState({ planItems: data.rows });
+          }
+        }.bind(this),
+        error: function (xhr, status, err) {}.bind(this)
+      });
+
+      $.ajax({
+        url: "/get_schedules",
+        dataType: 'json',
+        type: 'GET',
+        data: {},
+        success: function (data) {
+          if (data.success) {
+            this.setState({ timeItems: data.time_map });
+          }
+        }.bind(this),
+        error: function (xhr, status, err) {}.bind(this)
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this4 = this;
+
+      return React.createElement(
+        'div',
+        { className: 'course_view' },
+        React.createElement(
+          'ul',
+          { className: 'course_view_ul course_view_ul_title' },
+          React.createElement(
+            'li',
+            null,
+            '\u65F6\u95F4'
+          ),
+          React.createElement(
+            'li',
+            null,
+            '\u5468\u4E00'
+          ),
+          React.createElement(
+            'li',
+            null,
+            '\u5468\u4E8C'
+          ),
+          React.createElement(
+            'li',
+            null,
+            '\u5468\u4E09'
+          ),
+          React.createElement(
+            'li',
+            null,
+            '\u5468\u56DB'
+          ),
+          React.createElement(
+            'li',
+            null,
+            '\u5468\u4E94'
+          ),
+          React.createElement(
+            'li',
+            null,
+            '\u5468\u516D'
+          ),
+          React.createElement(
+            'li',
+            null,
+            '\u5468\u65E5'
+          )
+        ),
+        this.state.timeItems.map(function (item, index) {
+          return React.createElement(CourseLine, { key: index, item: item, index: index, timeItems: _this4.state.timeItems, planItems: _this4.state.planItems });
+        })
+      );
+    }
+  }]);
+
+  return Course;
+}(React.Component);
+
+;
+
+// 右边 头部
+
+var CourseLine = function (_React$Component4) {
+  _inherits(CourseLine, _React$Component4);
+
+  function CourseLine() {
+    _classCallCheck(this, CourseLine);
+
+    return _possibleConstructorReturn(this, (CourseLine.__proto__ || Object.getPrototypeOf(CourseLine)).apply(this, arguments));
+  }
+
+  _createClass(CourseLine, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var planId1 = this.props.item.v["星期一"].plan_id;
+      var planId2 = this.props.item.v["星期二"].plan_id;
+      var planId3 = this.props.item.v["星期三"].plan_id;
+      var planId4 = this.props.item.v["星期四"].plan_id;
+      var planId5 = this.props.item.v["星期五"].plan_id;
+      var planId6 = this.props.item.v["星期六"].plan_id;
+      var planId7 = this.props.item.v["星期天"].plan_id;
+      $("#planId1").val(planId1);
+      $("#planId2").val(planId2);
+      $("#planId3").val(planId3);
+      $("#planId4").val(planId4);
+      $("#planId5").val(planId5);
+      $("#planId6").val(planId6);
+      $("#planId7").val(planId7);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+
+      return React.createElement(
+        'ul',
+        { className: 'course_view_ul' },
+        React.createElement(
+          'li',
+          null,
+          this.props.item.time
+        ),
+        React.createElement(
+          'li',
+          null,
+          React.createElement(
+            'span',
+            { className: 'course_view_ul_li_span' },
+            React.createElement(
+              'select',
+              { className: 'weui-input', id: 'planId1' },
+              React.createElement(
+                'option',
+                { value: '' },
+                '\u5F85\u9009\u62E9'
+              ),
+              this.props.planItems.map(function (item, index) {
+                return React.createElement(
+                  'option',
+                  { key: index, value: item.id },
+                  item.name
+                );
+              })
+            )
+          )
+        ),
+        React.createElement(
+          'li',
+          null,
+          React.createElement(
+            'span',
+            { className: 'course_view_ul_li_span' },
+            React.createElement(
+              'select',
+              { className: 'weui-input', id: 'planId2' },
+              React.createElement(
+                'option',
+                { value: '' },
+                '\u5F85\u9009\u62E9'
+              ),
+              this.props.planItems.map(function (item, index) {
+                return React.createElement(
+                  'option',
+                  { key: index, value: item.id },
+                  item.name
+                );
+              })
+            )
+          )
+        ),
+        React.createElement(
+          'li',
+          null,
+          React.createElement(
+            'span',
+            { className: 'course_view_ul_li_span' },
+            React.createElement(
+              'select',
+              { className: 'weui-input', id: 'planId3' },
+              React.createElement(
+                'option',
+                { value: '' },
+                '\u5F85\u9009\u62E9'
+              ),
+              this.props.planItems.map(function (item, index) {
+                return React.createElement(
+                  'option',
+                  { key: index, value: item.id },
+                  item.name
+                );
+              })
+            )
+          )
+        ),
+        React.createElement(
+          'li',
+          null,
+          React.createElement(
+            'span',
+            { className: 'course_view_ul_li_span' },
+            React.createElement(
+              'select',
+              { className: 'weui-input', id: 'planId4' },
+              React.createElement(
+                'option',
+                { value: '' },
+                '\u5F85\u9009\u62E9'
+              ),
+              this.props.planItems.map(function (item, index) {
+                return React.createElement(
+                  'option',
+                  { key: index, value: item.id },
+                  item.name
+                );
+              })
+            )
+          )
+        ),
+        React.createElement(
+          'li',
+          null,
+          React.createElement(
+            'span',
+            { className: 'course_view_ul_li_span' },
+            React.createElement(
+              'select',
+              { className: 'weui-input', id: 'planId5' },
+              React.createElement(
+                'option',
+                { value: '' },
+                '\u5F85\u9009\u62E9'
+              ),
+              this.props.planItems.map(function (item, index) {
+                return React.createElement(
+                  'option',
+                  { key: index, value: item.id },
+                  item.name
+                );
+              })
+            )
+          )
+        ),
+        React.createElement(
+          'li',
+          null,
+          React.createElement(
+            'span',
+            { className: 'course_view_ul_li_span' },
+            React.createElement(
+              'select',
+              { className: 'weui-input', id: 'planId6' },
+              React.createElement(
+                'option',
+                { value: '' },
+                '\u5F85\u9009\u62E9'
+              ),
+              this.props.planItems.map(function (item, index) {
+                return React.createElement(
+                  'option',
+                  { key: index, value: item.id },
+                  item.name
+                );
+              })
+            )
+          )
+        ),
+        React.createElement(
+          'li',
+          null,
+          React.createElement(
+            'span',
+            { className: 'course_view_ul_li_span' },
+            React.createElement(
+              'select',
+              { className: 'weui-input', id: 'planId7' },
+              React.createElement(
+                'option',
+                { value: '' },
+                '\u5F85\u9009\u62E9'
+              ),
+              this.props.planItems.map(function (item, index) {
+                return React.createElement(
+                  'option',
+                  { key: index, value: item.id },
+                  item.name
+                );
+              })
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return CourseLine;
+}(React.Component);
+
+;
+// 右边 头部
+
+var AdminRightTop = function (_React$Component5) {
+  _inherits(AdminRightTop, _React$Component5);
 
   function AdminRightTop() {
     _classCallCheck(this, AdminRightTop);
@@ -23342,45 +23561,6 @@ var AdminRightTop = function (_React$Component3) {
 }(React.Component);
 
 ;
-
-//判断特殊列
-var checkTd = function checkTd(defaultTd) {
-
-  var props = this.props;
-  var id = props.item[props.thitem.name];
-
-  var handleChange = function (e) {}.bind(this);
-
-  if (this.props.thitem.type == "operation") {
-    return React.createElement(
-      'td',
-      null,
-      React.createElement(
-        'span',
-        { className: '' },
-        React.createElement(
-          'a',
-          { href: "student_view?id=" + id, className: 'btn btn-info btn-xs operate_announce' },
-          '\u67E5 \u770B'
-        )
-      )
-    );
-  } else if (this.props.thitem.type == "checked" || this.props.thitem.type == "check") {
-    return React.createElement(
-      'td',
-      null,
-      React.createElement('input', { type: 'checkbox', name: 'checkbox', 'data-id': id, onChange: handleChange })
-    );
-  } else if (this.props.thitem.type == "level") {
-    return React.createElement(
-      'td',
-      null,
-      this.props.item[this.props.thitem.name].name
-    );
-  } else {
-    return defaultTd;
-  }
-};
 
 // 返回到页面
 ReactDOM.render(React.createElement(AdminIndex, null), document.getElementById("admin"));

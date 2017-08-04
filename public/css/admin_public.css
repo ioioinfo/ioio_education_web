@@ -9,6 +9,9 @@ body,html{
   height: 100%;
   position: relative;
 }
+li{
+  list-style: none;
+}
 thead{
   background: #E6F8BA;
 
@@ -43,6 +46,13 @@ tr{
 }
 tbody{
   overflow: auto;
+}
+.coursetime_line{
+  width: 20px;
+  height: 2px;
+  background: #999;
+  display: inline-block;
+  vertical-align: middle;
 }
 .arrow_right_style{
   text-align: center;

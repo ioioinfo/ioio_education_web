@@ -377,12 +377,75 @@ exports.register = function(server, options, next) {
           //课程表
           {
               method: 'GET',
-              path: '/course_list',
+              path: '/course_view',
               handler: function(request, reply) {
                   var id = request.query.id;
-                  return reply.view("course_list");
+                  return reply.view("course_view");
               },
           },
+
+          //教室列表
+          {
+              method: 'GET',
+              path: '/classrome_list',
+              handler: function(request, reply) {
+                  var id = request.query.id;
+                  return reply.view("classrome_list");
+              },
+          },
+
+
+          //添加教室
+          {
+              method: 'GET',
+              path: '/add_classrome',
+              handler: function(request, reply) {
+                  var id = request.query.id;
+                  return reply.view("add_classrome");
+              },
+          },
+
+          //教室详情
+          {
+              method: 'GET',
+              path: '/classrome_view',
+              handler: function(request, reply) {
+                  var id = request.query.id;
+                  return reply.view("classrome_view");
+              },
+          },
+
+          //时刻表列表
+          {
+              method: 'GET',
+              path: '/timetable_list',
+              handler: function(request, reply) {
+                  var id = request.query.id;
+                  return reply.view("timetable_list");
+              },
+          },
+
+          //添加时刻表
+          {
+              method: 'GET',
+              path: '/add_timetable',
+              handler: function(request, reply) {
+                  var id = request.query.id;
+                  return reply.view("add_timetable");
+              },
+          },
+
+          //时刻表详情
+          {
+              method: 'GET',
+              path: '/timetable_view',
+              handler: function(request, reply) {
+                  var id = request.query.id;
+                  return reply.view("timetable_view");
+              },
+          },
+
+
 
 
 
