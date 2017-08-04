@@ -1567,6 +1567,115 @@ exports.register = function(server, options, next) {
                 });
             }
         },
+        //教室信息列表
+        {
+            method: "GET",
+            path: '/get_classrooms',
+            handler: function(request, reply) {
+                education_api.get_classrooms(function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //教室id查询
+        {
+            method: "GET",
+            path: '/search_classroom_byId',
+            handler: function(request, reply) {
+                var id = request.query.id;
+                if (!id) {
+                    return reply({"success":false,"message":"id null","service_info":service_info});
+                }
+                education_api.search_classroom_byId(id,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //删除教室
+        {
+            method: "POST",
+            path: '/delete_classroom',
+            handler: function(request, reply) {
+                var id = request.payload.id;
+                if (!id) {
+                    return reply({"success":false,"message":"id null","service_info":service_info});
+                }
+                var data = {
+                    "id" : id
+                };
+                education_api.delete_classroom(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //保存教室
+        {
+            method: "POST",
+            path: '/save_classroom',
+            handler: function(request, reply) {
+                var name = request.payload.name;
+				var code = request.payload.code;
+				var location =  request.payload.location;
+
+				if (!name || !code || !location) {
+					return reply({"success":false,"message":"params wrong","service_info":service_info});
+				}
+                var data = {
+                    "name":name,
+                    "code":code,
+                    "location":location
+                };
+                education_api.save_classroom(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //更新教室
+        {
+            method: "POST",
+            path: '/update_classroom',
+            handler: function(request, reply) {
+                var id = request.payload.id;
+                var name = request.payload.name;
+				var code = request.payload.code;
+				var location =  request.payload.location;
+
+				if (!name || !code || !id || !location) {
+					return reply({"success":false,"message":"params wrong","service_info":service_info});
+				}
+
+
+                var data = {
+                    "id":id,
+                    "name":name,
+                    "code":code,
+                    "location":location
+                };
+                education_api.update_classroom(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
 
 
 
