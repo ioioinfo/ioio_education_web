@@ -23,73 +23,24 @@ class AdminRight extends React.Component {
       super(props);
       // 初始化一个空对象
       this.handleClick=this.handleClick.bind(this);
-      this.state={planItem:[],teacherItem:[],levelItem:[]};
   }
 
   componentDidMount() {
       var tableHeight = $(window).height()-112;
       $(".student_view_wrap").css("height",tableHeight+"px");
 
-          $.ajax({
-                 url: "/get_grades",
-                 dataType: 'json',
-                 type: 'GET',
-                 data:{},
-                 success: function(data) {
-                  if(data.success){
-                    this.setState({levelItem:data.rows});
-                  }
-
-                 }.bind(this),
-                 error: function(xhr, status, err) {
-                 }.bind(this)
-            });
-
-            $.ajax({
-                   url: "/get_teachers",
-                   dataType: 'json',
-                   type: 'GET',
-                   data:{},
-                   success: function(data) {
-                    if(data.success){
-                      this.setState({teacherItem:data.rows});
-                    }
-
-                   }.bind(this),
-                   error: function(xhr, status, err) {
-                   }.bind(this)
-              });
-
-              $.ajax({
-                     url: "/get_lesson_plans",
-                     dataType: 'json',
-                     type: 'GET',
-                     data:{},
-                     success: function(data) {
-                      if(data.success){
-                        this.setState({planItem:data.rows});
-                      }
-
-                     }.bind(this),
-                     error: function(xhr, status, err) {
-                     }.bind(this)
-                });
 
 
   }
   handleClick(e){
     var name = $("#name").val();
     var code = $("#code").val();
-    var level_id = $("#level_id").val();
-    var teacher_id = $("#teacher_id").val();
-    var plan_id = $("#plan_id").val();
-    var hours = $("#hours").val();
 
     $.ajax({
-        url: "/save_lesson",
+        url: "/save_subject",
         dataType: 'json',
         type: 'POST',
-        data: {"name":name,"code":code,"level_id":level_id,"hours":hours,"plan_id":plan_id,"teacher_id":teacher_id},
+        data: {"name":name,"code":code},
         success: function(data) {
             if (data.success) {
                 alert("添加成功！");
@@ -121,46 +72,6 @@ class AdminRight extends React.Component {
                 <div className="weui-cell__hd"><label className="weui-label">课程</label></div>
                 <div className="weui-cell__bd student_view_input_style">
                     <input className="weui-input " type="text" placeholder="" id="name"/>
-                </div>
-            </div>
-
-            <div className="weui-cell">
-                <div className="weui-cell__hd"><label className="weui-label">年级</label></div>
-                <div className="weui-cell__bd student_view_input_style">
-                  <select className="weui-input " type="text" placeholder="" id="level_id">
-                  {this.state.levelItem.map((item,index)  => (
-                      <option key={index} value={item.id}>{item.name}</option>))
-                  }
-                  </select>
-                </div>
-            </div>
-
-            <div className="weui-cell">
-                <div className="weui-cell__hd"><label className="weui-label">计划</label></div>
-                <div className="weui-cell__bd student_view_input_style">
-                  <select className="weui-input " type="text" placeholder="" id="plan_id">
-                  {this.state.planItem.map((item,index)  => (
-                      <option key={index} value={item.id}>{item.name}</option>))
-                  }
-                  </select>
-                </div>
-            </div>
-
-            <div className="weui-cell">
-                <div className="weui-cell__hd"><label className="weui-label">老师</label></div>
-                <div className="weui-cell__bd student_view_input_style">
-                  <select className="weui-input " type="text" placeholder="" id="teacher_id">
-                  {this.state.teacherItem.map((item,index)  => (
-                      <option key={index} value={item.id}>{item.name}</option>))
-                  }
-                  </select>
-                </div>
-            </div>
-
-            <div className="weui-cell">
-                <div className="weui-cell__hd"><label className="weui-label">时长(H)</label></div>
-                <div className="weui-cell__bd student_view_input_style">
-                    <input className="weui-input " type="text" placeholder="" id="hours"/>
                 </div>
             </div>
 

@@ -23290,7 +23290,7 @@ var checkTd = function checkTd(defaultTd) {
 
   var delect = function delect(e) {
     $.ajax({
-      url: "/delete_lesson",
+      url: "/delete_subject",
       dataType: 'json',
       type: 'POST',
       data: { "id": id },

@@ -107,7 +107,7 @@ class AdminRightTop extends React.Component {
 
         var delect = function(e){
           $.ajax({
-              url: "/delete_lesson",
+              url: "/delete_subject",
               dataType: 'json',
               type: 'POST',
               data: {"id":id},

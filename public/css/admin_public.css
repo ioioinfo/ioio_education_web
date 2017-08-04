@@ -30,6 +30,9 @@ thead{
   text-align: center;
   border: 1px solid #fff;
 }
+th:last-child{
+  width: 100px;
+}
 tr{
   text-align: center;
 }

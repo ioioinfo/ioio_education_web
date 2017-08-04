@@ -19,18 +19,15 @@
     var company_name = "{{company_name}}";
     //表头
     var tt = [{name:'check',width:"5%", title:'',type:"check",sort:false}
-        ,{name:'id',title:'编号',sort:true}
-        ,{name:'name',title:'课程',type:"level"}
-        ,{name:'hours',title:'时长',sort:false}
-        ,{name:'plan_name',title:'计划',sort:false}
-        ,{name:'teacher_name',title:'老师',sort:false}
-        ,{name:'level_name',title:'年级',sort:false}
+        ,{name:'id',title:'课程id',sort:true}
+        ,{name:'code',title:'编号',sort:false}
+        ,{name:'name',title:'课程',sort:false}
         ,{name:'operation',title:'操作',type:"operation"}];
 
     function getTableData(params,cb) {
         params.everyNum = 50;
         var allNum = 0;
-        $.get("/get_lessons",{params:JSON.stringify(params)},function(data){
+        $.get("/get_subjects",{params:JSON.stringify(params)},function(data){
             if (data.success) {
               if (data.rows) {
                 allNum = data.num;
