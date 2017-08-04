@@ -1463,6 +1463,112 @@ exports.register = function(server, options, next) {
                 });
             }
         },
+        //学科信息列表
+        {
+            method: "GET",
+            path: '/get_subjects',
+            handler: function(request, reply) {
+                education_api.get_subjects(function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //学科id查询
+        {
+            method: "GET",
+            path: '/search_subject_byId',
+            handler: function(request, reply) {
+                var id = request.query.id;
+                if (!id) {
+                    return reply({"success":false,"message":"id null","service_info":service_info});
+                }
+                education_api.search_subject_byId(id,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //删除学科
+        {
+            method: "POST",
+            path: '/delete_subject',
+            handler: function(request, reply) {
+                var id = request.payload.id;
+                if (!id) {
+                    return reply({"success":false,"message":"id null","service_info":service_info});
+                }
+                var data = {
+                    "id" : id
+                };
+                education_api.delete_subject(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //保存学科
+        {
+            method: "POST",
+            path: '/save_subject',
+            handler: function(request, reply) {
+                var name = request.payload.name;
+				var code = request.payload.code;
+                if (!name||!code) {
+                    return reply({"success":false,"message":"params wrong","service_info":service_info});
+                }
+
+                var data = {
+                    "name":name,
+                    "code":code
+                };
+                education_api.save_subject(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //更新学科
+        {
+            method: "POST",
+            path: '/update_subject',
+            handler: function(request, reply) {
+                var id = request.payload.id;
+                var name = request.payload.name;
+                var code = request.payload.code;
+
+                if (!name || !code || !id) {
+                    return reply({"success":false,"message":"params wrong","service_info":service_info});
+                }
+
+                var data = {
+                    "id":id,
+                    "name":name,
+                    "code":code
+                };
+                education_api.update_subject(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+
+
 
     ]);
 
