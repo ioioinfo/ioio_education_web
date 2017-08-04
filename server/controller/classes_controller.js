@@ -1767,6 +1767,107 @@ exports.register = function(server, options, next) {
                 });
             }
         },
+        //课程表信息列表
+        {
+            method: "GET",
+            path: '/get_schedules',
+            handler: function(request, reply) {
+                education_api.get_schedules(function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //课程表id查询
+        {
+            method: "GET",
+            path: '/search_schedule_byId',
+            handler: function(request, reply) {
+                var id = request.query.id;
+                if (!id) {
+                    return reply({"success":false,"message":"id null","service_info":service_info});
+                }
+                education_api.search_schedule_byId(id,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //删除课程表
+        {
+            method: "POST",
+            path: '/delete_schedule',
+            handler: function(request, reply) {
+                var id = request.payload.id;
+                if (!id) {
+                    return reply({"success":false,"message":"id null","service_info":service_info});
+                }
+                var data = {
+                    "id" : id
+                };
+                education_api.delete_schedule(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //保存时刻表
+        {
+            method: "POST",
+            path: '/save_schedule',
+            handler: function(request, reply) {
+                var schedule = request.payload.schedule;
+				schedule = JSON.parse(schedule);
+
+                if (!schedule.name|| !schedule.plan_id||!schedule.time_id|| !schedule.class_id|| !schedule.day) {
+					return reply({"success":false,"message":"params wrong","service_info":service_info});
+				}
+                var data = {
+                    "schedule":JSON.stringify(schedule)
+                };
+                education_api.save_schedule(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //更新时刻表
+        {
+            method: "POST",
+            path: '/update_schedule',
+            handler: function(request, reply) {
+                var schedule = request.payload.schedule;
+				schedule = JSON.parse(schedule);
+
+				if (!schedule.name|| !schedule.plan_id||!schedule.time_id|| !schedule.class_id|| !schedule.day || !schedule.id) {
+					return reply({"success":false,"message":"params wrong","service_info":service_info});
+				}
+
+                var data = {
+                    "schedule":JSON.stringify(schedule)
+                };
+                education_api.update_schedule(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+
 
 
     ]);
