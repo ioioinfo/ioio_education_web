@@ -60,6 +60,9 @@ module.exports = {
         timetable_list:'./app/timetable_list.jsx',
         add_timetable:'./app/add_timetable.jsx',
         timetable_view:'./app/timetable_view.jsx',
+        change_class_list:'./app/change_class_list.jsx',
+        add_change_class:'./app/add_change_class.jsx',
+        change_class_view:'./app/change_class_view.jsx',
     },
     output: {
         path: __dirname,

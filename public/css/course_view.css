@@ -1,3 +1,7 @@
+*,ul{
+  margin: 0;
+  padding: 0;
+}
 @media screen and (max-width:640px){
   .course_view{
     width: 96%;
@@ -43,11 +47,24 @@
     align-self: auto;
     text-align: center;
     padding: 17px 0;
+    border-right: 1px solid #FAC599;
     }
 
-.course_view_ul li:first-child{
-  background:
+
+.course_view_ul li:last-child{
+  border-right: none;
 }
 .course_view_ul_li_span{
   display: inline-block;
+}
+.course_view_ul{
+  border-bottom: 1px solid #FAC599;
+}
+.course_view_ul:last-child{
+  border: none;
+}
+.course_view_button{
+  text-align: right;
+  width: 80%;
+  margin: 17px  auto;
 }

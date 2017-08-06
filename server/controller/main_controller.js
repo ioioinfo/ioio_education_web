@@ -380,7 +380,7 @@ exports.register = function(server, options, next) {
               path: '/course_view',
               handler: function(request, reply) {
                   var id = request.query.id;
-                  return reply.view("course_view");
+                  return reply.view("course_view",{"id":id});
               },
           },
 
@@ -445,6 +445,36 @@ exports.register = function(server, options, next) {
               },
           },
 
+
+            //升班列表
+            {
+                method: 'GET',
+                path: '/change_class_list',
+                handler: function(request, reply) {
+                    var id = request.query.id;
+                    return reply.view("change_class_list");
+                },
+            },
+
+            //添加升转班
+            {
+                method: 'GET',
+                path: '/add_change_class',
+                handler: function(request, reply) {
+                    var id = request.query.id;
+                    return reply.view("add_change_class");
+                },
+            },
+
+            //升转班详情
+            {
+                method: 'GET',
+                path: '/change_class_view',
+                handler: function(request, reply) {
+                    var id = request.query.id;
+                    return reply.view("change_class_view",{"id":id});
+                },
+            },
 
 
 

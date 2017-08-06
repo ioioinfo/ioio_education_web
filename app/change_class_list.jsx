@@ -100,54 +100,47 @@ class AdminRightTop extends React.Component {
   }
 };
 
-//判断特殊列
-var checkTd = function(defaultTd) {
-    var props = this.props;
-    var id = props.item.id;
-    var state = props.item.state;
+  //判断特殊列
+  var checkTd = function(defaultTd) {
+        var props = this.props;
+        var id = props.item.id;
 
-    var delect = function(e){
-      if(state=="已关闭"){
-        $.ajax({
-            url: "/delete_class",
-            dataType: 'json',
-            type: 'POST',
-            data: {"id":id},
-            success: function(data) {
-                if (data.success) {
-                    props.refresh();
-                    alert("删除成功！");
-                }else {
-                    alert("删除失败！");
-                }
-            }.bind(this),
-            error: function(xhr, status, err) {
-            }.bind(this)
-        });
-      }else {
-        alert("不允许删除");
-      }
+        var delect = function(e){
+          $.ajax({
+              url: "/delete_change_class",
+              dataType: 'json',
+              type: 'POST',
+              data: {"id":id},
+              success: function(data) {
+                  if (data.success) {
+                      props.refresh();
+                      alert("删除成功！");
+                  }else {
+                      alert("删除失败！");
+                  }
+              }.bind(this),
+              error: function(xhr, status, err) {
+              }.bind(this)
+          });
 
+        }
 
+        if(this.props.thitem.type=="operation"){
+          return (
+              <td>
+              <p className=""><a href={"exam_view?id="+id}  className="btn btn-info btn-xs operate_announce">查 看</a></p>
+              <p className=""><span className="btn btn-xs operate_announce weui-btn_warn" id={this.props.item[this.props.thitem.name]} onClick={delect} >删 除</span></p>
+              </td>
+          );
+        }else if (this.props.thitem.type=="check") {
+          return (
+            <td>
+              <input type="checkbox" name="checkbox" />
+            </td>
+          );
+        }else {
+        return defaultTd;
     }
-
-    if(this.props.thitem.type=="operation"){
-      return (
-          <td>
-          <p className=""><a href={"class_view?id="+id}  className="btn btn-info btn-xs operate_announce">查 看</a></p>
-          <p className=""><a href={"course_view?id="+id}  className="btn btn-info btn-xs operate_announce">课 表</a></p>
-          <p className=""><span className="btn btn-xs operate_announce weui-btn_warn" id={this.props.item[this.props.thitem.name]} onClick={delect} >删 除</span></p>
-          </td>
-      );
-    }else if (this.props.thitem.type=="check") {
-      return (
-        <td>
-          <input type="checkbox" name="checkbox" />
-        </td>
-      );
-    }else {
-    return defaultTd;
-  }
 };
 
 // 返回到页面

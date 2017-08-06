@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 212);
+/******/ 	return __webpack_require__(__webpack_require__.s = 216);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -23075,7 +23075,11 @@ module.exports = Table;
 /* 209 */,
 /* 210 */,
 /* 211 */,
-/* 212 */
+/* 212 */,
+/* 213 */,
+/* 214 */,
+/* 215 */,
+/* 216 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23323,6 +23327,15 @@ var checkTd = function checkTd(defaultTd) {
           'a',
           { href: "class_view?id=" + id, className: 'btn btn-info btn-xs operate_announce' },
           '\u67E5 \u770B'
+        )
+      ),
+      React.createElement(
+        'p',
+        { className: '' },
+        React.createElement(
+          'a',
+          { href: "course_view?id=" + id, className: 'btn btn-info btn-xs operate_announce' },
+          '\u8BFE \u8868'
         )
       ),
       React.createElement(
