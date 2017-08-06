@@ -1867,6 +1867,128 @@ exports.register = function(server, options, next) {
                 });
             }
         },
+        //转升班信息列表
+        {
+            method: "GET",
+            path: '/get_change_class_infos',
+            handler: function(request, reply) {
+                education_api.get_change_class_infos(function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //转升班id查询
+        {
+            method: "GET",
+            path: '/search_change_class_byId',
+            handler: function(request, reply) {
+                var id = request.query.id;
+                if (!id) {
+                    return reply({"success":false,"message":"id null","service_info":service_info});
+                }
+                education_api.search_change_class_byId(id,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //删除转升班
+        {
+            method: "POST",
+            path: '/delete_change_class',
+            handler: function(request, reply) {
+                var id = request.payload.id;
+                if (!id) {
+                    return reply({"success":false,"message":"id null","service_info":service_info});
+                }
+                var data = {
+                    "id" : id
+                };
+                education_api.delete_change_class(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //保存转升班
+        {
+            method: "POST",
+            path: '/save_change_class_info',
+            handler: function(request, reply) {
+                var change_infos = request.payload.change_infos;
+                change_infos = JSON.parse(change_infos);
+
+				if (!change_infos.class_id1 || !change_infos.class_id2 || !change_infos.student_ids.length>0 || !change_infos.type) {
+					return reply({"success":false,"message":"params wrong","service_info":service_info});
+				}
+
+                var data = {
+                    "change_infos":JSON.stringify(change_infos)
+                };
+                education_api.save_change_class_info(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //更新转升班
+        {
+            method: "POST",
+            path: '/update_change_class_info',
+            handler: function(request, reply) {
+                var change_info = request.payload.change_info;
+                change_info = JSON.parse(change_info);
+
+				if (!change_info.class_id1 || !change_info.class_id2 || !change_info.student_id || !change_info.type|| !change_info.id) {
+					return reply({"success":false,"message":"params wrong","service_info":service_info});
+				}
+
+                var data = {
+                    "change_info":JSON.stringify(change_info)
+                };
+                education_api.update_change_class_info(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+        //根据班级id更新课程表
+        {
+            method: "POST",
+            path: '/update_schedules_byClass_id',
+            handler: function(request, reply) {
+                var class_id = request.payload.class_id;
+                var subArray = request.payload.subArray;
+
+                var data = {
+                    "subArray":subArray,
+                    "class_id":class_id
+                };
+                education_api.update_schedules_byClass_id(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
 
 
 

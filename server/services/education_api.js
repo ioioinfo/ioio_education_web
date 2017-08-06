@@ -22,6 +22,66 @@ var host = "http://211.149.248.241:18027/";
 
 var nav = function(server) {
     return {
+        update_schedules_byClass_id: function(data,cb) {
+            var url = host + "update_schedules_byClass_id";
+            uu_request.request(url, data, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,body);
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
+        update_change_class_info: function(data,cb) {
+            var url = host + "update_change_class_info";
+            uu_request.request(url, data, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,body);
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
+        save_change_class_info: function(data,cb) {
+            var url = host + "save_change_class_info";
+            uu_request.request(url, data, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,body);
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
+        delete_change_class: function(data,cb) {
+            var url = host + "delete_change_class";
+            uu_request.request(url, data, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,body);
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
+        search_change_class_byId: function(id,cb) {
+            var url = host + "search_change_class_byId?id=" + id;
+            uu_request.get(url, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,JSON.parse(body));
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
+        get_change_class_infos: function(cb) {
+            var url = host + "get_change_class_infos";
+            uu_request.get(url, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,JSON.parse(body));
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
         update_schedule: function(data,cb) {
             var url = host + "update_schedule";
             uu_request.request(url, data, function(err, response, body) {
