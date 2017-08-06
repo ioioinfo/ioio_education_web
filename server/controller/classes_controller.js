@@ -1968,6 +1968,28 @@ exports.register = function(server, options, next) {
                 });
             }
         },
+        //根据班级id更新课程表
+        {
+            method: "POST",
+            path: '/update_schedules_byClass_id',
+            handler: function(request, reply) {
+                var class_id = request.payload.class_id;
+                var subArray = request.payload.subArray;
+
+                var data = {
+                    "subArray":subArray,
+                    "class_id":class_id
+                };
+                education_api.update_schedules_byClass_id(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
+
 
 
     ]);
