@@ -54,6 +54,7 @@ module.exports = {
         exam_record_view: './app/exam_record_view.jsx',
         course_time:'./app/course_time.jsx',
         course_view:'./app/course_view.jsx',
+        course_list:'./app/course_list.jsx',
         classrome_list:'./app/classrome_list.jsx',
         add_classrome:'./app/add_classrome.jsx',
         classrome_view:'./app/classrome_view.jsx',
