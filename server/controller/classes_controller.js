@@ -1989,7 +1989,29 @@ exports.register = function(server, options, next) {
                 });
             }
         },
-
+        //升班
+        {
+            method: "POST",
+            path: '/update_classAndStudents',
+            handler: function(request, reply) {
+                var class_id1 = request.payload.class_id1;
+				var class_id2 = request.payload.class_id2;
+				if (!class_id1||!class_id1) {
+					return reply({"success":false,"message":"class_id null","service_info":service_info});
+				}
+                var data = {
+                    "class_id1":class_id1,
+                    "class_id2":class_id2
+                };
+                education_api.update_classAndStudents(data,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
 
 
     ]);

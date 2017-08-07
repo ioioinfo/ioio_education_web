@@ -22,6 +22,17 @@ var host = "http://211.149.248.241:18027/";
 
 var nav = function(server) {
     return {
+        update_classAndStudents: function(data,cb) {
+            var url = host + "update_classAndStudents";
+            uu_request.request(url, data, function(err, response, body) {
+                if (!err && response.statusCode === 200) {
+                    cb(err,body);
+                } else {
+                    cb(true,{message:"网络错误"});
+                }
+            });
+        },
+
         update_schedules_byClass_id: function(data,cb) {
             var url = host + "update_schedules_byClass_id";
             uu_request.request(url, data, function(err, response, body) {
