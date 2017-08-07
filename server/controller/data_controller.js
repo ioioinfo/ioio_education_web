@@ -64,16 +64,18 @@ exports.register = function(server, options, next) {
                     {icon:"fa fa-plus-square fa-fw",navname:"科目详情",a:"lesson_view",snav:[]},
                     
                     {icon:"fa fa-book fa-fw",navname:"计划列表",a:"plan_list",snav:[]},
-                    {icon:"fa fa-plus-square fa-fw",navname:"计划详情",a:"plan_view",snav:[]},
                     {icon:"fa fa-plus-square fa-fw",navname:"添加计划",a:"add_plan",snav:[]},
-                    {icon:"fa fa-plus-square fa-fw",navname:"添加学校任务",a:"add_lessons",snav:[]},
+                    {icon:"fa fa-plus-square fa-fw",navname:"计划详情",a:"plan_view",snav:[]},
+                    
                     {icon:"fa fa-plus-square fa-fw",navname:"回访列表",a:"feedbacks_list",snav:[]},
                     {icon:"fa fa-plus-square fa-fw",navname:"回访详情",a:"feedbacks_view",snav:[]},
                     {icon:"fa fa-plus-square fa-fw",navname:"添加回访",a:"add_feedbacks",snav:[]},
                     
                     {icon:"fa fa-plus-square fa-fw",navname:"学习记录列表",a:"record_list",snav:[]},
                     {icon:"fa fa-plus-square fa-fw",navname:"学习记录详情",a:"record_view",snav:[]},
+                    
                     {icon:"fa fa-plus-square fa-fw",navname:"学习任务列表",a:"task_list",snav:[]},
+                    {icon:"fa fa-plus-square fa-fw",navname:"添加学习任务",a:"add_lessons",snav:[]},
                     {icon:"fa fa-plus-square fa-fw",navname:"学习任务详情",a:"task_view",snav:[]},
                     
                     {icon:"fa fa-plus-square fa-fw",navname:"年级列表",a:"grade_list",snav:[]},
@@ -84,6 +86,7 @@ exports.register = function(server, options, next) {
                     {icon:"fa fa-plus-square fa-fw",navname:"老师类型详情",a:"teacher_type_view",snav:[]},
                     {icon:"fa fa-plus-square fa-fw",navname:"考试信息列表",a:"exam_list",snav:[]},
                     {icon:"fa fa-plus-square fa-fw",navname:"考试信息详情",a:"exam_view",snav:[]},
+                    
                     {icon:"fa fa-plus-square fa-fw",navname:"成绩列表",a:"exam_record_list",snav:[]},
                     {icon:"fa fa-plus-square fa-fw",navname:"添加成绩",a:"add_exam_record",snav:[]},
                     {icon:"fa fa-plus-square fa-fw",navname:"成绩详情",a:"exam_record_view",snav:[]},
