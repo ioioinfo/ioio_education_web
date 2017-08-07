@@ -75,6 +75,28 @@ exports.register = function(server, options, next) {
                     {icon:"fa fa-plus-square fa-fw",navname:"学习任务列表",a:"task_list",snav:[]},
                     {icon:"fa fa-plus-square fa-fw",navname:"学习任务详情",a:"task_view",snav:[]},
                     
+                    {icon:"fa fa-plus-square fa-fw",navname:"年级列表",a:"grade_list",snav:[]},
+                    {icon:"fa fa-plus-square fa-fw",navname:"添加年级",a:"add_grade",snav:[]},
+                    {icon:"fa fa-plus-square fa-fw",navname:"年级详情",a:"grade_view",snav:[]},
+                    {icon:"fa fa-plus-square fa-fw",navname:"老师类型",a:"teacher_type_list",snav:[]},
+                    {icon:"fa fa-plus-square fa-fw",navname:"添加老师类型",a:"add_teacher_type",snav:[]},
+                    {icon:"fa fa-plus-square fa-fw",navname:"老师类型详情",a:"teacher_type_view",snav:[]},
+                    {icon:"fa fa-plus-square fa-fw",navname:"考试信息列表",a:"exam_list",snav:[]},
+                    {icon:"fa fa-plus-square fa-fw",navname:"考试信息详情",a:"exam_view",snav:[]},
+                    {icon:"fa fa-plus-square fa-fw",navname:"成绩列表",a:"exam_record_list",snav:[]},
+                    {icon:"fa fa-plus-square fa-fw",navname:"添加成绩",a:"add_exam_record",snav:[]},
+                    {icon:"fa fa-plus-square fa-fw",navname:"成绩详情",a:"exam_record_view",snav:[]},
+                    
+                    {icon:"fa fa-plus-square fa-fw",navname:"创建课程时段",a:"course_time",snav:[]},
+                    {icon:"fa fa-plus-square fa-fw",navname:"课程表详情",a:"course_view",snav:[]},
+                    {icon:"fa fa-plus-square fa-fw",navname:"教室列表",a:"classrome_list",snav:[]},
+                    {icon:"fa fa-plus-square fa-fw",navname:"添加教室",a:"add_classrome",snav:[]},
+                    {icon:"fa fa-plus-square fa-fw",navname:"教室详情",a:"classrome_view",snav:[]},
+                    {icon:"fa fa-plus-square fa-fw",navname:"课程时段列表",a:"timetable_list",snav:[]},
+                    {icon:"fa fa-plus-square fa-fw",navname:"课程时段修改",a:"timetable_view",snav:[]},
+                    {icon:"fa fa-plus-square fa-fw",navname:"升转班列表",a:"change_class_list",snav:[]},
+                    {icon:"fa fa-plus-square fa-fw",navname:"升转班添加",a:"add_change_class",snav:[]},
+                    {icon:"fa fa-plus-square fa-fw",navname:"升转班查看",a:"change_class_view",snav:[]},
                 ];
                 
                 return reply({"success":true,"rows":rows,"message":"ok"});
