@@ -66,16 +66,16 @@ class AdminRight extends React.Component {
                 var district = data.rows[0].district;
                 var address_detail = province + city + district + address;
                 var photo = data.rows[0].photo;
-                type_id = data.rows[0].type_id;
+                var level = data.rows[0].level;
                 $("#name").val(name);
                 $("#code").val(code);
                 $("#age").val(age);
                 $("#sex").val(sex);
                 $("#phone").val(phone);
                 $("#state_up").html(state);
-                $("#address").val(address_detail);
+                $("#address").val(district);
                 $("#photo").val(photo);
-                $("#type_id").val(type_id);
+                $("#level").val(level);
                 this.setState({item:data.rows[0]});
               }
 
@@ -89,7 +89,7 @@ class AdminRight extends React.Component {
   handleClick(e){
     var teacher = new Object();
     var id = this.state.item.id;
-    var level = 1;
+    var level = $("#level").val();
     var name = $("#name").val();
     var code = $("#code").val();
     var age = $("#age").val();
@@ -101,7 +101,7 @@ class AdminRight extends React.Component {
     var province = "无";
     var city = "无";
     var district = $("#address").val();
-    var type_id = Number($("#type_id").val());
+    var type_id = 0;
     var is_master = 0;
     var is_leader = 0;
     teacher.id=id;
@@ -181,6 +181,13 @@ class AdminRight extends React.Component {
             </div>
 
             <div className="weui-cell">
+                <div className="weui-cell__hd"><label className="weui-label">等级</label></div>
+                <div className="weui-cell__bd student_view_input_style">
+                  <input className="weui-input " type="text" placeholder="" id="level"/>
+                </div>
+            </div>
+
+            <div className="weui-cell">
                 <div className="weui-cell__hd"><label className="weui-label">状态</label></div>
                 <div className="weui-cell__bd student_view_input_style">
                   <select className="weui-input " type="text" placeholder="" id="state">
@@ -192,16 +199,7 @@ class AdminRight extends React.Component {
                 </div>
             </div>
 
-            <div className="weui-cell">
-                <div className="weui-cell__hd"><label className="weui-label">职位</label></div>
-                <div className="weui-cell__bd student_view_input_style">
-                  <select className="weui-input " type="text" placeholder="" id="type_id">
-                    {this.state.typeItem.map((item,index)  => (
-                        <option key={index} value={item.id}>{item.name}</option>))
-                    }
-                  </select>
-                </div>
-            </div>
+
 
             <div className="weui-cell">
                 <div className="weui-cell__hd"><label className="weui-label">地址</label></div>

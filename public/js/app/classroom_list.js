@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 233);
+/******/ 	return __webpack_require__(__webpack_require__.s = 205);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -23068,35 +23068,7 @@ module.exports = Table;
 /* 202 */,
 /* 203 */,
 /* 204 */,
-/* 205 */,
-/* 206 */,
-/* 207 */,
-/* 208 */,
-/* 209 */,
-/* 210 */,
-/* 211 */,
-/* 212 */,
-/* 213 */,
-/* 214 */,
-/* 215 */,
-/* 216 */,
-/* 217 */,
-/* 218 */,
-/* 219 */,
-/* 220 */,
-/* 221 */,
-/* 222 */,
-/* 223 */,
-/* 224 */,
-/* 225 */,
-/* 226 */,
-/* 227 */,
-/* 228 */,
-/* 229 */,
-/* 230 */,
-/* 231 */,
-/* 232 */,
-/* 233 */
+/* 205 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23312,7 +23284,7 @@ var checkTd = function checkTd(defaultTd) {
 
   var delect = function delect(e) {
     $.ajax({
-      url: "/delete_timetable",
+      url: "/delete_classroom",
       dataType: 'json',
       type: 'POST',
       data: { "id": id },
@@ -23337,7 +23309,7 @@ var checkTd = function checkTd(defaultTd) {
         { className: '' },
         React.createElement(
           'a',
-          { href: "timetable_view?id=" + id, className: 'btn btn-info btn-xs operate_announce' },
+          { href: "classroom_view?id=" + id, className: 'btn btn-info btn-xs operate_announce' },
           '\u67E5 \u770B'
         )
       ),

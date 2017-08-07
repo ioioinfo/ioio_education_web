@@ -29,6 +29,7 @@ class AdminRight extends React.Component {
   componentDidMount() {
       var tableHeight = $(window).height()-112;
       $(".student_view_wrap").css("height",tableHeight+"px");
+
         // 班级
         $.ajax({
            url: "/get_classes",
@@ -37,7 +38,9 @@ class AdminRight extends React.Component {
            data:{},
            success: function(data) {
             if(data.success){
+
               this.setState({classItem:data.rows});
+              $('#class_id1').val(id);
             }
 
            }.bind(this),
@@ -46,21 +49,14 @@ class AdminRight extends React.Component {
       });
   }
   handleClick(e){
-    var change_infos  = new Object();
-    var student_ids = [1];
     var class_id1 = $("#class_id1").val();
     var class_id2 = $("#class_id2").val();
-    var type = $("#type").val();
-    change_infos.class_id1=class_id1;
-    change_infos.class_id2=class_id2;
-    change_infos.type=type;
-    change_infos.student_ids=student_ids;
 
     $.ajax({
-        url: "/save_change_class_info",
+        url: "/update_classAndStudents",
         dataType: 'json',
         type: 'POST',
-        data: {'change_infos':JSON.stringify(change_infos)},
+        data: {'class_id1':class_id1,'class_id2':class_id2},
         success: function(data) {
             if (data.success) {
                 alert("添加成功！");
@@ -104,17 +100,6 @@ class AdminRight extends React.Component {
                       <option key={index} value={item.id}>{item.name}</option>))
                   }
                   </select>
-                </div>
-            </div>
-
-            <div className="weui-cell">
-                <div className="weui-cell__hd"><label className="weui-label">类型</label></div>
-                <div className="weui-cell__bd student_view_input_style">
-                    <select className="weui-input" id="type">
-                      <option>请选择类型</option>
-                      <option>转班</option>
-                      <option>升班</option>
-                    </select>
                 </div>
             </div>
 

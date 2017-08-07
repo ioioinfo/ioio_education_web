@@ -93,14 +93,14 @@ $.ajax({
        success: function(data) {
 
           if(data.success){
-            classroom_id = data.rows[0].classroom_id;
+            var classroom_id = data.rows[0].classroom_id;
             var name = data.rows[0].name;
             var code = data.rows[0].code;
             var state = data.rows[0].state;
             var starting_date = data.rows[0].starting_date;
             var end_date = data.rows[0].end_date;
             var class_master = data.rows[0].class_master;
-            master_id = data.rows[0].master_id;
+            var master_id = data.rows[0].master_id;
             var remarks = data.rows[0].remarks;
             level_id = data.rows[0].level_id;
             $("#code").val(code);
@@ -121,8 +121,7 @@ $.ajax({
   handleClick(e){
     var clas = new Object();
 
-    var id = "1";
-    classroom_id = this.state.item.classroom_id;
+    var id = id;
     var name = $("#name").val();
     var code = $("#code").val();
     var state = $("#state").val();
@@ -135,7 +134,6 @@ $.ajax({
     clas.id=id;
     clas.name=name;
     clas.code=code;
-    clas.classroom_id=classroom_id;
     clas.starting_date=starting_date;
     clas.end_date=end_date;
     clas.state=state;

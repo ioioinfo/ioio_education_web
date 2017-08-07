@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>转班</title>
+    <link rel="stylesheet" href="css/weui.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/admin_public.css">
+    <link rel="stylesheet" href="css/admin_nav.css">
+    <link rel="stylesheet" href="css/admin_view.css">
+    <link rel="stylesheet" href="css/student_view.css">
+</head>
+<body>
+    <div id="admin"></div>
+    <script type="text/javascript">
+    var platform_name = "{{platform_name}}";
+    var company_name = "{{company_name}}";
+    var newId;
+    //表头
+    var tt = [{name:'id',width:"5%", title:'',type:"checked",sort:false}
+              ,{name:'student_id',title:'学员id',sort:false}
+              ,{name:'name',title:'名称',sort:false}
+              ];
+
+    var yy = [{name:'student_id',title:'学员id',sort:false}
+              ,{name:'student_name',title:'名称',sort:false}];
+
+    function getTableData(params,cb) {
+        params.everyNum = 50;
+        var allNum = 0;
+        if(params.table=="1"){
+          $.get("/search_students_byId",{params:JSON.stringify(params),"class_id":"1"},function(data){
+              if (data.success) {
+                if (data.rows) {
+                  allNum = data.num;
+                  cb({tabthitems:tt,tabtritems:data.rows,allNum:allNum,everyNum:params.everyNum});
+                }
+              }else {
+                  alert(data.message);
+              }
+          });
+        }else if (params.table=="2") {
+          $.get("/search_students_byId",{params:JSON.stringify(params),"class_id":newId},function(data){
+              if (data.success) {
+                if (data.rows) {
+                  allNum = data.num;
+                  cb({tabthitems1:yy,tabtritems1:data.rows,allNum:allNum,everyNum:params.everyNum});
+                }
+              }else {
+                  alert(data.message);
+              }
+          });
+        }
+
+
+
+    };
+
+    </script>
+
+
+    <script src="js/jquery-3.1.1.min.js" type="text/javascript"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/app/turn_class.js"></script>
+
+
+</body>
+</html>

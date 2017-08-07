@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 229);
+/******/ 	return __webpack_require__(__webpack_require__.s = 231);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -22604,7 +22604,9 @@ module.exports = traverseAllChildren;
 /* 226 */,
 /* 227 */,
 /* 228 */,
-/* 229 */
+/* 229 */,
+/* 230 */,
+/* 231 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22758,41 +22760,7 @@ var AdminRight = function (_React$Component2) {
               React.createElement(
                 'div',
                 { className: 'weui-cell__bd student_view_input_style' },
-                React.createElement(
-                  'select',
-                  { className: 'weui-input ', type: 'text', placeholder: '', id: 'name' },
-                  React.createElement('option', { id: 'name_down' }),
-                  React.createElement(
-                    'option',
-                    null,
-                    '\u73ED\u4E3B\u4EFB'
-                  ),
-                  React.createElement(
-                    'option',
-                    null,
-                    '\u5E74\u7EA7\u7EC4\u957F'
-                  ),
-                  React.createElement(
-                    'option',
-                    null,
-                    '\u9605\u8BFB\u8001\u5E08'
-                  ),
-                  React.createElement(
-                    'option',
-                    null,
-                    '\u5199\u4F5C\u8001\u5E08'
-                  ),
-                  React.createElement(
-                    'option',
-                    null,
-                    '\u8003\u8BD5\u8D1F\u8D23\u4EBA'
-                  ),
-                  React.createElement(
-                    'option',
-                    null,
-                    '\u95E8\u536B\u8001\u5E08'
-                  )
-                )
+                React.createElement('input', { className: 'weui-input ', type: 'text', placeholder: '', id: 'name' })
               )
             ),
             React.createElement(

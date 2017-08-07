@@ -12,6 +12,9 @@ body,html{
 li{
   list-style: none;
 }
+label{
+  margin: 0;
+}
 thead{
   background: #E6F8BA;
 
@@ -34,7 +37,7 @@ thead{
   border: 1px solid #fff;
 }
 th:last-child{
-  width: 100px;
+  width: 110px;
 }
 tr{
   text-align: center;
@@ -128,6 +131,8 @@ tbody{
 .admin_creat{
   text-align: right;
   padding: 17px 15px;
+  background: #fff;
+  margin-bottom: 17px;
 }
 .admin_creat_input{
   width: 100%;
@@ -224,4 +229,13 @@ tbody{
 
 .borrow_creat {
   display: none;
+}
+.class_button_wrap{
+  display: inline-block;
+}
+.turn_class_select_style{
+  width: 280px;
+}
+.student_view_input_style_public{
+  margin-left: 10px;
 }

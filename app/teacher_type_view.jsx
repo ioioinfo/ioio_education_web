@@ -91,15 +91,7 @@ class AdminRight extends React.Component {
             <div className="weui-cell">
                 <div className="weui-cell__hd"><label className="weui-label">职位</label></div>
                 <div className="weui-cell__bd student_view_input_style">
-                  <select className="weui-input " type="text" placeholder="" id="name">
-                    <option id="name_down"></option>
-                    <option>班主任</option>
-                    <option>年级组长</option>
-                    <option>阅读老师</option>
-                    <option>写作老师</option>
-                    <option>考试负责人</option>
-                    <option>门卫老师</option>
-                  </select>
+                  <input className="weui-input " type="text" placeholder="" id="name"/>
                 </div>
             </div>
 

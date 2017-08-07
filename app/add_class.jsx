@@ -79,7 +79,7 @@ class AdminRight extends React.Component {
   handleClick(e){
     var clas = new Object();
 
-    var classroom_id = this.state.item.classroom_id;
+    var classroom_id = '1';
     var name = $("#name").val();
     var code = $("#code").val();
     var state = $("#state").val();

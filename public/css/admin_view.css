@@ -25,6 +25,12 @@
   background: #fff;
   cursor: pointer;
 }
+.button_background_see{
+  background: #8254ED;
+}
+.button_background_course{
+  background: #1FB4AC;
+}
 
 /*新建借书证*/
 .new_creat_play_style{

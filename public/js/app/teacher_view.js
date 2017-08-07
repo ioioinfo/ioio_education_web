@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 230);
+/******/ 	return __webpack_require__(__webpack_require__.s = 232);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -22605,7 +22605,9 @@ module.exports = traverseAllChildren;
 /* 227 */,
 /* 228 */,
 /* 229 */,
-/* 230 */
+/* 230 */,
+/* 231 */,
+/* 232 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22706,16 +22708,16 @@ var AdminRight = function (_React$Component2) {
                         var district = data.rows[0].district;
                         var address_detail = province + city + district + address;
                         var photo = data.rows[0].photo;
-                        type_id = data.rows[0].type_id;
+                        var level = data.rows[0].level;
                         $("#name").val(name);
                         $("#code").val(code);
                         $("#age").val(age);
                         $("#sex").val(sex);
                         $("#phone").val(phone);
                         $("#state_up").html(state);
-                        $("#address").val(address_detail);
+                        $("#address").val(district);
                         $("#photo").val(photo);
-                        $("#type_id").val(type_id);
+                        $("#level").val(level);
                         this.setState({ item: data.rows[0] });
                     }
                 }.bind(this),
@@ -22727,7 +22729,7 @@ var AdminRight = function (_React$Component2) {
         value: function handleClick(e) {
             var teacher = new Object();
             var id = this.state.item.id;
-            var level = 1;
+            var level = $("#level").val();
             var name = $("#name").val();
             var code = $("#code").val();
             var age = $("#age").val();
@@ -22739,7 +22741,7 @@ var AdminRight = function (_React$Component2) {
             var province = "无";
             var city = "无";
             var district = $("#address").val();
-            var type_id = Number($("#type_id").val());
+            var type_id = 0;
             var is_master = 0;
             var is_leader = 0;
             teacher.id = id;
@@ -22886,6 +22888,24 @@ var AdminRight = function (_React$Component2) {
                                 React.createElement(
                                     'label',
                                     { className: 'weui-label' },
+                                    '\u7B49\u7EA7'
+                                )
+                            ),
+                            React.createElement(
+                                'div',
+                                { className: 'weui-cell__bd student_view_input_style' },
+                                React.createElement('input', { className: 'weui-input ', type: 'text', placeholder: '', id: 'level' })
+                            )
+                        ),
+                        React.createElement(
+                            'div',
+                            { className: 'weui-cell' },
+                            React.createElement(
+                                'div',
+                                { className: 'weui-cell__hd' },
+                                React.createElement(
+                                    'label',
+                                    { className: 'weui-label' },
                                     '\u72B6\u6001'
                                 )
                             ),
@@ -22911,34 +22931,6 @@ var AdminRight = function (_React$Component2) {
                                         null,
                                         '\u5DF2\u79BB\u804C'
                                     )
-                                )
-                            )
-                        ),
-                        React.createElement(
-                            'div',
-                            { className: 'weui-cell' },
-                            React.createElement(
-                                'div',
-                                { className: 'weui-cell__hd' },
-                                React.createElement(
-                                    'label',
-                                    { className: 'weui-label' },
-                                    '\u804C\u4F4D'
-                                )
-                            ),
-                            React.createElement(
-                                'div',
-                                { className: 'weui-cell__bd student_view_input_style' },
-                                React.createElement(
-                                    'select',
-                                    { className: 'weui-input ', type: 'text', placeholder: '', id: 'type_id' },
-                                    this.state.typeItem.map(function (item, index) {
-                                        return React.createElement(
-                                            'option',
-                                            { key: index, value: item.id },
-                                            item.name
-                                        );
-                                    })
                                 )
                             )
                         ),

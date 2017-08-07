@@ -23,27 +23,12 @@ class AdminRight extends React.Component {
       super(props);
       // 初始化一个空对象
       this.handleClick=this.handleClick.bind(this);
-      this.state={planItem:[],teacherItem:[],levelItem:[]};
+      this.state={planItem:[],teacherItem:[]};
   }
 
   componentDidMount() {
       var tableHeight = $(window).height()-112;
       $(".student_view_wrap").css("height",tableHeight+"px");
-
-      $.ajax({
-             url: "/get_grades",
-             dataType: 'json',
-             type: 'GET',
-             data:{},
-             success: function(data) {
-              if(data.success){
-                this.setState({levelItem:data.rows});
-              }
-
-             }.bind(this),
-             error: function(xhr, status, err) {
-             }.bind(this)
-        });
 
       $.ajax({
              url: "/get_teachers",
@@ -99,11 +84,7 @@ class AdminRight extends React.Component {
             <div className="weui-cell">
                 <div className="weui-cell__hd"><label className="weui-label">年级</label></div>
                 <div className="weui-cell__bd student_view_input_style">
-                  <select className="weui-input " type="text" placeholder="" id="name">
-                  {this.state.levelItem.map((item,index)  => (
-                      <option key={index} value={item.id}>{item.name}</option>))
-                  }
-                  </select>
+                  <input className="weui-input " type="text" placeholder="" id="name"/>
                 </div>
             </div>
 

@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 216);
+/******/ 	return __webpack_require__(__webpack_require__.s = 218);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -23079,7 +23079,9 @@ module.exports = Table;
 /* 213 */,
 /* 214 */,
 /* 215 */,
-/* 216 */
+/* 216 */,
+/* 217 */,
+/* 218 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23321,30 +23323,65 @@ var checkTd = function checkTd(defaultTd) {
       'td',
       null,
       React.createElement(
-        'p',
-        { className: '' },
+        'div',
+        { className: 'class_button_wrap pull-left' },
         React.createElement(
-          'a',
-          { href: "class_view?id=" + id, className: 'btn btn-info btn-xs operate_announce' },
-          '\u67E5 \u770B'
+          'p',
+          { className: '' },
+          React.createElement(
+            'a',
+            { href: "class_view?id=" + id, className: 'btn btn-info btn-xs operate_announce button_background_see' },
+            '\u73ED \u7EA7'
+          )
+        ),
+        React.createElement(
+          'p',
+          { className: '' },
+          React.createElement(
+            'a',
+            { href: "course_view?id=" + id, className: 'btn btn-info btn-xs operate_announce button_background_course' },
+            '\u8BFE \u8868'
+          )
+        ),
+        React.createElement(
+          'p',
+          { className: '' },
+          React.createElement(
+            'a',
+            { href: "class_student_list?id=" + id, className: 'btn btn-info btn-xs operate_announce button_background_course' },
+            '\u5B66 \u5458'
+          )
         )
       ),
       React.createElement(
-        'p',
-        { className: '' },
+        'div',
+        { className: 'class_button_wrap pull-right' },
         React.createElement(
-          'a',
-          { href: "course_view?id=" + id, className: 'btn btn-info btn-xs operate_announce' },
-          '\u8BFE \u8868'
-        )
-      ),
-      React.createElement(
-        'p',
-        { className: '' },
+          'p',
+          { className: '' },
+          React.createElement(
+            'a',
+            { href: "add_change_class?id=" + id, className: 'btn btn-info btn-xs operate_announce' },
+            '\u5347 \u73ED'
+          )
+        ),
         React.createElement(
-          'span',
-          { className: 'btn btn-xs operate_announce weui-btn_warn', id: this.props.item[this.props.thitem.name], onClick: delect },
-          '\u5220 \u9664'
+          'p',
+          { className: '' },
+          React.createElement(
+            'a',
+            { href: "add_class_student?id=" + id, className: 'btn btn-info btn-xs operate_announce' },
+            '\u6DFB \u52A0'
+          )
+        ),
+        React.createElement(
+          'p',
+          { className: '' },
+          React.createElement(
+            'span',
+            { className: 'btn btn-xs operate_announce weui-btn_warn', id: this.props.item[this.props.thitem.name], onClick: delect },
+            '\u5220 \u9664'
+          )
         )
       )
     );

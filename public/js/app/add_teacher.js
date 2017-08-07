@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 197);
+/******/ 	return __webpack_require__(__webpack_require__.s = 198);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -22572,7 +22572,8 @@ module.exports = traverseAllChildren;
 /* 194 */,
 /* 195 */,
 /* 196 */,
-/* 197 */
+/* 197 */,
+/* 198 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -22667,7 +22668,7 @@ var AdminRight = function (_React$Component2) {
             var province = "无";
             var city = "无";
             var district = $("#address").val();
-            var level = $("#level_id").val();
+            var level = $("#level").val();
             var is_master = 0;
             var is_leader = 0;
             teacher.name = name;
@@ -22684,6 +22685,7 @@ var AdminRight = function (_React$Component2) {
             teacher.level = level;
             teacher.is_master = is_master;
             teacher.is_leader = is_leader;
+            teacher.type_id = 0;
             console.log(teacher);
 
             $.ajax({
@@ -22826,23 +22828,13 @@ var AdminRight = function (_React$Component2) {
                                 React.createElement(
                                     'label',
                                     { className: 'weui-label' },
-                                    '\u5E74\u7EA7'
+                                    '\u7B49\u7EA7'
                                 )
                             ),
                             React.createElement(
                                 'div',
                                 { className: 'weui-cell__bd student_view_input_style' },
-                                React.createElement(
-                                    'select',
-                                    { className: 'weui-input ', type: 'text', placeholder: '', id: 'level_id' },
-                                    this.state.levelItem.map(function (item, index) {
-                                        return React.createElement(
-                                            'option',
-                                            { key: index, value: item.id },
-                                            item.name
-                                        );
-                                    })
-                                )
+                                React.createElement('input', { className: 'weui-input ', type: 'text', placeholder: '', id: 'level' })
                             )
                         ),
                         React.createElement(

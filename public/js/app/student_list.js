@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 223);
+/******/ 	return __webpack_require__(__webpack_require__.s = 225);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -23086,7 +23086,9 @@ module.exports = Table;
 /* 220 */,
 /* 221 */,
 /* 222 */,
-/* 223 */
+/* 223 */,
+/* 224 */,
+/* 225 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23346,12 +23348,6 @@ var checkTd = function checkTd(defaultTd) {
       'td',
       null,
       React.createElement('input', { type: 'checkbox', name: 'checkbox' })
-    );
-  } else if (this.props.thitem.type == "level") {
-    return React.createElement(
-      'td',
-      null,
-      this.props.item[this.props.thitem.name].name
     );
   } else {
     return defaultTd;

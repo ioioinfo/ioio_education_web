@@ -22627,6 +22627,7 @@ var AdminRight = function (_React$Component2) {
     value: function componentDidMount() {
       var tableHeight = $(window).height() - 112;
       $(".student_view_wrap").css("height", tableHeight + "px");
+
       // 班级
       $.ajax({
         url: "/get_classes",
@@ -22635,7 +22636,9 @@ var AdminRight = function (_React$Component2) {
         data: {},
         success: function (data) {
           if (data.success) {
+
             this.setState({ classItem: data.rows });
+            $('#class_id1').val(id);
           }
         }.bind(this),
         error: function (xhr, status, err) {}.bind(this)
@@ -22644,21 +22647,14 @@ var AdminRight = function (_React$Component2) {
   }, {
     key: 'handleClick',
     value: function handleClick(e) {
-      var change_infos = new Object();
-      var student_ids = [1];
       var class_id1 = $("#class_id1").val();
       var class_id2 = $("#class_id2").val();
-      var type = $("#type").val();
-      change_infos.class_id1 = class_id1;
-      change_infos.class_id2 = class_id2;
-      change_infos.type = type;
-      change_infos.student_ids = student_ids;
 
       $.ajax({
-        url: "/save_change_class_info",
+        url: "/update_classAndStudents",
         dataType: 'json',
         type: 'POST',
-        data: { 'change_infos': JSON.stringify(change_infos) },
+        data: { 'class_id1': class_id1, 'class_id2': class_id2 },
         success: function (data) {
           if (data.success) {
             alert("添加成功！");
@@ -22745,42 +22741,6 @@ var AdminRight = function (_React$Component2) {
                       item.name
                     );
                   })
-                )
-              )
-            ),
-            React.createElement(
-              'div',
-              { className: 'weui-cell' },
-              React.createElement(
-                'div',
-                { className: 'weui-cell__hd' },
-                React.createElement(
-                  'label',
-                  { className: 'weui-label' },
-                  '\u7C7B\u578B'
-                )
-              ),
-              React.createElement(
-                'div',
-                { className: 'weui-cell__bd student_view_input_style' },
-                React.createElement(
-                  'select',
-                  { className: 'weui-input', id: 'type' },
-                  React.createElement(
-                    'option',
-                    null,
-                    '\u8BF7\u9009\u62E9\u7C7B\u578B'
-                  ),
-                  React.createElement(
-                    'option',
-                    null,
-                    '\u8F6C\u73ED'
-                  ),
-                  React.createElement(
-                    'option',
-                    null,
-                    '\u5347\u73ED'
-                  )
                 )
               )
             ),

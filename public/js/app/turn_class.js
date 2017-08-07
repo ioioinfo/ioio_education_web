@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 204);
+/******/ 	return __webpack_require__(__webpack_require__.s = 235);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -23067,7 +23067,38 @@ module.exports = Table;
 /* 201 */,
 /* 202 */,
 /* 203 */,
-/* 204 */
+/* 204 */,
+/* 205 */,
+/* 206 */,
+/* 207 */,
+/* 208 */,
+/* 209 */,
+/* 210 */,
+/* 211 */,
+/* 212 */,
+/* 213 */,
+/* 214 */,
+/* 215 */,
+/* 216 */,
+/* 217 */,
+/* 218 */,
+/* 219 */,
+/* 220 */,
+/* 221 */,
+/* 222 */,
+/* 223 */,
+/* 224 */,
+/* 225 */,
+/* 226 */,
+/* 227 */,
+/* 228 */,
+/* 229 */,
+/* 230 */,
+/* 231 */,
+/* 232 */,
+/* 233 */,
+/* 234 */,
+/* 235 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -23127,9 +23158,11 @@ var AdminRight = function (_React$Component2) {
     _this2.setPage = _this2.setPage.bind(_this2);
     _this2.handleSort = _this2.handleSort.bind(_this2);
     _this2.loadData = _this2.loadData.bind(_this2);
-    _this2.refresh = _this2.refresh.bind(_this2);
+    _this2.addClick = _this2.addClick.bind(_this2);
+    _this2.addClick = _this2.addClick.bind(_this2);
+    _this2.handleChange = _this2.handleChange.bind(_this2);
     // 初始化一个空对象
-    _this2.state = { tabthitems: [], tabtritems: [], allNum: 0, everyNum: 20, thisPage: 1, sort: { name: "", dir: "" } };
+    _this2.state = { tabthitems: [], tabtritems: [], tabthitems1: [], tabtritems1: [], allNum: 0, everyNum: 20, thisPage: 1, sort: { name: "", dir: "" }, tdstates: { "checked": false, "1": false }, classItem: [] };
     return _this2;
   }
 
@@ -23147,9 +23180,25 @@ var AdminRight = function (_React$Component2) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
+      $(".page_wrap").css("display", "none");
       var tableHeight = $(window).height() - 181;
-      $("#table").css("height", tableHeight + "px");
-      this.loadData({});
+      $(".tableHeight").css("height", tableHeight + "px");
+      $(".arrow_right_style").css("height", tableHeight + "px");
+      $(".arrow_right_style").css("line-height", tableHeight + "px");
+      this.loadData({ "table": "1" });
+      this.loadData({ "table": "2" });
+      $.ajax({
+        url: "/get_classes",
+        dataType: 'json',
+        type: 'GET',
+        data: {},
+        success: function (data) {
+          if (data.success) {
+            this.setState({ classItem: data.rows });
+          }
+        }.bind(this),
+        error: function (xhr, status, err) {}.bind(this)
+      });
     }
   }, {
     key: 'setPage',
@@ -23162,9 +23211,39 @@ var AdminRight = function (_React$Component2) {
       this.loadData({ sort: sort });
     }
   }, {
-    key: 'refresh',
-    value: function refresh() {
-      this.loadData({});
+    key: 'addClick',
+    value: function addClick(e) {
+      var student_ids = new Array();
+      $(".tabthitems_wrap td [name=checkbox]").each(function (index) {
+        if ($(this).is(":checked")) {
+          var id = $(this).attr("data-id");
+          student_ids.push(id);
+        }
+      });
+      var class_id1 = '1';
+      $.ajax({
+        url: "/change_classAndStudents",
+        dataType: 'json',
+        type: 'POST',
+        data: { "class_id1": class_id1, "class_id2": newId, "student_ids": JSON.stringify(student_ids) },
+        success: function (data) {
+          if (data.success) {
+            $(".tabthitems_wrap td [name=checkbox]").prop("checked", false);
+            this.loadData({ "table": "1" });
+            this.loadData({ "table": "2" });
+          } else {
+            alert("添加失败！");
+          }
+        }.bind(this),
+        error: function (xhr, status, err) {}.bind(this)
+      });
+    }
+  }, {
+    key: 'handleChange',
+    value: function handleChange(e) {
+      newId = $('#class_id').val();
+      this.loadData({ "table": "1" });
+      this.loadData({ "table": "2" });
     }
   }, {
     key: 'render',
@@ -23178,57 +23257,55 @@ var AdminRight = function (_React$Component2) {
           { className: 'admin_creat overflow_hidden' },
           React.createElement(
             'div',
-            { className: '' },
+            { className: 'weui-cell turn_class_select_style pull-right' },
             React.createElement(
               'div',
-              { className: 'col-xs-12 col-sm-8 col-md-8' },
+              { className: 'weui-cell__hd' },
               React.createElement(
-                'div',
-                { className: 'row' },
-                React.createElement(
-                  'div',
-                  { className: 'admin_creat_butto_wrap col-xs-12 col-sm-3 col-md-2 cursor_pointer' },
-                  React.createElement(
-                    'p',
-                    { className: 'button_style_delect text_align_center' },
-                    React.createElement('i', { className: 'fa fa-trash fa-fw admin_creat_button ' }),
-                    '\xA0 \u5220 \u9664'
-                  )
-                ),
-                React.createElement(
-                  'div',
-                  { className: 'admin_creat_butto_wrap col-xs-12 col-sm-3 col-md-2 cursor_pointer' },
-                  React.createElement(
-                    'p',
-                    { className: 'button_style_new text_align_center' },
-                    React.createElement('i', { className: 'fa fa-plus fa-fw admin_creat_button ' }),
-                    '\xA0 \u65B0 \u5EFA'
-                  )
-                )
+                'label',
+                { className: 'weui-label' },
+                '\u73ED\u7EA7'
               )
             ),
             React.createElement(
               'div',
-              { className: 'col-xs-12 col-sm-4 col-md-4' },
+              { className: 'weui-cell__bd student_view_input_style student_view_input_style_public' },
               React.createElement(
-                'div',
-                { className: 'row' },
+                'select',
+                { className: 'weui-input ', type: 'text', placeholder: '', id: 'class_id', onChange: this.handleChange },
                 React.createElement(
-                  'span',
-                  { className: 'admin_creat_search  col-xs-8 col-sm-8 col-md-8' },
-                  React.createElement('input', { className: 'admin_creat_input', type: 'search', placeholder: '\u8BF7\u8F93\u5165\u5173\u952E\u5B57' })
+                  'option',
+                  { value: '' },
+                  '\u8BF7\u9009\u62E9\u8981\u8F6C\u7684\u73ED\u7EA7'
                 ),
-                React.createElement(
-                  'button',
-                  { className: 'admin_creat_button_search col-xs-4 col-sm-4 col-md-4 button_style_search cursor_pointer' },
-                  '\u641C \u7D22'
-                )
+                this.state.classItem.map(function (item, index) {
+                  return React.createElement(
+                    'option',
+                    { key: index, value: item.id },
+                    item.name
+                  );
+                })
               )
             )
           )
         ),
-        React.createElement(Table, { tabthitems: this.state.tabthitems, tabtritems: this.state.tabtritems, sort: this.state.sort, onSort: this.handleSort, refresh: this.refresh, checkTd: checkTd }),
-        React.createElement(PageTab, { setPage: this.setPage, allNum: this.state.allNum, everyNum: this.state.everyNum, thisPage: this.state.thisPage })
+        React.createElement(
+          'div',
+          { className: 'col-xs-12 col-md-5 tabthitems_wrap' },
+          React.createElement(Table, { tabthitems: this.state.tabthitems, tabtritems: this.state.tabtritems, sort: this.state.sort, onSort: this.handleSort, tdstates: this.state.tdstates, checkTd: checkTd }),
+          React.createElement(PageTab, { setPage: this.setPage, allNum: this.state.allNum, everyNum: this.state.everyNum, thisPage: this.state.thisPage })
+        ),
+        React.createElement(
+          'div',
+          { className: 'col-xs-12 col-md-2 arrow_right_style' },
+          React.createElement('i', { className: 'fa fa-arrow-right fa-fw cursor_pointer', onClick: this.addClick })
+        ),
+        React.createElement(
+          'div',
+          { className: 'col-xs-12 col-md-5 tabthitems1_wrap' },
+          React.createElement(Table, { tabthitems: this.state.tabthitems1, tabtritems: this.state.tabtritems1, sort: this.state.sort, onSort: this.handleSort, tdstates: this.state.tdstates, checkTd: checkTd }),
+          React.createElement(PageTab, { setPage: this.setPage, allNum: this.state.allNum, everyNum: this.state.everyNum, thisPage: this.state.thisPage })
+        )
       );
     }
   }]);
@@ -23278,55 +23355,31 @@ var AdminRightTop = function (_React$Component3) {
 
 //判断特殊列
 var checkTd = function checkTd(defaultTd) {
-  var props = this.props;
-  var id = props.item.id;
 
-  var delect = function delect(e) {
-    $.ajax({
-      url: "/delete_classroom",
-      dataType: 'json',
-      type: 'POST',
-      data: { "id": id },
-      success: function (data) {
-        if (data.success) {
-          props.refresh();
-          alert("删除成功！");
-        } else {
-          alert("删除失败！");
-        }
-      }.bind(this),
-      error: function (xhr, status, err) {}.bind(this)
-    });
-  };
+  var props = this.props;
+  var id = props.item[props.thitem.name];
+
+  var handleChange = function (e) {}.bind(this);
 
   if (this.props.thitem.type == "operation") {
     return React.createElement(
       'td',
       null,
       React.createElement(
-        'p',
+        'span',
         { className: '' },
         React.createElement(
           'a',
-          { href: "classrome_view?id=" + id, className: 'btn btn-info btn-xs operate_announce' },
+          { href: "student_view?id=" + id, className: 'btn btn-info btn-xs operate_announce' },
           '\u67E5 \u770B'
-        )
-      ),
-      React.createElement(
-        'p',
-        { className: '' },
-        React.createElement(
-          'span',
-          { className: 'btn btn-xs operate_announce weui-btn_warn', id: this.props.item[this.props.thitem.name], onClick: delect },
-          '\u5220 \u9664'
         )
       )
     );
-  } else if (this.props.thitem.type == "check") {
+  } else if (this.props.thitem.type == "checked" || this.props.thitem.type == "check") {
     return React.createElement(
       'td',
       null,
-      React.createElement('input', { type: 'checkbox', name: 'checkbox' })
+      React.createElement('input', { type: 'checkbox', name: 'checkbox', 'data-id': id, onChange: handleChange })
     );
   } else {
     return defaultTd;

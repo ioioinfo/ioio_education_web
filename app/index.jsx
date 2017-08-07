@@ -134,9 +134,16 @@ var checkTd = function(defaultTd) {
     if(this.props.thitem.type=="operation"){
       return (
           <td>
-          <p className=""><a href={"class_view?id="+id}  className="btn btn-info btn-xs operate_announce">查 看</a></p>
-          <p className=""><a href={"course_view?id="+id}  className="btn btn-info btn-xs operate_announce">课 表</a></p>
-          <p className=""><span className="btn btn-xs operate_announce weui-btn_warn" id={this.props.item[this.props.thitem.name]} onClick={delect} >删 除</span></p>
+            <div className="class_button_wrap pull-left">
+              <p className=""><a href={"class_view?id="+id}  className="btn btn-info btn-xs operate_announce button_background_see">班 级</a></p>
+              <p className=""><a href={"course_view?id="+id}  className="btn btn-info btn-xs operate_announce button_background_course">课 表</a></p>
+              <p className=""><a href={"class_student_list?id="+id}  className="btn btn-info btn-xs operate_announce button_background_course">学 员</a></p>
+            </div>
+            <div className="class_button_wrap pull-right">
+              <p className=""><a href={"add_change_class?id="+id}  className="btn btn-info btn-xs operate_announce">升 班</a></p>
+              <p className=""><a href={"add_class_student?id="+id}  className="btn btn-info btn-xs operate_announce">添 加</a></p>
+              <p className=""><span className="btn btn-xs operate_announce weui-btn_warn" id={this.props.item[this.props.thitem.name]} onClick={delect} >删 除</span></p>
+            </div>
           </td>
       );
     }else if (this.props.thitem.type=="check") {

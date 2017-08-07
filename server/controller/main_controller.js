@@ -47,12 +47,22 @@ exports.register = function(server, options, next) {
             },
         },
 
+        //班级学员添加
+        {
+            method: 'GET',
+            path: '/add_class_student',
+            handler: function(request, reply) {
+                var id = request.query.id;
+                return reply.view("add_class_student",{"id":id});
+            },
+        },
         //班级学员列表
         {
             method: 'GET',
             path: '/class_student_list',
             handler: function(request, reply) {
-                return reply.view("class_student_list");
+                var id = request.query.id;
+                return reply.view("class_student_list",{"id":id});
             },
         },
 
@@ -396,10 +406,10 @@ exports.register = function(server, options, next) {
           //教室列表
           {
               method: 'GET',
-              path: '/classrome_list',
+              path: '/classroom_list',
               handler: function(request, reply) {
                   var id = request.query.id;
-                  return reply.view("classrome_list");
+                  return reply.view("classroom_list");
               },
           },
 
@@ -407,20 +417,20 @@ exports.register = function(server, options, next) {
           //添加教室
           {
               method: 'GET',
-              path: '/add_classrome',
+              path: '/add_classroom',
               handler: function(request, reply) {
                   var id = request.query.id;
-                  return reply.view("add_classrome");
+                  return reply.view("add_classroom");
               },
           },
 
           //教室详情
           {
               method: 'GET',
-              path: '/classrome_view',
+              path: '/classroom_view',
               handler: function(request, reply) {
                   var id = request.query.id;
-                  return reply.view("classrome_view");
+                  return reply.view("classroom_view");
               },
           },
 
@@ -485,7 +495,15 @@ exports.register = function(server, options, next) {
                 },
             },
 
-
+            //转班
+            {
+                method: 'GET',
+                path: '/turn_class',
+                handler: function(request, reply) {
+                    var id = request.query.id;
+                    return reply.view("turn_class");
+                },
+            },
 
 
 

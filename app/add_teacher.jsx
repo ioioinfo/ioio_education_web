@@ -59,7 +59,7 @@ class AdminRight extends React.Component {
     var province = "无";
     var city = "无";
     var district = $("#address").val();
-    var level= $("#level_id").val();
+    var level= $("#level").val();
     var is_master = 0;
     var is_leader = 0;
     teacher.name=name;
@@ -76,6 +76,7 @@ class AdminRight extends React.Component {
     teacher.level=level;
     teacher.is_master=is_master;
     teacher.is_leader=is_leader;
+    teacher.type_id=0;
     console.log(teacher);
 
     $.ajax({
@@ -141,13 +142,9 @@ class AdminRight extends React.Component {
             </div>
 
             <div className="weui-cell">
-                <div className="weui-cell__hd"><label className="weui-label">年级</label></div>
+                <div className="weui-cell__hd"><label className="weui-label">等级</label></div>
                 <div className="weui-cell__bd student_view_input_style">
-                  <select className="weui-input " type="text" placeholder="" id="level_id">
-                    {this.state.levelItem.map((item,index)  => (
-                        <option key={index} value={item.id}>{item.name}</option>))
-                    }
-                  </select>
+                  <input className="weui-input " type="text" placeholder="" id="level"/>
                 </div>
             </div>
 

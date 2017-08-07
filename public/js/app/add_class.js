@@ -22672,7 +22672,7 @@ var AdminRight = function (_React$Component2) {
         value: function handleClick(e) {
             var clas = new Object();
 
-            var classroom_id = this.state.item.classroom_id;
+            var classroom_id = '1';
             var name = $("#name").val();
             var code = $("#code").val();
             var state = $("#state").val();
