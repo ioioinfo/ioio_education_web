@@ -22735,7 +22735,7 @@ var AdminRight = function (_React$Component2) {
           if (data.success) {
             alert("添加成功！");
           } else {
-            alert("添加失败！");
+            alert("添加失败！" + data.message);
           }
         }.bind(this),
         error: function (xhr, status, err) {}.bind(this)

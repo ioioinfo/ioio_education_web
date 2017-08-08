@@ -23,7 +23,7 @@ class AdminRight extends React.Component {
       super(props);
       // 初始化一个空对象
       this.handleClick=this.handleClick.bind(this);
-      this.state={planItem:[],masterItem:[],levelItem:[]};
+      this.state={planItem:[],masterItem:[],levelItem:[],item:{}};
   }
 
   componentDidMount() {
@@ -111,6 +111,7 @@ $.ajax({
             $("#remarks").val(remarks);
             $("#state_up").html(state);
             $("#level_id").val(level_id);
+            this.setState({item:data.rows[0]});
           }
 
        }.bind(this),
@@ -121,7 +122,8 @@ $.ajax({
   handleClick(e){
     var clas = new Object();
 
-    var id = id;
+    var id = this.state.item.id;
+    var classroom_id = '1';
     var name = $("#name").val();
     var code = $("#code").val();
     var state = $("#state").val();
@@ -132,6 +134,7 @@ $.ajax({
     var remarks = $("#remarks").val();
     var level_id = $("#level_id").val();
     clas.id=id;
+    clas.classroom_id=classroom_id;
     clas.name=name;
     clas.code=code;
     clas.starting_date=starting_date;

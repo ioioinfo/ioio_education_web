@@ -22636,7 +22636,7 @@ var AdminRight = function (_React$Component2) {
     var _this2 = _possibleConstructorReturn(this, (AdminRight.__proto__ || Object.getPrototypeOf(AdminRight)).call(this, props));
 
     _this2.handleClick = _this2.handleClick.bind(_this2);
-    _this2.state = { planItem: [], masterItem: [], levelItem: [] };
+    _this2.state = { planItem: [], masterItem: [], levelItem: [], item: {} };
     return _this2;
   }
 
@@ -22721,6 +22721,7 @@ var AdminRight = function (_React$Component2) {
             $("#remarks").val(remarks);
             $("#state_up").html(state);
             $("#level_id").val(level_id);
+            this.setState({ item: data.rows[0] });
           }
         }.bind(this),
         error: function (xhr, status, err) {}.bind(this)
@@ -22731,7 +22732,8 @@ var AdminRight = function (_React$Component2) {
     value: function handleClick(e) {
       var clas = new Object();
 
-      var id = id;
+      var id = this.state.item.id;
+      var classroom_id = '1';
       var name = $("#name").val();
       var code = $("#code").val();
       var state = $("#state").val();
@@ -22742,6 +22744,7 @@ var AdminRight = function (_React$Component2) {
       var remarks = $("#remarks").val();
       var level_id = $("#level_id").val();
       clas.id = id;
+      clas.classroom_id = classroom_id;
       clas.name = name;
       clas.code = code;
       clas.starting_date = starting_date;
