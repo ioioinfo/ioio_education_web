@@ -1406,7 +1406,7 @@ exports.register = function(server, options, next) {
             handler: function(request, reply) {
                 var plan = request.payload.plan;
                 plan = JSON.parse(plan);
-                if (!plan.class_id|| !plan.name || !plan.code|| !plan.hours|| !plan.teacher_id|| !plan.assistant_id ||!plan.subject_id||!plan.starting_date|| !plan.end_date) {
+                if (!plan.class_id|| !plan.name || !plan.code|| !plan.hours|| !plan.teacher_id|| !plan.assistant_id ||!plan.subject_id||!plan.starting_date|| !plan.end_date||!plan.classroom_id) {
                     return reply({"success":false,"message":"params wrong","service_info":service_info});
                 }
 
@@ -1430,7 +1430,7 @@ exports.register = function(server, options, next) {
                 var plan = request.payload.plan;
                 plan = JSON.parse(plan);
 
-                if (!plan.class_id|| !plan.name || !plan.code|| !plan.hours|| !plan.teacher_id|| !plan.assistant_id ||!plan.subject_id||!plan.starting_date|| !plan.end_date|| !plan.id) {
+                if (!plan.class_id|| !plan.name || !plan.code|| !plan.hours|| !plan.teacher_id|| !plan.assistant_id ||!plan.subject_id||!plan.starting_date|| !plan.end_date|| !plan.id ||!plan.classroom_id) {
                     return reply({"success":false,"message":"params wrong","service_info":service_info});
                 }
 
