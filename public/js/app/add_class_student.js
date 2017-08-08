@@ -23277,7 +23277,7 @@ var AdminRight = function (_React$Component2) {
         React.createElement(
           'div',
           { className: 'col-xs-12 col-md-2 arrow_right_style' },
-          React.createElement('i', { className: 'fa fa-arrow-right fa-fw cursor_pointer', onClick: this.addClick })
+          React.createElement('i', { className: 'fa fa-exchange fa-fw cursor_pointer', onClick: this.addClick })
         ),
         React.createElement(
           'div',

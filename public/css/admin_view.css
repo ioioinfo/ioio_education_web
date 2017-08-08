@@ -15,7 +15,16 @@
   color: #fff;
   cursor: pointer;
 }
-
+.button_background_add{
+  background: #CA8027;
+  color: #fff;
+  cursor: pointer;
+}
+.button_background_student{
+  background: #2786B4;
+  color: #fff;
+  cursor: pointer;
+}
 /*新建图书弹出层title*/
 .borrow_creat_title_style{
   background: #009695;

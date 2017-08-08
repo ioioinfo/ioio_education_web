@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/weui.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
     <link rel="stylesheet" href="css/admin_public.css">
     <link rel="stylesheet" href="css/admin_nav.css">
     <link rel="stylesheet" href="css/admin_view.css">
@@ -23,7 +24,32 @@
 
     <script src="js/jquery-3.1.1.min.js" type="text/javascript"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-datetimepicker.min.js"></script>
+    <script src="js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
     <script src="js/app/plan_view.js"></script>
+    <script type="text/javascript">
 
+    $(function(){
+        $("#starting_date").datetimepicker({
+            language:"zh-CN",
+            format: 'yyyy-mm-dd',
+            autoclose: true,
+            minView:2,        //关闭时分秒
+            timepicker:false,    //关闭时间选项
+            todayButton:false    //关闭选择今天按钮
+        });
+    })
+
+    $(function(){
+        $("#end_date").datetimepicker({
+            language:"zh-CN",
+            format: 'yyyy-mm-dd',
+            autoclose: true,
+            minView:2,        //关闭时分秒
+            timepicker:false,    //关闭时间选项
+            todayButton:false    //关闭选择今天按钮
+        });
+    })
+    </script>
 </body>
 </html>

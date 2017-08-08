@@ -22654,7 +22654,7 @@ var AdminRight = function (_React$Component2) {
     var _this2 = _possibleConstructorReturn(this, (AdminRight.__proto__ || Object.getPrototypeOf(AdminRight)).call(this, props));
 
     _this2.handleClick = _this2.handleClick.bind(_this2);
-    _this2.state = { teacherItem: [], masterItem: [], subjectItem: [], classItem: [] };
+    _this2.state = { teacherItem: [], masterItem: [], subjectItem: [], classItem: [], classroomsItem: [] };
     return _this2;
   }
 
@@ -22704,13 +22704,26 @@ var AdminRight = function (_React$Component2) {
       });
 
       $.ajax({
-        url: "/get_lessons",
+        url: "/get_subjects",
         dataType: 'json',
         type: 'GET',
         data: {},
         success: function (data) {
           if (data.success) {
             this.setState({ subjectItem: data.rows });
+          }
+        }.bind(this),
+        error: function (xhr, status, err) {}.bind(this)
+      });
+
+      $.ajax({
+        url: "/get_classrooms",
+        dataType: 'json',
+        type: 'GET',
+        data: {},
+        success: function (data) {
+          if (data.success) {
+            this.setState({ classroomsItem: data.rows });
           }
         }.bind(this),
         error: function (xhr, status, err) {}.bind(this)
@@ -22723,6 +22736,7 @@ var AdminRight = function (_React$Component2) {
         success: function (data) {
           if (data.success) {
             var class_id = data.rows[0].class_id;
+            var classroom_id = data.rows[0].classroom_id;
             var name = data.rows[0].name;
             var code = data.rows[0].code;
             var hours = data.rows[0].hours;
@@ -22731,6 +22745,7 @@ var AdminRight = function (_React$Component2) {
             var starting_date = data.rows[0].starting_date;
             var end_date = data.rows[0].end_date;
             $("#class_id").val(class_id);
+            $("#classroom_id").val(classroom_id);
             $("#name").val(name);
             $("#code").val(code);
             $("#hours").val(hours);
@@ -22738,6 +22753,7 @@ var AdminRight = function (_React$Component2) {
             $("#subject_id").val(subject_id);
             $("#starting_date").val(starting_date);
             $("#end_date").val(end_date);
+            console.log(classroom_id);
 
             this.setState({ item: data.rows });
           }
@@ -22751,6 +22767,7 @@ var AdminRight = function (_React$Component2) {
       var plan = new Object();
       var id = this.state.item.id;
       var class_id = $("#class_id").val();
+      var classroom_id = $("#classroom_id").val();
       var name = $("#name").val();
       var code = $("#code").val();
       var hours = $("#hours").val();
@@ -22761,6 +22778,7 @@ var AdminRight = function (_React$Component2) {
       var assistant_id = '1';
       plan.id = id;
       plan.class_id = class_id;
+      plan.classroom_id = classroom_id;
       plan.name = name;
       plan.code = code;
       plan.hours = hours;
@@ -22773,12 +22791,12 @@ var AdminRight = function (_React$Component2) {
         url: "/save_education_plan",
         dataType: 'json',
         type: 'POST',
-        data: { 'plan': JSONstringify(plan) },
+        data: { 'plan': JSON.stringify(plan) },
         success: function (data) {
           if (data.success) {
-            alert("添加成功！");
+            alert("修改成功！");
           } else {
-            alert("添加失败！");
+            alert("修改失败！");
           }
         }.bind(this),
         error: function (xhr, status, err) {}.bind(this)
@@ -22868,13 +22886,46 @@ var AdminRight = function (_React$Component2) {
                 { className: 'weui-cell__bd student_view_input_style' },
                 React.createElement(
                   'select',
-                  { className: 'weui-input ', type: 'text', placeholder: '', id: 'level_id' },
+                  { className: 'weui-input ', type: 'text', placeholder: '', id: 'class_id' },
                   React.createElement(
                     'option',
                     { value: '' },
-                    '\u8BF7\u9009\u62E9\u5E74\u7EA7'
+                    '\u8BF7\u9009\u62E9\u73ED\u7EA7'
                   ),
                   this.state.classItem.map(function (item, index) {
+                    return React.createElement(
+                      'option',
+                      { key: index, value: item.id },
+                      item.name
+                    );
+                  })
+                )
+              )
+            ),
+            React.createElement(
+              'div',
+              { className: 'weui-cell' },
+              React.createElement(
+                'div',
+                { className: 'weui-cell__hd' },
+                React.createElement(
+                  'label',
+                  { className: 'weui-label' },
+                  '\u6559\u5BA4'
+                )
+              ),
+              React.createElement(
+                'div',
+                { className: 'weui-cell__bd student_view_input_style' },
+                React.createElement(
+                  'select',
+                  { className: 'weui-input ', type: 'text', placeholder: '', id: 'classroom_id' },
+                  React.createElement(
+                    'option',
+                    { value: '' },
+                    '\u8BF7\u9009\u62E9\u6559\u5BA4'
+                  ),
+                  this.state.classroomsItem.map(function (item, index) {
                     return React.createElement(
                       'option',
                       { key: index, value: item.id },
@@ -22926,7 +22977,7 @@ var AdminRight = function (_React$Component2) {
                 React.createElement(
                   'label',
                   { className: 'weui-label' },
-                  '\u8BFE\u7A0B'
+                  '\u79D1\u76EE'
                 )
               ),
               React.createElement(
@@ -22938,7 +22989,7 @@ var AdminRight = function (_React$Component2) {
                   React.createElement(
                     'option',
                     { value: '' },
-                    '\u8BF7\u9009\u62E9\u8BFE\u7A0B'
+                    '\u8BF7\u9009\u62E9\u79D1\u76EE'
                   ),
                   this.state.subjectItem.map(function (item, index) {
                     return React.createElement(

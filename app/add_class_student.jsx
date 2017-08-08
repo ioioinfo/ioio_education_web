@@ -147,7 +147,7 @@ class AdminRight extends React.Component {
           <PageTab setPage={this.setPage} allNum={this.state.allNum} everyNum={this.state.everyNum} thisPage={this.state.thisPage} />
         </div>
         <div  className="col-xs-12 col-md-2 arrow_right_style">
-          <i className="fa fa-arrow-right fa-fw cursor_pointer" onClick={this.addClick}></i>
+          <i className="fa fa-exchange fa-fw cursor_pointer" onClick={this.addClick}></i>
         </div>
         <div className="col-xs-12 col-md-5 tabthitems1_wrap">
           <Table tabthitems={this.state.tabthitems1} tabtritems={this.state.tabtritems1} sort={this.state.sort} onSort={this.handleSort} tdstates={this.state.tdstates}   checkTd={checkTd} />

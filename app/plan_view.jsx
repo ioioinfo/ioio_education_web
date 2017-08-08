@@ -23,7 +23,7 @@ class AdminRight extends React.Component {
       super(props);
       // 初始化一个空对象
       this.handleClick=this.handleClick.bind(this);
-      this.state={teacherItem:[],masterItem:[],subjectItem:[],classItem:[]};
+      this.state={teacherItem:[],masterItem:[],subjectItem:[],classItem:[],classroomsItem:[]};
   }
 
   componentDidMount() {
@@ -76,7 +76,7 @@ class AdminRight extends React.Component {
           });
 
         $.ajax({
-               url: "/get_lessons",
+               url: "/get_subjects",
                dataType: 'json',
                type: 'GET',
                data:{},
@@ -89,6 +89,21 @@ class AdminRight extends React.Component {
                error: function(xhr, status, err) {
                }.bind(this)
           });
+
+          $.ajax({
+                 url: "/get_classrooms",
+                 dataType: 'json',
+                 type: 'GET',
+                 data:{},
+                 success: function(data) {
+                  if(data.success){
+                    this.setState({classroomsItem:data.rows});
+                  }
+
+                 }.bind(this),
+                 error: function(xhr, status, err) {
+                 }.bind(this)
+            });
         $.ajax({
                  url: "/search_education_plan_byId",
                  dataType: 'json',
@@ -97,6 +112,7 @@ class AdminRight extends React.Component {
                  success: function(data) {
                   if(data.success){
                     var class_id = data.rows[0].class_id;
+                    var classroom_id = data.rows[0].classroom_id;
                     var name = data.rows[0].name;
                     var code = data.rows[0].code;
                     var hours = data.rows[0].hours;
@@ -105,6 +121,7 @@ class AdminRight extends React.Component {
                     var starting_date = data.rows[0].starting_date;
                     var end_date = data.rows[0].end_date;
                     $("#class_id").val(class_id);
+                    $("#classroom_id").val(classroom_id);
                     $("#name").val(name);
                     $("#code").val(code);
                     $("#hours").val(hours);
@@ -112,6 +129,7 @@ class AdminRight extends React.Component {
                     $("#subject_id").val(subject_id);
                     $("#starting_date").val(starting_date);
                     $("#end_date").val(end_date);
+                    console.log(classroom_id);
 
                     this.setState({item:data.rows});
                   }
@@ -128,6 +146,7 @@ class AdminRight extends React.Component {
     var plan = new Object();
     var id = this.state.item.id;
     var class_id = $("#class_id").val();
+    var classroom_id = $("#classroom_id").val();
     var name = $("#name").val();
     var code = $("#code").val();
     var hours = $("#hours").val();
@@ -138,6 +157,7 @@ class AdminRight extends React.Component {
     var assistant_id = '1';
     plan.id=id;
     plan.class_id=class_id;
+    plan.classroom_id=classroom_id;
     plan.name=name;
     plan.code=code;
     plan.hours=hours;
@@ -150,12 +170,12 @@ class AdminRight extends React.Component {
         url: "/save_education_plan",
         dataType: 'json',
         type: 'POST',
-        data: {'plan':JSONstringify(plan)},
+        data: {'plan':JSON.stringify(plan)},
         success: function(data) {
             if (data.success) {
-                alert("添加成功！");
+                alert("修改成功！");
             }else {
-                alert("添加失败！");
+                alert("修改失败！");
             }
         }.bind(this),
         error: function(xhr, status, err) {
@@ -195,9 +215,21 @@ class AdminRight extends React.Component {
             <div className="weui-cell">
                 <div className="weui-cell__hd"><label className="weui-label">班级</label></div>
                 <div className="weui-cell__bd student_view_input_style">
-                  <select className="weui-input " type="text" placeholder="" id="level_id">
-                  <option value="">请选择年级</option>
+                  <select className="weui-input " type="text" placeholder="" id="class_id">
+                  <option value="">请选择班级</option>
                   {this.state.classItem.map((item,index)  => (
+                      <option key={index} value={item.id}>{item.name}</option>))
+                  }
+                  </select>
+                </div>
+            </div>
+
+            <div className="weui-cell">
+                <div className="weui-cell__hd"><label className="weui-label">教室</label></div>
+                <div className="weui-cell__bd student_view_input_style">
+                  <select className="weui-input " type="text" placeholder="" id="classroom_id">
+                  <option value="">请选择教室</option>
+                  {this.state.classroomsItem.map((item,index)  => (
                       <option key={index} value={item.id}>{item.name}</option>))
                   }
                   </select>
@@ -217,10 +249,10 @@ class AdminRight extends React.Component {
             </div>
 
             <div className="weui-cell">
-                <div className="weui-cell__hd"><label className="weui-label">课程</label></div>
+                <div className="weui-cell__hd"><label className="weui-label">科目</label></div>
                 <div className="weui-cell__bd student_view_input_style">
                   <select className="weui-input " type="text" placeholder="" id="subject_id">
-                  <option value="">请选择课程</option>
+                  <option value="">请选择科目</option>
                   {this.state.subjectItem.map((item,index)  => (
                       <option key={index} value={item.id}>{item.name}</option>))
                   }

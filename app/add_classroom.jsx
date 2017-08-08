@@ -70,7 +70,7 @@ class AdminRight extends React.Component {
             </div>
 
             <div className="weui-cell">
-                <div className="weui-cell__hd"><label className="weui-label">课程</label></div>
+                <div className="weui-cell__hd"><label className="weui-label">教室名称</label></div>
                 <div className="weui-cell__bd student_view_input_style">
                     <input className="weui-input " type="text" placeholder="" id="name"/>
                 </div>

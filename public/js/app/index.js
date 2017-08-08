@@ -23348,7 +23348,7 @@ var checkTd = function checkTd(defaultTd) {
           { className: '' },
           React.createElement(
             'a',
-            { href: "class_student_list?id=" + id, className: 'btn btn-info btn-xs operate_announce button_background_course' },
+            { href: "class_student_list?id=" + id, className: 'btn btn-info btn-xs operate_announce button_background_student' },
             '\u5B66 \u5458'
           )
         )
@@ -23370,7 +23370,7 @@ var checkTd = function checkTd(defaultTd) {
           { className: '' },
           React.createElement(
             'a',
-            { href: "add_class_student?id=" + id, className: 'btn btn-info btn-xs operate_announce' },
+            { href: "add_class_student?id=" + id, className: 'btn btn-xs button_background_add' },
             '\u6DFB \u52A0'
           )
         ),

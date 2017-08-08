@@ -23,7 +23,7 @@ class AdminRight extends React.Component {
       super(props);
       // 初始化一个空对象
       this.handleClick=this.handleClick.bind(this);
-      this.state={teacherItem:[],masterItem:[],subjectItem:[],classItem:[]};
+      this.state={teacherItem:[],masterItem:[],subjectItem:[],classItem:[],classroomsItem:[]};
   }
 
   componentDidMount() {
@@ -77,13 +77,27 @@ class AdminRight extends React.Component {
               });
 
               $.ajax({
-                     url: "/get_lessons",
+                     url: "/get_subjects",
                      dataType: 'json',
                      type: 'GET',
                      data:{},
                      success: function(data) {
                       if(data.success){
                         this.setState({subjectItem:data.rows});
+                      }
+
+                     }.bind(this),
+                     error: function(xhr, status, err) {
+                     }.bind(this)
+                });
+              $.ajax({
+                     url: "/get_classrooms",
+                     dataType: 'json',
+                     type: 'GET',
+                     data:{},
+                     success: function(data) {
+                      if(data.success){
+                        this.setState({classroomsItem:data.rows});
                       }
 
                      }.bind(this),
@@ -97,6 +111,7 @@ class AdminRight extends React.Component {
   handleClick(e){
     var plan = new Object();
     var class_id = $("#class_id").val();
+    var classroom_id = $("#classroom_id").val();
     var name = $("#name").val();
     var code = $("#code").val();
     var hours = $("#hours").val();
@@ -107,6 +122,7 @@ class AdminRight extends React.Component {
     var assistant_id = '1';
     plan.class_id=class_id;
     plan.name=name;
+    plan.classroom_id=classroom_id;
     plan.code=code;
     plan.hours=hours;
     plan.teacher_id=teacher_id;
@@ -118,7 +134,7 @@ class AdminRight extends React.Component {
         url: "/save_education_plan",
         dataType: 'json',
         type: 'POST',
-        data: {'plan':JSONstringify(plan)},
+        data: {'plan':JSON.stringify(plan)},
         success: function(data) {
             if (data.success) {
                 alert("添加成功！");
@@ -163,9 +179,21 @@ class AdminRight extends React.Component {
             <div className="weui-cell">
                 <div className="weui-cell__hd"><label className="weui-label">班级</label></div>
                 <div className="weui-cell__bd student_view_input_style">
-                  <select className="weui-input " type="text" placeholder="" id="level_id">
-                  <option value="">请选择年级</option>
+                  <select className="weui-input " type="text" placeholder="" id="class_id">
+                  <option value="">请选择班级</option>
                   {this.state.classItem.map((item,index)  => (
+                      <option key={index} value={item.id}>{item.name}</option>))
+                  }
+                  </select>
+                </div>
+            </div>
+
+            <div className="weui-cell">
+                <div className="weui-cell__hd"><label className="weui-label">教室</label></div>
+                <div className="weui-cell__bd student_view_input_style">
+                  <select className="weui-input " type="text" placeholder="" id="classroom_id">
+                  <option value="">请选择教室</option>
+                  {this.state.classroomsItem.map((item,index)  => (
                       <option key={index} value={item.id}>{item.name}</option>))
                   }
                   </select>
@@ -185,7 +213,7 @@ class AdminRight extends React.Component {
             </div>
 
             <div className="weui-cell">
-                <div className="weui-cell__hd"><label className="weui-label">课程</label></div>
+                <div className="weui-cell__hd"><label className="weui-label">科目</label></div>
                 <div className="weui-cell__bd student_view_input_style">
                   <select className="weui-input " type="text" placeholder="" id="subject_id">
                   <option value="">请选择课程</option>

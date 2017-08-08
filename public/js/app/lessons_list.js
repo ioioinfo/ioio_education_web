@@ -23321,7 +23321,7 @@ var checkTd = function checkTd(defaultTd) {
       null,
       React.createElement(
         'p',
-        { className: '' },
+        { className: 'display_inline_block button_margin' },
         React.createElement(
           'a',
           { href: "lesson_view?id=" + id, className: 'btn btn-info btn-xs operate_announce' },
@@ -23330,7 +23330,7 @@ var checkTd = function checkTd(defaultTd) {
       ),
       React.createElement(
         'p',
-        { className: '' },
+        { className: 'display_inline_block button_margin' },
         React.createElement(
           'span',
           { className: 'btn btn-xs operate_announce weui-btn_warn', id: this.props.item[this.props.thitem.name], onClick: delect },

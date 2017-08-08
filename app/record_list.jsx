@@ -128,8 +128,8 @@ class AdminRightTop extends React.Component {
         if(this.props.thitem.type=="operation"){
           return (
               <td>
-              <p className=""><a href={"record_view?id="+id}  className="btn btn-info btn-xs operate_announce">查 看</a></p>
-              <p className=""><span className="btn btn-xs operate_announce weui-btn_warn" id={this.props.item[this.props.thitem.name]} onClick={delect} >删 除</span></p>
+              <p className="display_inline_block button_margin"><a href={"record_view?id="+id}  className="btn btn-info btn-xs operate_announce">查 看</a></p>
+              <p className="display_inline_block button_margin"><span className="btn btn-xs operate_announce weui-btn_warn" id={this.props.item[this.props.thitem.name]} onClick={delect} >删 除</span></p>
               </td>
           );
         }else if (this.props.thitem.type=="check") {

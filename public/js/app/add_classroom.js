@@ -22692,7 +22692,7 @@ var AdminRight = function (_React$Component2) {
                 React.createElement(
                   'label',
                   { className: 'weui-label' },
-                  '\u8BFE\u7A0B'
+                  '\u6559\u5BA4\u540D\u79F0'
                 )
               ),
               React.createElement(

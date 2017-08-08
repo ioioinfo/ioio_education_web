@@ -37,7 +37,7 @@ thead{
   border: 1px solid #fff;
 }
 th:last-child{
-  width: 110px;
+  width: 125px;
 }
 tr{
   text-align: center;
@@ -49,6 +49,12 @@ tr{
 }
 tbody{
   overflow: auto;
+}
+.display_inline_block{
+  display: inline-block;
+}
+.button_margin{
+  margin: 0 3px;
 }
 .coursetime_line{
   width: 20px;

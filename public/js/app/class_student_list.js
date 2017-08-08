@@ -23277,15 +23277,18 @@ var AdminRightTop = function (_React$Component3) {
 
 //判断特殊列
 var checkTd = function checkTd(defaultTd) {
+  var student_ids = new Array();
   var props = this.props;
-  var id = props.item.student_id;
+  var id = props.item.id;
+  var student_id = props.item.student_id;
+  student_ids.push(student_id);
 
   var delect = function delect(e) {
     $.ajax({
-      url: "/delete_change_class",
+      url: "/delete_class_student",
       dataType: 'json',
       type: 'POST',
-      data: { "id": id },
+      data: { "class_id": class_id, "student_ids": JSON.stringify(student_ids) },
       success: function (data) {
         if (data.success) {
           props.refresh();
@@ -23304,7 +23307,7 @@ var checkTd = function checkTd(defaultTd) {
       null,
       React.createElement(
         'p',
-        { className: '' },
+        { className: 'display_inline_block button_margin' },
         React.createElement(
           'a',
           { href: "student_view?id=" + id, className: 'btn btn-info btn-xs operate_announce' },
@@ -23313,7 +23316,7 @@ var checkTd = function checkTd(defaultTd) {
       ),
       React.createElement(
         'p',
-        { className: '' },
+        { className: 'display_inline_block button_margin' },
         React.createElement(
           'span',
           { className: 'btn btn-xs operate_announce weui-btn_warn', id: this.props.item[this.props.thitem.name], onClick: delect },

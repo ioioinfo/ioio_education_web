@@ -102,15 +102,18 @@ class AdminRightTop extends React.Component {
 
   //判断特殊列
   var checkTd = function(defaultTd) {
+        var student_ids  = new Array();
         var props = this.props;
-        var id = props.item.student_id;
+        var id = props.item.id;
+        var student_id = props.item.student_id;
+        student_ids.push(student_id);
 
         var delect = function(e){
           $.ajax({
-              url: "/delete_change_class",
+              url: "/delete_class_student",
               dataType: 'json',
               type: 'POST',
-              data: {"id":id},
+              data: {"class_id":class_id,"student_ids":JSON.stringify(student_ids)},
               success: function(data) {
                   if (data.success) {
                       props.refresh();
@@ -128,8 +131,8 @@ class AdminRightTop extends React.Component {
         if(this.props.thitem.type=="operation"){
           return (
               <td>
-              <p className=""><a href={"student_view?id="+id}  className="btn btn-info btn-xs operate_announce">查 看</a></p>
-              <p className=""><span className="btn btn-xs operate_announce weui-btn_warn" id={this.props.item[this.props.thitem.name]} onClick={delect} >删 除</span></p>
+              <p className="display_inline_block button_margin"><a href={"student_view?id="+id}  className="btn btn-info btn-xs operate_announce">查 看</a></p>
+              <p className="display_inline_block button_margin"><span className="btn btn-xs operate_announce weui-btn_warn" id={this.props.item[this.props.thitem.name]} onClick={delect} >删 除</span></p>
               </td>
           );
         }else if (this.props.thitem.type=="check") {
