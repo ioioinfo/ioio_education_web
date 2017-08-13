@@ -1163,6 +1163,24 @@ exports.register = function(server, options, next) {
                 });
             }
         },
+        //id查询考试记录
+        {
+            method: "GET",
+            path: '/search_record_by_student',
+            handler: function(request, reply) {
+                var student_id = request.query.student_id;
+				if (!student_id) {
+					return reply({"success":false,"message":"student_id null","service_info":service_info});
+				}
+                education_api.search_record_by_student(student_id,function(err,rows){
+                    if (!err) {
+                        return reply(rows);
+                    }else {
+                        return reply({"success":false,"message":rows.message});
+                    }
+                });
+            }
+        },
         //更新考试记录
         {
             method: "POST",
