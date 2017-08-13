@@ -23172,7 +23172,7 @@ var AdminRight = function (_React$Component2) {
     value: function render() {
       return React.createElement(
         'div',
-        { className: 'admin_right col-xs-12 col-sm-8 col-md-10 overflow_auto' },
+        { className: 'admin_right col-xs-12 col-sm-8 col-md-10' },
         React.createElement(AdminRightTop, null),
         React.createElement(
           'div',
