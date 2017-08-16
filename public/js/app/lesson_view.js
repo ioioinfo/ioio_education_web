@@ -22661,8 +22661,6 @@ var AdminRight = function (_React$Component2) {
       var plan_id = "";
       var teacher_id = "";
       var level_id = "";
-      var tableHeight = $(window).height() - 112;
-      $(".student_view_wrap").css("height", tableHeight + "px");
       $.ajax({
         url: "/search_subject_byId",
         dataType: 'json',

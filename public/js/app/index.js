@@ -23185,14 +23185,14 @@ var AdminRight = function (_React$Component2) {
     value: function render() {
       return React.createElement(
         'div',
-        { className: 'admin_right col-xs-12 col-sm-8 col-md-10' },
+        { className: 'admin_right col-xs-12 col-sm-8 col-md-10', id: 'admin_index' },
         React.createElement(AdminRightTop, null),
         React.createElement(
           'div',
           { className: 'admin_creat overflow_hidden' },
           React.createElement(
             'div',
-            { className: '' },
+            null,
             React.createElement(
               'div',
               { className: 'col-xs-12 col-sm-8 col-md-8' },
@@ -23342,7 +23342,11 @@ var checkTd = function checkTd(defaultTd) {
             { href: "course_view?id=" + id, className: 'btn btn-info btn-xs operate_announce button_background_course' },
             '\u8BFE \u8868'
           )
-        ),
+        )
+      ),
+      React.createElement(
+        'div',
+        { className: 'class_button_wrap pull-left class_button_wrap_margin' },
         React.createElement(
           'p',
           { className: '' },
@@ -23351,11 +23355,7 @@ var checkTd = function checkTd(defaultTd) {
             { href: "class_student_list?id=" + id, className: 'btn btn-info btn-xs operate_announce button_background_student' },
             '\u5B66 \u5458'
           )
-        )
-      ),
-      React.createElement(
-        'div',
-        { className: 'class_button_wrap pull-right' },
+        ),
         React.createElement(
           'p',
           { className: '' },
@@ -23364,7 +23364,11 @@ var checkTd = function checkTd(defaultTd) {
             { href: "add_change_class?id=" + id, className: 'btn btn-info btn-xs operate_announce' },
             '\u5347 \u73ED'
           )
-        ),
+        )
+      ),
+      React.createElement(
+        'div',
+        { className: 'class_button_wrap pull-left' },
         React.createElement(
           'p',
           { className: '' },

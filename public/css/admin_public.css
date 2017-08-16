@@ -46,13 +46,21 @@ tr{
   text-align: center;
 }
 .table>tbody>tr>td{
-  height: 50px;
   font-size: 12px;
   vertical-align: middle;
   border: 1px solid #fff;
 }
+.table>tbody>tr>td{
+  padding: 0;
+}
 tbody{
   overflow: auto;
+}
+.weui-cell:before{
+  border: none;
+}
+.weui-btn_primary{
+  background: #009695;
 }
 .display_inline_block{
   display: inline-block;
@@ -248,4 +256,10 @@ tbody{
 }
 .student_view_input_style_public{
   margin-left: 10px;
+}
+#admin_index table th:last-child{
+  width: 158px;
+}
+.class_button_wrap_margin{
+  margin: 0 7px;
 }
