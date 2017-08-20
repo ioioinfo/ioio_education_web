@@ -22719,13 +22719,13 @@ var PageTab = function (_React$Component) {
             }
             return React.createElement(
                 "div",
-                { className: "page_wrap" },
+                { className: "page_wrap text_align_center" },
                 React.createElement(
                     "div",
                     { className: "ouveflow_hidden " },
                     React.createElement(
                         "nav",
-                        { "aria-label": "Page navigation", className: "nav_text pull-right" },
+                        { "aria-label": "Page navigation", className: "nav_text" },
                         React.createElement(
                             "ul",
                             { className: "pagination" },
@@ -22742,7 +22742,7 @@ var PageTab = function (_React$Component) {
                     { className: "ouveflow_hidden" },
                     React.createElement(
                         "p",
-                        { className: "pull-right" },
+                        { className: "" },
                         React.createElement(
                             "span",
                             { className: "table-tab-span4" },
@@ -23186,7 +23186,7 @@ var AdminRight = function (_React$Component2) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       $(".page_wrap").css("display", "none");
-      var tableHeight = $(window).height() - 181;
+      var tableHeight = $(window).height() - 195;
       $(".tableHeight").css("height", tableHeight + "px");
       $(".arrow_right_style").css("height", tableHeight + "px");
       $(".arrow_right_style").css("line-height", tableHeight + "px");

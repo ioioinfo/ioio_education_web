@@ -43,7 +43,7 @@ class AdminRight extends React.Component {
   }
   componentDidMount() {
       $(".page_wrap").css("display","none");
-      var tableHeight = $(window).height()-181;
+      var tableHeight = $(window).height()-195;
       $(".tableHeight").css("height",tableHeight+"px");
       $(".arrow_right_style").css("height",tableHeight+"px");
       $(".arrow_right_style").css("line-height",tableHeight+"px");

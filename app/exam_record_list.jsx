@@ -40,7 +40,7 @@ class AdminRight extends React.Component {
       }.bind(this));
   }
   componentDidMount() {
-      var tableHeight = $(window).height()-181;
+      var tableHeight = $(window).height()-195;
       $("#table").css("height",tableHeight+"px");
       this.loadData({});
   }
@@ -61,10 +61,10 @@ class AdminRight extends React.Component {
             <div className="">
               <div className="col-xs-12 col-sm-8 col-md-8">
                 <div className="row">
-                  <div className="admin_creat_butto_wrap col-xs-12 col-sm-3 col-md-2 cursor_pointer">
+                  <div className="admin_creat_butto_wrap col-xs-12 col-sm-3 col-md-3 cursor_pointer">
                     <p  className="button_style_delect text_align_center"><i className="fa fa-trash fa-fw admin_creat_button "></i>&nbsp; 删 除</p>
                   </div>
-                  <div className="admin_creat_butto_wrap col-xs-12 col-sm-3 col-md-2 cursor_pointer">
+                  <div className="admin_creat_butto_wrap col-xs-12 col-sm-3 col-md-3 cursor_pointer">
                     <p  className="button_style_new text_align_center"><i className="fa fa-plus fa-fw admin_creat_button "></i>&nbsp; 新 建</p>
                   </div>
                 </div>

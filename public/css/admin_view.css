@@ -3,12 +3,14 @@
   color: #fff;
   cursor: pointer;
   margin: 0 13px;
+  border-radius: 3px;
 }
 .button_style_new{
   background: #03CC6B;
   color: #fff;
   cursor: pointer;
   margin: 0 13px;
+  border-radius: 3px;
 }
 .button_style_search{
   background: #009695;

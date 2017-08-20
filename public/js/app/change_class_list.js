@@ -22719,13 +22719,13 @@ var PageTab = function (_React$Component) {
             }
             return React.createElement(
                 "div",
-                { className: "page_wrap" },
+                { className: "page_wrap text_align_center" },
                 React.createElement(
                     "div",
                     { className: "ouveflow_hidden " },
                     React.createElement(
                         "nav",
-                        { "aria-label": "Page navigation", className: "nav_text pull-right" },
+                        { "aria-label": "Page navigation", className: "nav_text" },
                         React.createElement(
                             "ul",
                             { className: "pagination" },
@@ -22742,7 +22742,7 @@ var PageTab = function (_React$Component) {
                     { className: "ouveflow_hidden" },
                     React.createElement(
                         "p",
-                        { className: "pull-right" },
+                        { className: "" },
                         React.createElement(
                             "span",
                             { className: "table-tab-span4" },
@@ -23149,7 +23149,7 @@ var AdminRight = function (_React$Component2) {
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      var tableHeight = $(window).height() - 181;
+      var tableHeight = $(window).height() - 195;
       $("#table").css("height", tableHeight + "px");
       this.loadData({});
     }
@@ -23189,7 +23189,7 @@ var AdminRight = function (_React$Component2) {
                 { className: 'row' },
                 React.createElement(
                   'div',
-                  { className: 'admin_creat_butto_wrap col-xs-12 col-sm-3 col-md-2 cursor_pointer' },
+                  { className: 'admin_creat_butto_wrap col-xs-12 col-sm-3 col-md-3 cursor_pointer' },
                   React.createElement(
                     'p',
                     { className: 'button_style_delect text_align_center' },
@@ -23199,7 +23199,7 @@ var AdminRight = function (_React$Component2) {
                 ),
                 React.createElement(
                   'div',
-                  { className: 'admin_creat_butto_wrap col-xs-12 col-sm-3 col-md-2 cursor_pointer' },
+                  { className: 'admin_creat_butto_wrap col-xs-12 col-sm-3 col-md-3 cursor_pointer' },
                   React.createElement(
                     'p',
                     { className: 'button_style_new text_align_center' },

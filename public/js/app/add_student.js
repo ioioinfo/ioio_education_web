@@ -22730,7 +22730,7 @@ var AdminRight = function (_React$Component2) {
                                 { className: 'row' },
                                 React.createElement(
                                     'div',
-                                    { className: 'admin_creat_butto_wrap col-xs-12 col-sm-3 col-md-2 cursor_pointer' },
+                                    { className: 'admin_creat_butto_wrap col-xs-12 col-sm-3 col-md-3 cursor_pointer' },
                                     React.createElement(
                                         'p',
                                         { className: 'button_style_delect text_align_center' },
@@ -22740,7 +22740,7 @@ var AdminRight = function (_React$Component2) {
                                 ),
                                 React.createElement(
                                     'div',
-                                    { className: 'admin_creat_butto_wrap col-xs-12 col-sm-3 col-md-2 cursor_pointer' },
+                                    { className: 'admin_creat_butto_wrap col-xs-12 col-sm-3 col-md-3 cursor_pointer' },
                                     React.createElement(
                                         'p',
                                         { className: 'button_style_new text_align_center' },
