@@ -263,3 +263,10 @@ tbody{
 .class_button_wrap_margin{
   margin: 0 7px;
 }
+.student_view_button_xiugai{
+  text-align: right;
+}
+.student_view_button_xiugai span{
+  display: inline-block;
+  width: 150px;
+}
