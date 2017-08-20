@@ -9848,6 +9848,11 @@ var AdminLeftNav = function (_React$Component2) {
         data: {},
         success: function (data) {
           this.setState({ items: data.rows });
+
+          $("#scrollbar1").mCustomScrollbar({
+            axis: "y",
+            theme: "light-thin"
+          });
         }.bind(this),
         error: function (xhr, status, err) {}.bind(this)
       });
@@ -9859,7 +9864,7 @@ var AdminLeftNav = function (_React$Component2) {
 
       return React.createElement(
         "div",
-        { className: "admin_index_nav overflow_auto" },
+        { className: "admin_index_nav overflow_auto content", id: "scrollbar1" },
         this.state.items.map(function (item, index) {
           return React.createElement(
             "div",

@@ -55,3 +55,12 @@
   background: #1FB4AC;
   color: #fff;
 }
+
+/*滚动条样式*/
+.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar{
+  background: #003742;
+}
+.mCSB_scrollTools .mCSB_dragger.mCSB_dragger_onDrag .mCSB_dragger_bar, .mCSB_scrollTools .mCSB_dragger:active .mCSB_dragger_bar{
+
+  background: #fff;
+}

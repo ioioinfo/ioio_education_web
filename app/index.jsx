@@ -7,6 +7,10 @@ var Table = require('Table');
 var PageTab = require('PageTab');;
 
 class AdminIndex extends React.Component {
+
+  componentDidMount() {
+  }
+
   render() {
     return (
       <div className="admin_index">

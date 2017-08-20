@@ -38,6 +38,11 @@ class AdminLeftNav extends React.Component {
          data:{},
          success: function(data) {
             this.setState({items:data.rows});
+
+            $("#scrollbar1").mCustomScrollbar({
+              axis:"y",
+              theme:"light-thin"
+            });
          }.bind(this),
          error: function(xhr, status, err) {
          }.bind(this)
@@ -45,7 +50,7 @@ class AdminLeftNav extends React.Component {
   }
   render() {
     return (
-      <div className="admin_index_nav overflow_auto">
+      <div className="admin_index_nav overflow_auto content" id="scrollbar1">
         {this.state.items.map((item,index) => (
             <div className="nav_public  font_color" key={index} >
                 <a href={item.a}>
