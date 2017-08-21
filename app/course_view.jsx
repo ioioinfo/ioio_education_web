@@ -45,7 +45,7 @@ class AdminRight extends React.Component {
 
               </div>
               <div className="col-xs-12 col-sm-4 col-md-4">
-                <div  className="row">
+                <div  className="">
                   <span className="admin_creat_search  col-xs-8 col-sm-8 col-md-8">
                     <input className="admin_creat_input" type="search" placeholder="请输入关键字" />
                   </span>

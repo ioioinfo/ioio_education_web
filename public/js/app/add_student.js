@@ -22755,7 +22755,7 @@ var AdminRight = function (_React$Component2) {
                             { className: 'col-xs-12 col-sm-4 col-md-4' },
                             React.createElement(
                                 'div',
-                                { className: 'row' },
+                                { className: '' },
                                 React.createElement(
                                     'span',
                                     { className: 'admin_creat_search  col-xs-8 col-sm-8 col-md-8' },
